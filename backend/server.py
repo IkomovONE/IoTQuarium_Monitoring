@@ -4,6 +4,15 @@ from fastapi import FastAPI
 from fastapi.responses import HTMLResponse
 from dotenv import load_dotenv
 import os
+from pymongo import MongoClient
+
+
+def convert_message_to_api_format(response_role, response_content):
+    
+    formatted_message = { "role": response_role,  "content": response_content  }
+    
+    
+    return formatted_message
 
 
 load_dotenv()  # Load environment variables from .env file
@@ -15,7 +24,37 @@ app = FastAPI()
 
 client = OpenAI()
 
-context= [{"role": "system", "content": "You are a helpful pet shop aquarium assistant, You are a part of an IoT system where Raspberry Pi collects aquarium data using sensors and sends it to you. You need to analyze the data and provide the status whe asked to, or just assist with general questions. Each time u will get list of messages as a history of conversation/data, and u need to assist based on the data history and saved knowledge."}]
+#{"role": "system", "content": "You are a helpful pet shop aquarium assistant, You are a part of an IoT system where Raspberry Pi collects aquarium data using sensors and sends it to you. You need to analyze the data and provide the status whe asked to, or just assist with general questions. Each time u will get list of messages as a history of conversation/data, and u need to assist based on the data history and saved knowledge. Additionaly, when u're told about aquarium environment statistics, such as temperature or pH, u should not answer anything, but memorize it as current ststus of the aquarium and then give values plus evaluation when asked about the status"}
+
+
+context= [{"role": "system", "content": "You are a helpful pet shop aquarium assistant, You are a part of an IoT system where Raspberry Pi collects aquarium data using sensors and sends it to you. You need to analyze the data and provide the status whe asked to, or just assist with general questions. Each time u will get list of messages as a history of conversation/data, and u need to assist based on the data history and saved knowledge. Additionaly, when u're told about aquarium environment statistics, such as temperature or pH, u should not answer anything, but memorize it as current ststus of the aquarium and then give values plus evaluation when asked about the status. The sensor values are sent from _system_, automatically, so u don't have to answer this."}
+]
+
+
+
+Mongoclient = MongoClient("mongodb://localhost:27017/")  # Local MongoDB instance
+   
+
+   
+db = Mongoclient["IoT_Quarium_Monitoring"]
+
+
+context_table = db["Assistant_context"]
+
+
+entries= context_table.find()
+
+
+for i in entries:
+
+
+    context_history_msg= convert_message_to_api_format(i["role"], i["content"])
+
+    
+    context.append(context_history_msg)
+
+
+
 
 
 
@@ -32,15 +71,33 @@ def read_root():
     
     request= input("Enter request:")
 
-    role= "user"
+    role= "system"
 
 
     converted_input= convert_message_to_api_format(role, request)
 
+    context_table.insert_one(converted_input)
+
+    converted_input= convert_message_to_api_format(role, request)
+
+
+    
+
+    
+
     context.append(converted_input)
 
-        
 
+
+    
+
+    
+
+    
+
+    
+
+    
 
 
 
@@ -64,7 +121,10 @@ def read_root():
 
     processed_response= convert_message_to_api_format(response_role, response_content)
 
-    
+
+    context_table.insert_one(processed_response)
+
+    processed_response= convert_message_to_api_format(response_role, response_content)
 
     context.append(processed_response)
 
@@ -104,10 +164,3 @@ def read_root():
 
 
 
-
-def convert_message_to_api_format(response_role, response_content):
-    
-    formatted_message = { "role": response_role,  "content": response_content  }
-    
-    
-    return formatted_message
