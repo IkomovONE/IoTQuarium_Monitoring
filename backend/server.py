@@ -9,6 +9,7 @@ from fastapi.responses import HTMLResponse
 from dotenv import load_dotenv
 import os
 from pymongo import MongoClient
+from pymongo import DESCENDING
 
 
 def convert_message_to_api_format(response_role, response_content):
@@ -107,8 +108,15 @@ def daily_data_input():
     while True:
 
         time.sleep(1440)  # 86400 seconds = 24 hours
+        #time.sleep(20)
         # Get the last 24 entries from the data_table
-        recent_data = list(data_table.find().sort("Time", -1).limit(24))
+
+        recent_data = list(data_table.find().sort([("Date", DESCENDING), ("Time", DESCENDING)]).limit(24))
+
+
+        print(recent_data)
+
+    
 
         
         
@@ -257,16 +265,17 @@ def message_gpt():
 def read_root():
 
 
-    recent_data = data_table.find().sort("Time", -1).limit(1)
+    recent_data = data_table.find().sort([("Date", DESCENDING), ("Time", DESCENDING)]).limit(1)
 
-    data= None
+    data = recent_data[0]
 
-    for i in recent_data:
-        data= i
+
+
+    #data = recent_data[0] if recent_data.count() > 0 else None
 
 
     
-    
+    print(data)
 
 
     recent_data_message = convert_message_to_api_format("system", str(data))
