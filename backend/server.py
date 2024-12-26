@@ -95,7 +95,7 @@ def input_data():
 
 
 
-        time.sleep(60)
+        time.sleep(3600)
 
 
         continue
@@ -107,7 +107,7 @@ def input_data():
 def daily_data_input():
     while True:
 
-        time.sleep(1440)  # 86400 seconds = 24 hours
+        time.sleep(86430)  # 86400 seconds = 24 hours
         #time.sleep(20)
         # Get the last 24 entries from the data_table
 
