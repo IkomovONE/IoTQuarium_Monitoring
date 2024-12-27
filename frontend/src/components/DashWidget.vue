@@ -1,7 +1,10 @@
 <template>
-  <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-start">
+  <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-start ">
+    
     <h3 class="text-lg font-semibold">{{ data.title }}</h3>
-    <p class="text-sm text-gray-500">{{ data.description }}</p>
+    <h1 class="text-sm text-gray-500">{{ data.description }}</h1>
+    <img :src="data.icon" alt="Widget icon" />
+    
     
   </div>
 </template>
@@ -16,5 +19,67 @@ export default {
 </script>
 
 <style scoped>
-/* Add custom widget styles here */
+
+div {
+  background: linear-gradient(145deg, #14cbc894, #0815c3);
+  color: #ffffff;
+  box-shadow: 5px 5px 15px #bebebe, -5px -5px 15px #ffffff;
+  border-radius: 15px;
+  padding: 10px;
+  transition: transform 0.2s ease-in-out;
+}
+
+h3 {
+
+  text-align: left;
+
+  position: relative;
+
+  bottom: 0.8cm;
+
+  font-size: x-large;
+
+
+}
+
+img {
+
+  position: relative;
+
+  left: 4cm;
+
+  bottom: 1cm;
+
+  height: 2.5cm;
+
+  width: 2.5cm;
+
+
+}
+
+
+h1 {
+
+
+
+position: relative;
+
+top: 2cm;
+
+left: 1cm;
+
+bottom: 0.8cm;
+
+
+
+font-size: xx-large;
+
+font-weight: bold;
+
+
+}
+
+div:hover {
+  transform: scale(1.05);
+}
 </style>

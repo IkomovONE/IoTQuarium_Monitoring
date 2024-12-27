@@ -1,9 +1,10 @@
 <template>
-  <div class="grid grid-cols-3 gap-4 p-4">
-    <DashWidget v-for="widget in widgets" :key="widget.id" :data="widget" />
-    <DashWidget v-for="widget in widgets" :key="widget.id" :data="widget" />
-    <DashWidget v-for="widget in widgets" :key="widget.id" :data="widget" />
-    <DashWidget v-for="widget in widgets" :key="widget.id" :data="widget" />
+  <h2>Dashboard</h2>
+  <div class="grid-container">
+    <DashWidget  v-for="widget in widgets" :key="widget.id" :data="widget"  />
+    <DashWidget  v-for="widget in widgets" :key="widget.id" :data="widget"  />
+    <DashWidget v-for="widget in widgets" :key="widget.id" :data="widget"  />
+    <DashWidget v-for="widget in widgets" :key="widget.id" :data="widget"  />
   </div>
 </template>
 
@@ -19,8 +20,8 @@ export default {
   data() {
     return {
       widgets: [
-        { id: 1, title: "Latest Uploads", description: "987 files", icon: "icon1.png" },
-        { id: 2, title: "What's Your Plan?", description: "36°C, looks like a shady day", icon: "icon2.png" },
+        { id: 1, title: "Water Temperature", description: "24°C", icon: require('@/assets/therm.png') },
+        { id: 2, title: "What's Your Plan?", description: "No plan", icon: require('@/assets/therm.png') },
       ],
     };
   },
@@ -44,15 +45,30 @@ a {
   color: #42b983;
 }
 
-.widget {
-  background: linear-gradient(145deg, #ececec, #ffffff);
-  box-shadow: 5px 5px 15px #bebebe, -5px -5px 15px #ffffff;
-  border-radius: 12px;
-  padding: 16px;
-  transition: transform 0.2s ease-in-out;
+h2 {
+
+  text-align: start;
+
+  
+
+
+
 }
 
-.widget:hover {
-  transform: scale(1.05);
-}
+.grid-container {
+     display: grid;
+     grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+     gap: 15px;
+
+     position: relative;
+
+     top: 1cm;
+
+     left: 0.01cm;
+
+     
+
+   }
+
+
 </style>
