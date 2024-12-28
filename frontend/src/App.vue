@@ -1,4 +1,8 @@
 <template>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  
   <div id="app">
     <div id="main">
       <div class="grid-container">
@@ -6,7 +10,7 @@
           <img src="./assets/icon.gif" />
         </h1>
 
-        <h3>IoTQuarium</h3>
+        <h3 id="logo2">IoTQuarium</h3>
 
         <h2 id="dash">|</h2>
 
@@ -64,6 +68,7 @@ body {
   height: 100%; /* Ensure the full height is considered */
   display: flex;
   flex-direction: column;
+  overflow-x: hidden;
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grawyscale;
@@ -122,12 +127,15 @@ a {
   font-size: 14px;
 }
 
+
+
 #welcome {
   position: relative;
   top: 0.2cm;
   left: 2.3cm;
   width: 20cm;
   text-align: start;
+  
 }
 
 #dash {
@@ -155,5 +163,59 @@ img {
   left: 0.5cm;
   bottom: 0.2cm;
   padding-bottom: 0.01cm;
+}
+
+
+
+
+
+
+@media (max-width: 768px) {
+  /* Adjust logo size for smaller screens */
+  #logo {
+    width: 40px;
+    height: 40px;
+  }
+
+  /* Reduce the padding of the header on smaller screens */
+  
+
+  /* Adjust the 'Welcome back' font size for smaller screens */
+  #dash {
+
+
+
+    left: 1.5cm;
+
+    width: 2cm;
+
+
+  }
+
+  #welcome {
+
+    
+    font-size: large;
+
+    width: 4cm;
+
+    top: 0.7cm;
+
+    left: 0.7cm;
+
+  }
+
+  .footer {
+    width: 10.2cm;
+  }
+
+  
+  
+
+  /* Adjust footer layout for mobile */
+  .footer-links {
+    display: block;
+    text-align: center;
+  }
 }
 </style>
