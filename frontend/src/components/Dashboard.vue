@@ -25,7 +25,7 @@ export default {
         { id: 1, title: "Water Temperature", description: "24°C", icon: require('@/assets/therm.png') },
         { id: 2, title: "Light", description: "No plan", icon: require('@/assets/therm.png') },
         { id: 3, title: "What's Your Plan?", description: "No plan", icon: require('@/assets/therm.png') },
-        { id: 4, title: "Water Temperature", description: "24°C", icon: require('@/assets/therm.png') },
+        { id: 4, title: "Water thickness", description: "24°C", icon: require('@/assets/therm.png') },
         { id: 5, title: "What's Your Plan?", description: "No plan", icon: require('@/assets/therm.png') },
         { id: 6, title: "What's Your Plan?", description: "No plan", icon: require('@/assets/therm.png') },
       ],
