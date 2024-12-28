@@ -27,9 +27,6 @@ div {
   border-radius: 15px;
   padding: 10px;
   transition: transform 0.2s ease-in-out;
-
-  width: 10cm;
-  height: 5cm;
 }
 
 h3 {
@@ -40,7 +37,7 @@ h3 {
 
   bottom: 0.8cm;
 
-  font-size: x-large;
+  font-size: small;
 
 
 }
@@ -49,13 +46,13 @@ img {
 
   position: relative;
 
-  left: 2cm;
+  left: 1cm;
 
   bottom: 1cm;
 
-  height: 2.5cm;
+  height: 1cm;
 
-  width: 2.5cm;
+  width: 1cm;
 
 
 }
@@ -67,15 +64,15 @@ h1 {
 
 position: relative;
 
-top: 2cm;
-
-left: 1cm;
-
-bottom: 0.8cm;
 
 
+left: 0.1cm;
 
-font-size: xx-large;
+bottom: 0.5cm;
+
+
+
+font-size: medium;
 
 font-weight: bold;
 

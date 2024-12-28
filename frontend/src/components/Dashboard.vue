@@ -1,27 +1,33 @@
 <template>
+
+  <h1>————————</h1>
   <h2>Dashboard</h2>
   <div class="grid-container">
-    <DashWidget  v-for="widget in widgets" :key="widget.id" :data="widget"  />
-    <DashWidget  v-for="widget in widgets" :key="widget.id" :data="widget"  />
-    <DashWidget v-for="widget in widgets" :key="widget.id" :data="widget"  />
-    <DashWidget v-for="widget in widgets" :key="widget.id" :data="widget"  />
+    <DashWidget  id="big" v-for="widget in widgets.slice(0, 3)" :key="widget.id" :data="widget"  />
+    <DashWidgetSmall id="small" v-for="widget in widgets.slice(3)" :key="widget.id" :data="widget"  />
   </div>
 </template>
 
 <script>
 import DashWidget from './DashWidget.vue';
+import DashWidgetSmall from './DashWidgetSmall.vue';
 
 export default {
   name: 'DashBoard',
   components: {
-    DashWidget
+    DashWidget,
+    DashWidgetSmall
   },
 
   data() {
     return {
       widgets: [
         { id: 1, title: "Water Temperature", description: "24°C", icon: require('@/assets/therm.png') },
-        { id: 2, title: "What's Your Plan?", description: "No plan", icon: require('@/assets/therm.png') },
+        { id: 2, title: "Light", description: "No plan", icon: require('@/assets/therm.png') },
+        { id: 3, title: "What's Your Plan?", description: "No plan", icon: require('@/assets/therm.png') },
+        { id: 4, title: "Water Temperature", description: "24°C", icon: require('@/assets/therm.png') },
+        { id: 5, title: "What's Your Plan?", description: "No plan", icon: require('@/assets/therm.png') },
+        { id: 6, title: "What's Your Plan?", description: "No plan", icon: require('@/assets/therm.png') },
       ],
     };
   },
@@ -47,9 +53,24 @@ a {
 
 h2 {
 
+  position: relative;
+
+  bottom: 2.7cm;
+
   text-align: start;
 
-  
+
+}
+
+h1 {
+
+position: relative;
+
+bottom: 2cm;
+
+text-align: start;
+
+
 
 
 
@@ -57,18 +78,44 @@ h2 {
 
 .grid-container {
      display: grid;
-     grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-     gap: 15px;
+     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+     
+
+     row-gap: 20px;
+
+     column-gap: 50px;
+
+     
 
      position: relative;
 
-     top: 1cm;
+     
+
+     bottom: 2cm;
 
      left: 0.01cm;
 
      
 
    }
+
+   #small {
+
+    height: 3cm;
+
+    width: 3cm;
+
+
+   }
+
+   #big {
+
+    height: 6cm;
+
+    width: 6cm;
+
+
+    }
 
 
 </style>

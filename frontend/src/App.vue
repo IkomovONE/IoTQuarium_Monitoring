@@ -14,12 +14,16 @@
 
       <h3>IoTQuarium </h3>
 
+      <h2 id="dash">|</h2>
+
+      <h1 id="welcome">Welcome back!</h1>
+
 
 
     </div>
 
 
-    <h1 id="welcome">Welcome back!</h1>
+    
   
 
   
@@ -89,12 +93,9 @@ export default {
 
 h1 {
 
-  text-align: left;
+  text-align: start;
 
 
-  padding-bottom: 0.1cm;
-
-  
 }
 
 
@@ -106,7 +107,7 @@ a {
 
 #logo {
 
-  padding-bottom: 0.1cm;
+  
 
   
 
@@ -119,7 +120,7 @@ a {
 .footer {
   background-color: #ffffff;
   color: rgb(0, 0, 0);
-  padding-top: 2cm;
+  padding-top: 0.2cm;
   text-align: center;
 }
 
@@ -146,11 +147,36 @@ a {
 
 position: relative;
 
-bottom: 2cm;
+top: 0.2cm;
+
+left: 2.3cm;
+
+width: 20cm;
 
 
 
 text-align: start;
+
+
+}
+
+#dash {
+
+
+  position: relative;
+
+  left: 2.3cm;
+
+  
+
+  
+
+  font-size: xx-large;
+
+
+
+
+  padding-bottom: 0.1cm;
 
 
 }
@@ -178,6 +204,8 @@ img {
 
   
 
+  
+
 
 }
 
@@ -192,14 +220,12 @@ img {
      gap: 30px;
      position: relative;
 
-
-
      left: 0.2cm;
 
      
      bottom: 1.5cm;
 
-     padding-bottom: 2cm;
+     padding-bottom: 0.01cm;
      
 
    }
