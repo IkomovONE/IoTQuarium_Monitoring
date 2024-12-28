@@ -49,7 +49,7 @@ img {
 
   position: relative;
 
-  left: 2cm;
+  left: 3.5cm;
 
   bottom: 1cm;
 
@@ -67,9 +67,9 @@ h1 {
 
 position: relative;
 
-top: 2cm;
+top: 1.8cm;
 
-left: 1cm;
+left: 0.2cm;
 
 bottom: 0.8cm;
 

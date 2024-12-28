@@ -46,7 +46,7 @@ img {
 
   position: relative;
 
-  left: 1cm;
+  left: 2cm;
 
   bottom: 1cm;
 
@@ -68,7 +68,7 @@ position: relative;
 
 left: 0.1cm;
 
-bottom: 0.5cm;
+top: 0.4cm;
 
 
 

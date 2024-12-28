@@ -55,7 +55,9 @@ h2 {
 
   position: relative;
 
-  bottom: 2.7cm;
+  bottom: 1.8cm;
+
+  left: 0.5cm;
 
   text-align: start;
 
@@ -66,7 +68,9 @@ h1 {
 
 position: relative;
 
-bottom: 2cm;
+bottom: 1cm;
+
+left: 0.5cm;
 
 text-align: start;
 
@@ -91,9 +95,9 @@ text-align: start;
 
      
 
-     bottom: 2cm;
+     bottom: 1.1cm;
 
-     left: 0.01cm;
+     left: 0.5cm;
 
      
 
