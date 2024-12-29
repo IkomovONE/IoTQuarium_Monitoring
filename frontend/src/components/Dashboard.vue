@@ -78,49 +78,30 @@ h2 {
 
 
 .grid-container {
-     display: grid;
-     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-     
-
-     row-gap: 20px;
-
-     column-gap: 115px;
-
-     
-
-     position: relative;
-
-     
-
-     bottom: 0.1cm;
-
-     left: 0.5cm;
-
-     
-
-   }
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Flexible layout */
+  row-gap: 100px;
+  column-gap: 1px; /* Reduced column gap */
+  position: relative;
+  margin: 0 auto; /* Centers the container */
+}
 
 
    .grid-container-small {
-     display: grid;
-     grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
-     
 
-     row-gap: 20px;
+      
+      display: grid;
+      grid-template-columns: repeat(2, 150px); /* Fixed number of columns */
+      grid-auto-rows: 70px; /* Consistent row height */
+      row-gap: 85px;
+      column-gap: 10px;
+      position: relative;
 
-     column-gap: 70px;
+      right: 0.3cm;
+      margin-left: 0.3cm; /* Center the grid */
 
-     
-
-     position: relative;
-
-     
-
-     right: 1cm;
-
-     
-
-   }
+      
+}
 
    #small {
 
@@ -136,6 +117,26 @@ h2 {
     height: 7cm;
 
     width: 7cm;
+
+
+    }
+
+
+    @media (max-width: 768px) {
+
+      .grid-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); /* Flexible layout */
+        row-gap: 100px;
+        column-gap: 1px; /* Reduced column gap */
+        position: relative;
+        margin: 0 auto; /* Centers the container */
+}
+
+
+
+
+
 
 
     }

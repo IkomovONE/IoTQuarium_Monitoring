@@ -152,6 +152,8 @@ a {
   color: rgb(0, 0, 0);
   padding: 10px 0;
   text-align: center;
+
+  margin-top: 1cm;
 }
 
 .footer-links {
@@ -223,7 +225,7 @@ img {
 
 
 body[data-theme="dark"] {
-  background-color: #0e0d14;
+  background: linear-gradient(180deg, #000000, #131212);
   color: #fdfeff;
 }
 
@@ -266,6 +268,29 @@ body[data-theme="dark"] #logo img {
 
 
 @media (max-width: 768px) {
+
+
+  body {
+
+    
+
+    overflow-x: hidden;
+
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+    max-width: 100%;
+
+
+  }
+
+
+  .grid-container,
+  .grid-container-small {
+    max-width: 90%; /* Prevent grids from exceeding viewport width */
+
+}
   /* Adjust logo size for smaller screens */
   #logo {
     width: 40px;
@@ -328,6 +353,84 @@ body[data-theme="dark"] #logo img {
 
   .footer-copyright {
     width: 10.2cm;
+
+
+}
+}
+
+
+
+@media (width: 1000px ) {
+
+
+body {
+
+  width: 26cm;
+
+
+}
+/* Adjust logo size for smaller screens */
+#logo {
+  width: 40px;
+  height: 40px;
+}
+
+/* Reduce the padding of the header on smaller screens */
+
+
+/* Adjust the 'Welcome back' font size for smaller screens */
+#dash {
+
+
+
+  left: 1.5cm;
+
+  width: 2cm;
+
+
+}
+
+#welcome {
+
+  
+  font-size: large;
+
+  width: 4cm;
+
+  top: 0.7cm;
+
+  left: 0.7cm;
+
+}
+
+.footer {
+  width: 20.2cm;
+
+
+
+
+}
+
+
+
+
+/* Adjust footer layout for mobile */
+.footer-links {
+  display: block;
+  text-align: center;
+
+  width: 10.2cm;
+}
+
+.footer-content {
+
+  width: 10cm;
+
+
+}
+
+.footer-copyright {
+  width: 10.2cm;
 
 
 }

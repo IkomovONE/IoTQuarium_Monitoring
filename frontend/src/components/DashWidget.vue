@@ -70,18 +70,24 @@ button {
 
   bottom: 1.8cm;
 
-  left: 5.25cm;
+  left: 5.45cm;
 
   font-size: 1cm;
 
   font-style: normal;
 
-  width: 1.5cm;
-  height: 1.5cm;
+  border-width: 0cm;
 
-  color: #e6e6e6;
+  box-shadow: 10px 10px 10px #26295475, -1px -1px 10px #21245178;
 
-  background-color: #262a5c;
+  
+
+  width: 1.3cm;
+  height: 1.3cm;
+
+  color: #000000;
+
+  background-color: #f0f1f4e1;
 
   border-radius: 20px;
 
@@ -135,11 +141,28 @@ body[data-theme="dark"] div {
   
 }
 
+
+body[data-theme="dark"] button {
+
+  color: #e6e6e6;
+
+  background-color: #262a5c;
+
+  box-shadow: 10px 10px 10px #26295438, -1px -1px 10px #21245153;
+  
+
+  
+}
+
 @media (max-width: 768px) {
   
   button {
 
-    left: 4cm;
+    left: 4.8cm;
+
+    
+
+    
 
   }
 
