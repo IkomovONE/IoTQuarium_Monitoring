@@ -3,7 +3,8 @@
     
     <h3 class="text-lg font-semibold">{{ data.title }}</h3>
     <h1 class="text-sm text-gray-500">{{ data.description }}</h1>
-    <img :src="data.icon" alt="Widget icon" />
+
+    <button class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-start "><a id="i">i</a></button>
     
     
   </div>
@@ -38,26 +39,63 @@ h3 {
 
   position: relative;
 
-  bottom: 0.8cm;
+  bottom: 1.45cm;
 
-  font-size: x-large;
+  font-size: 1cm;
 
 
 }
 
-img {
+#i {
+
+text-align: center;
+
+position: relative;
+
+bottom: 0.1cm;
+
+font-size: 0.7cm;
+
+font-weight: 100;
+
+
+}
+
+button {
 
   position: relative;
 
-  left: 3.5cm;
-
-  bottom: 1cm;
-
-  height: 2.5cm;
-
-  width: 2.5cm;
+  text-align: center;
 
 
+  bottom: 1.8cm;
+
+  left: 5.25cm;
+
+  font-size: 1cm;
+
+  font-style: normal;
+
+  width: 1.5cm;
+  height: 1.5cm;
+
+  color: #e6e6e6;
+
+  background-color: #262a5c;
+
+  border-radius: 20px;
+
+  transition: transform 0.4s ease-in-out;
+
+  
+
+  
+
+
+}
+
+button:hover {
+  transform: scale(1.1);
 }
 
 
@@ -67,17 +105,15 @@ h1 {
 
 position: relative;
 
-top: 1.8cm;
+top: 0.6cm;
 
-left: 0.2cm;
-
-bottom: 0.8cm;
+left: 0.3cm;
 
 
 
-font-size: xx-large;
+font-size: 1.3cm;
 
-font-weight: bold;
+font-weight: 400;
 
 
 }
@@ -85,4 +121,32 @@ font-weight: bold;
 div:hover {
   transform: scale(1.05);
 }
+
+
+body[data-theme="dark"] div {
+  background: linear-gradient(195deg, #0f0f48, #1b1b1d);
+  
+  color:  #fdfeff;
+  box-shadow: 7px 7px 15px #080919, -7px -7px 15px #080919;
+  border-radius: 15px;
+  padding: 10px;
+  transition: transform 0.2s ease-in-out;
+
+  
+}
+
+@media (max-width: 768px) {
+  
+  button {
+
+    left: 4cm;
+
+  }
+
+
+}
+
+
+
+
 </style>

@@ -1,6 +1,9 @@
 <template>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap" rel="stylesheet">
   </head>
   
   <div id="app">
@@ -15,12 +18,14 @@
         <h2 id="dash">|</h2>
 
         <h1 id="welcome">Welcome back!</h1>
+
+        
       </div>
 
       <DashBoard />
     </div>
 
-    <footer class="footer">
+    <footer class="footer" id="footer">
       <div class="footer-content">
         <div class="footer-links">
           <a
@@ -57,6 +62,31 @@ export default {
   components: {
     DashBoard,
   },
+  data() {
+    return {
+      isDarkMode: false, // Default state
+    };
+  },
+  methods: {
+    setDarkModeBasedOnSystem() {
+      const prefersDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      this.isDarkMode = prefersDarkMode;
+      document.body.setAttribute("data-theme", prefersDarkMode ? "dark" : "light");
+    },
+  },
+  mounted() {
+    // Apply dark mode based on the initial system preference
+    this.setDarkModeBasedOnSystem();
+
+    // Listen for changes in system preference and update dynamically
+    window
+      .matchMedia("(prefers-color-scheme: dark)")
+      .addEventListener("change", (event) => {
+        this.isDarkMode = event.matches;
+        document.body.setAttribute("data-theme", event.matches ? "dark" : "light");
+      });
+  },
+
 };
 </script>
 
@@ -67,9 +97,25 @@ body {
   padding: 0;
   height: 100%; /* Ensure the full height is considered */
   display: flex;
+  flex-wrap: wrap;
   flex-direction: column;
   overflow-x: hidden;
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Roboto Flex", serif;
+  font-optical-sizing: auto;
+  font-weight: 100;
+  font-style: normal;
+  font-variation-settings:
+    "slnt" 0,
+    "wdth" 100,
+    "GRAD" 0,
+    "XOPQ" 96,
+    "XTRA" 468,
+    "YOPQ" 79,
+    "YTAS" 750,
+    "YTDE" -203,
+    "YTFI" 738,
+    "YTLC" 514,
+    "YTUC" 712;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grawyscale;
   text-rendering: optimizeLegibility;
@@ -135,6 +181,8 @@ a {
   left: 2.3cm;
   width: 20cm;
   text-align: start;
+
+  font-weight: 100;
   
 }
 
@@ -143,11 +191,15 @@ a {
   left: 2.3cm;
   font-size: xx-large;
   padding-bottom: 0.1cm;
+
+  font-weight: 400;
 }
 
 h3 {
   text-align: center;
   padding-top: 0.5cm;
+
+  font-weight: 100;
 }
 
 img {
@@ -163,6 +215,49 @@ img {
   left: 0.5cm;
   bottom: 0.2cm;
   padding-bottom: 0.01cm;
+}
+
+
+
+
+
+
+body[data-theme="dark"] {
+  background-color: #0e0d14;
+  color: #fdfeff;
+}
+
+
+
+
+body[data-theme="dark"] .footer {
+  background-color: #21212196; /* Dark background */
+  color: #bbbbbb; /* Light text color */
+}
+
+/* Adjust footer links for dark mode */
+body[data-theme="dark"] .footer-links a {
+  color: #ffffffd7; /* Light blue color for links */
+}
+
+body[data-theme="dark"] .footer-links a:hover {
+  color: #787777; /* Highlighted color on hover */
+}
+
+/* Adjust footer copyright for dark mode */
+body[data-theme="dark"] .footer-copyright {
+  color: #bbbbbb;
+}
+
+
+
+body[data-theme="dark"] #logo img {
+  filter: invert(1);
+
+  
+
+
+  
 }
 
 
@@ -206,7 +301,11 @@ img {
   }
 
   .footer {
-    width: 10.2cm;
+    width: 20.2cm;
+
+
+
+
   }
 
   
@@ -216,6 +315,21 @@ img {
   .footer-links {
     display: block;
     text-align: center;
+
+    width: 10.2cm;
   }
+
+  .footer-content {
+
+    width: 10cm;
+
+
+  }
+
+  .footer-copyright {
+    width: 10.2cm;
+
+
+}
 }
 </style>

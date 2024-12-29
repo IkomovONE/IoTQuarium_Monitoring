@@ -37,7 +37,7 @@ h3 {
 
   bottom: 0.8cm;
 
-  font-size: small;
+  font-size: 0.4cm;
 
 
 }
@@ -46,9 +46,9 @@ img {
 
   position: relative;
 
-  left: 2cm;
+  left: 2.2cm;
 
-  bottom: 0.5cm;
+  bottom: 1.3cm;
 
   height: 1cm;
 
@@ -66,20 +66,37 @@ position: relative;
 
 
 
-left: 0.2cm;
-
-top: 0cm;
+left: 0.1cm;
 
 
 
-font-size: medium;
+bottom: 0.9cm;
 
-font-weight: bold;
+
+
+font-size: 0.8cm;
+
+font-weight: 400;
 
 
 }
 
 div:hover {
   transform: scale(1.05);
+}
+
+
+
+body[data-theme="dark"] div {
+  background: linear-gradient(195deg, #0f0f48, #131314);
+  
+  color:  #fdfeff;
+  box-shadow: 7px 7px 15px #080919, -7px -7px 15px #080919;
+  border-radius: 15px;
+  padding: 10px;
+  transition: transform 0.2s ease-in-out;
+
+  width: 10cm;
+  height: 5cm;
 }
 </style>
