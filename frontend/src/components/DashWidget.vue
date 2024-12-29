@@ -170,6 +170,37 @@ body[data-theme="dark"] button {
 }
 
 
+@media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+
+  button {
+
+    left: 4.8cm;
+
+
+
+
+
+}
+}
+
+@media only screen and (min-width: 1024px) and (max-width: 1366px) and (orientation: landscape) {
+
+button {
+
+  left: 4.8cm;
+
+
+
+
+
+}
+
+
+
+
+}
+
+
 
 
 </style>
