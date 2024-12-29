@@ -10,10 +10,10 @@
     <div id="main">
       <div class="grid-container">
         <h1 id="logo">
-          <img src="./assets/icon.gif" />
+          <img src="./assets/icon.gif" id="logo_img"/>
         </h1>
 
-        <h3 id="logo2">IoTQuarium</h3>
+        <h3 id="logo_title">IoTQuarium</h3>
 
         <h2 id="dash">|</h2>
 
@@ -37,7 +37,7 @@
           <a href="/about">About the project</a>
 
           <a
-            href="https://www.flaticon.com/free-animated-icons"
+            href="https://www.flaticon.com/"
             target="_blank"
             title="animated icons"
             >Animated and other icons created by Freepik - Flaticon</a
@@ -93,6 +93,7 @@ export default {
 <style>
 html,
 body {
+  background: linear-gradient(360deg, #aac5ff7b 0% 10%, #ffffff);
   margin: 0;
   padding: 0;
   height: 100%; /* Ensure the full height is considered */
@@ -143,12 +144,19 @@ a {
 #logo {
   text-align: start;
 
+  filter: drop-shadow(2px 7px 5px rgb(255, 255, 255));
 
+}
+
+#logo_img {
+  
+
+  filter: drop-shadow(2px 7px 5px rgb(255, 255, 255));
 
 }
 
 .footer {
-  background-color: #ffffff;
+  background-color: #adc6fc;
   color: rgb(0, 0, 0);
   padding: 10px 0;
   text-align: center;
@@ -161,7 +169,7 @@ a {
 }
 
 .footer-links a {
-  color: #8b8b8b;
+  color: #0022fc;
   margin: 0 15px;
   text-decoration: none;
 }
@@ -204,9 +212,18 @@ h3 {
   font-weight: 100;
 }
 
+#logo_title {
+  text-align: center;
+  padding-top: 0.5cm;
+
+  font-weight: 500;
+}
+
 img {
   width: 50px;
   height: 50px;
+
+  
 }
 
 .grid-container {
@@ -253,13 +270,18 @@ body[data-theme="dark"] .footer-copyright {
 
 
 
-body[data-theme="dark"] #logo img {
-  filter: invert(1);
-
-  
+body[data-theme="dark"] #logo  {
+  filter: drop-shadow(6px 7px 5px rgb(0, 0, 0));
 
 
   
+}
+
+body[data-theme="dark"] #logo_img {
+  filter: invert(1) drop-shadow(2px 7px 5px rgb(0, 0, 0)) grayscale(90%);
+
+  
+
 }
 
 

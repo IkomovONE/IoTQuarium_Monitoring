@@ -34,9 +34,9 @@ export default {
         { id: 1, title: "Water Temperature", description: "24°C", icon: require('@/assets/therm.png') },
         { id: 2, title: "pH value of the water", description: "7.4", icon: require('@/assets/therm.png') },
         { id: 3, title: "Water hardness (GH)", description: "6 dGH", icon: require('@/assets/therm.png') },
-        { id: 4, title: "Liquid level", description: "OK", icon: require('@/assets/therm.png') },
-        { id: 5, title: "Aquarium Lamp", description: "ON", icon: require('@/assets/therm.png') },
-        { id: 6, title: "Filter water flow", description: "Normal", icon: require('@/assets/therm.png') },
+        { id: 4, title: "Liquid level", description: "OK", icon: require('@/assets/water-level.png') },
+        { id: 5, title: "Aquarium Lamp", description: "ON", icon: require('@/assets/light.png') },
+        { id: 6, title: "Filter water flow", description: "Normal", icon: require('@/assets/waves.png') },
       ],
     };
   },

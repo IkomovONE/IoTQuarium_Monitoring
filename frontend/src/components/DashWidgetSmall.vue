@@ -21,7 +21,7 @@ export default {
 <style scoped>
 
 div {
-  background: linear-gradient(145deg, #14cbc894, #0815c3);
+  background: linear-gradient(145deg, #14cbc894, #3f4aee);
   color: #ffffff;
   box-shadow: 5px 5px 15px #bebebe, -5px -5px 15px #ffffff;
   border-radius: 15px;
@@ -46,13 +46,15 @@ img {
 
   position: relative;
 
-  left: 2.2cm;
+  left: 1.9cm;
 
-  bottom: 1.3cm;
+  bottom: 1cm;
 
   height: 1cm;
 
   width: 1cm;
+
+  filter: invert(1);
 
 
 }
@@ -74,7 +76,7 @@ bottom: 0.9cm;
 
 
 
-font-size: 0.8cm;
+font-size: 0.6cm;
 
 font-weight: 400;
 

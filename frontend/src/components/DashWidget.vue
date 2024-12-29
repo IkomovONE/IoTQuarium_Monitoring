@@ -22,7 +22,7 @@ export default {
 <style scoped>
 
 div {
-  background: linear-gradient(145deg, #14cbc894, #0815c3);
+  background: linear-gradient(145deg, #14cbc894, #3f4aee);
   color: #ffffff;
   box-shadow: 5px 5px 15px #bebebe, -5px -5px 15px #ffffff;
   border-radius: 15px;
