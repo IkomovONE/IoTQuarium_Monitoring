@@ -77,7 +77,7 @@ export default {
         { id: 2, title: "pH value of the water", description: "7.4", icon: require('@/assets/therm.png') },
         { id: 3, title: "Water hardness (GH)", description: "6 dGH", icon: require('@/assets/therm.png') },
         { id: 4, title: "Have questions?", description: "Ask me!", icon: require('@/assets/light.png') },
-        { id: 5, title: "Liquid level", description: "OK", icon: require('@/assets/water-level.png') },
+        { id: 5, title: "Water level", description: "OK", icon: require('@/assets/water-level.png') },
         { id: 6, title: "Aquarium Lamp", description: "ON", icon: require('@/assets/light.png') },
         { id: 7, title: "Filter water flow", description: "Normal", icon: require('@/assets/waves.png') },
         { id: 8, title: "Recorded at", description: "2nd January 2025,  21:07", icon: require('@/assets/clock.png') },

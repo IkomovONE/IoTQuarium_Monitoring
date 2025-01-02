@@ -157,7 +157,7 @@ def daily_data_input():
         # Sleep for 1 day (24 hours) before running again
         
 
-
+######
 
 @app.on_event("startup")
 def start_data_generation():
@@ -165,7 +165,7 @@ def start_data_generation():
     threading.Thread(target=daily_data_input, daemon=True).start()
 
 
-
+#####
 
 
 entries= context_table.find()
@@ -267,7 +267,18 @@ def read_root():
 
     recent_data = data_table.find().sort([("Date", DESCENDING), ("Time", DESCENDING)]).limit(1)
 
+    recent_daily_data = daily_data_table.find().sort([("Date", DESCENDING), ("Time", DESCENDING)]).limit(1)
+
     data = recent_data[0]
+
+    daily_data= recent_daily_data[0]
+
+
+    api_response= []
+
+    api_response.append(data)
+
+    api_response.append(daily_data)
 
 
 
@@ -277,13 +288,19 @@ def read_root():
     
     print(data)
 
+    print(daily_data)
+
 
     recent_data_message = convert_message_to_api_format("system", str(data))
+
+    
     
     
     context.append(recent_data_message)
 
-    context.append({"role": "system", "content": "DASHBOARD VIEW: tell the status of the aquarium, including daily av evaluation and most recent recording. Include Date and time of the daily recording as well"})
+    
+
+    context.append({"role": "system", "content": "DASHBOARD VIEW: tell the status of the aquarium, including daily av evaluation and most recent recording. 30 words maximum, Example format: Good conditions! Temperature is appropriate, liquid level is sufficient, pH is balanced, water TDS is normal. You can press 'Ask GPT' to ask me anything!"})
     
 
 
@@ -293,9 +310,6 @@ def read_root():
     messages= context
 )
     
-
-
-
 
     response= completion.choices[0].message
 
@@ -315,6 +329,8 @@ def read_root():
 
     context.append(processed_response)
 
+    api_response.append(processed_response)
+
 
 
 
@@ -330,13 +346,17 @@ def read_root():
 
     formatted_output = "<br><br><br><br><br><br><br><br>".join(processed_chat)
 
+    api_response.append(processed_chat)
+
 
     
 
 
     
 
-    return HTMLResponse(content=f"<pre>{formatted_output}</pre>")
+    #return HTMLResponse(content=f"<pre>{formatted_output}</pre>")
+
+    return api_response
 
 
 
