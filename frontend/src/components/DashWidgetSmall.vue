@@ -112,4 +112,29 @@ body[data-theme="dark"] div {
 
 
 }
+
+@media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+
+
+
+div:hover {
+  transform: scale(1);
+  }
+}
+
+@media only screen and (min-width: 1024px) and (max-width: 1366px) and (orientation: landscape) {
+
+
+
+div:hover {
+  transform: scale(1);
+  }
+
+
+
+
+}
+
+
+
 </style>

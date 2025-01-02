@@ -46,9 +46,9 @@ img {
 
   position: relative;
 
-  left: 1.9cm;
+  left: 6cm;
 
-  bottom: 1cm;
+  bottom: 0.7cm;
 
   height: 1cm;
 
@@ -76,7 +76,7 @@ bottom: 0.9cm;
 
 
 
-font-size: 0.6cm;
+font-size: 0.5cm;
 
 font-weight: 400;
 
@@ -114,4 +114,29 @@ body[data-theme="dark"] div {
 
 
 }
+
+@media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+
+
+
+div:hover {
+  transform: scale(1);
+  }
+}
+
+@media only screen and (min-width: 1024px) and (max-width: 1366px) and (orientation: landscape) {
+
+
+
+div:hover {
+  transform: scale(1);
+  }
+
+
+
+
+}
+
+
+
 </style>

@@ -302,7 +302,11 @@ body[data-theme="dark"] #logo_img {
     padding: 0;
     box-sizing: border-box;
 
+    
+
     max-width: 100%;
+
+
 
 
   }
@@ -349,14 +353,7 @@ body[data-theme="dark"] #logo_img {
 
   .footer {
     width: 20.2cm;
-
-
-
-
   }
-
-  
-  
 
   /* Adjust footer layout for mobile */
   .footer-links {
@@ -380,53 +377,19 @@ body[data-theme="dark"] #logo_img {
 }
 }
 
-
-
-@media (width: 1000px ) {
-
+@media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
 
 body {
 
-  width: 26cm;
+  overflow-x: hidden;
 
+  overscroll-behavior-x: none ;
 
-}
-/* Adjust logo size for smaller screens */
-#logo {
-  width: 40px;
-  height: 40px;
-}
-
-/* Reduce the padding of the header on smaller screens */
-
-
-/* Adjust the 'Welcome back' font size for smaller screens */
-#dash {
-
-
-
-  left: 1.5cm;
-
-  width: 2cm;
-
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 
 }
-
-#welcome {
-
-  
-  font-size: large;
-
-  width: 4cm;
-
-  top: 0.7cm;
-
-  left: 0.7cm;
-
-}
-
-.footer {
-  width: 20.2cm;
 
 
 
@@ -436,25 +399,4 @@ body {
 
 
 
-/* Adjust footer layout for mobile */
-.footer-links {
-  display: block;
-  text-align: center;
-
-  width: 10.2cm;
-}
-
-.footer-content {
-
-  width: 10cm;
-
-
-}
-
-.footer-copyright {
-  width: 10.2cm;
-
-
-}
-}
 </style>

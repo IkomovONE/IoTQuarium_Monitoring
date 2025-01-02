@@ -158,7 +158,7 @@ body[data-theme="dark"] button {
   
   button {
 
-    left: 5.7cm;
+    left: 5.3cm;
 
     
 
@@ -178,25 +178,30 @@ body[data-theme="dark"] button {
 
   button {
 
-    left: 4.8cm;
+    left: 5.2cm;
+
+    width: 2cm;
 
 
-
-
-
-}
+  }
+  div:hover {
+    transform: scale(1);
+  }
 }
 
 @media only screen and (min-width: 1024px) and (max-width: 1366px) and (orientation: landscape) {
 
 button {
 
-  left: 4.8cm;
+  left: 5.2cm;
+
+  width: 2cm;
 
 
+}
 
-
-
+div:hover {
+  transform: scale(1);
 }
 
 

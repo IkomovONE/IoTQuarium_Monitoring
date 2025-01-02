@@ -64,7 +64,7 @@ div {
 
   position: relative;
 
-  left: 25cm;
+  left: 14.5cm;
 
   bottom: 5cm;
 
@@ -250,33 +250,49 @@ body[data-theme="dark"] button {
 
 @media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
 
-  button {
+  #buttons {
 
-    left: 4.8cm;
+    left: 3cm;
 
+    margin-top: 0cm;
 
+    bottom: 1.2cm;
 
+    
 
 
 }
+
+h1 {
+
+  font-size: 0.6cm;
+
+  width: 16cm;
+
 }
+
+  div:hover {
+    transform: scale(1);
+    }
+  }
 
 @media only screen and (min-width: 1024px) and (max-width: 1366px) and (orientation: landscape) {
 
-button {
+  #buttons {
 
-  left: 4.8cm;
-
-
+    left: 14.5cm;
 
 
+  }
 
-}
+  div:hover {
+    transform: scale(1);
+    }
 
 
 
 
-}
+  }
 
 
 
