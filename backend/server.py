@@ -281,6 +281,8 @@ def message_gpt():
 @app.get("/dashboard/")
 def read_root():
 
+    print(context)
+
 
     recent_data = data_table.find().sort("timestamp", DESCENDING).limit(1)
 
@@ -327,7 +329,7 @@ def read_root():
 
     
 
-    context.append({"role": "system", "content": "DASHBOARD VIEW: tell the status of the aquarium, including daily av evaluation and most recent recording. 30 words maximum, Example format: Good conditions! Temperature is appropriate, liquid level is sufficient, pH is balanced, water TDS is normal. You can press 'Ask GPT' to ask me anything!"})
+    context.append({"role": "system", "content": "DASHBOARD VIEW: tell the status of the aquarium, including daily av evaluation and most recent recording. Limit: 33-35 words, Example format: Good conditions! Temperature is appropriate, liquid level is sufficient, pH is balanced, water TDS is normal. You can press 'Ask GPT' to ask me anything!"})
     
 
 
@@ -357,6 +359,8 @@ def read_root():
     api_response.append(processed_response)
 
     api_response.append(daily_data_message)
+
+    context.pop()
 
 
 
