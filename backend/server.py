@@ -2,6 +2,7 @@ from typing import Union
 import time
 import threading
 import random
+import uvicorn
 from datetime import datetime
 from openai import OpenAI
 from fastapi import FastAPI
@@ -10,6 +11,7 @@ from dotenv import load_dotenv
 import os
 from pymongo import MongoClient
 from pymongo import DESCENDING
+from fastapi.middleware.cors import CORSMiddleware
 
 
 def convert_message_to_api_format(response_role, response_content):
@@ -26,11 +28,23 @@ api_key = os.getenv("OPENAI_API_KEY")
 
 app = FastAPI()
 
+
+
+
 client = OpenAI()
 
 Mongoclient = MongoClient("mongodb://localhost:27017/")  # Local MongoDB instance
 
 db = Mongoclient["IoT_Quarium_Monitoring"]
+
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins="http://localhost:8080",
+    allow_credentials=True,
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allow_headers="*",
+)
 
 
 
@@ -83,10 +97,12 @@ def input_data():
         sensor_data = {
         "Temp": round(23.0 + random.uniform(0.0, 1.0), 1),  # 23.0 to 24.0
         "pH": round(7.0 + random.uniform(0.0, 0.6), 1),    # 7.0 to 7.6
+        "TDS": round(50 + random.uniform(0.0, 450.0), 1),
         "LightNow": "ON" if random.choice([True, False]) else "OFF",  # Random ON/OFF
         "WaterLevel": random.choice(["Sufficient", "Low", "Critical"]),
-        "Date": datetime.now().strftime("%d.%m.%Y"),
-        "Time": datetime.now().strftime("%H:%M")
+        "WaterFlow": random.choice(["Normal", "Weak", "Strong"]),
+        "timestamp": datetime.now().isoformat()
+        
     }
         
         data_table.insert_one(sensor_data)
@@ -111,7 +127,7 @@ def daily_data_input():
         #time.sleep(20)
         # Get the last 24 entries from the data_table
 
-        recent_data = list(data_table.find().sort([("Date", DESCENDING), ("Time", DESCENDING)]).limit(24))
+        recent_data = list(data_table.find().sort("timestamp", DESCENDING).limit(24))
 
 
         print(recent_data)
@@ -124,13 +140,14 @@ def daily_data_input():
             # Calculate averages
             avg_temp = sum(d['Temp'] for d in recent_data) / 24
             avg_ph = sum(d['pH'] for d in recent_data) / 24
+            avg_tds = sum(d['TDS'] for d in recent_data) / 24
             
             # Prepare the averaged data document
             avg_data = {
-                "Date": datetime.now().strftime("%d.%m.%Y"),
-                "Time": datetime.now().strftime("%H:%M"),
+                "timestamp": datetime.now().isoformat(),
                 "AverageTemp": round(avg_temp, 1),
-                "AveragepH": round(avg_ph, 1)
+                "AveragepH": round(avg_ph, 1),
+                "AverageTDS": round(avg_tds, 1)
             }
             
             # Insert the average data into the Daily_Average_Data collection
@@ -261,13 +278,15 @@ def message_gpt():
 
 
 
-@app.get("/dashboard")
+@app.get("/dashboard/")
 def read_root():
 
 
-    recent_data = data_table.find().sort([("Date", DESCENDING), ("Time", DESCENDING)]).limit(1)
+    recent_data = data_table.find().sort("timestamp", DESCENDING).limit(1)
 
-    recent_daily_data = daily_data_table.find().sort([("Date", DESCENDING), ("Time", DESCENDING)]).limit(1)
+    print(recent_data)
+
+    recent_daily_data = daily_data_table.find().sort("timestamp", DESCENDING).limit(1)
 
     data = recent_data[0]
 
@@ -276,9 +295,12 @@ def read_root():
 
     api_response= []
 
-    api_response.append(data)
 
-    api_response.append(daily_data)
+    
+
+    
+
+    
 
 
 
@@ -288,15 +310,20 @@ def read_root():
     
     print(data)
 
-    print(daily_data)
+    #print(daily_data)
 
 
     recent_data_message = convert_message_to_api_format("system", str(data))
+
+    daily_data_message = convert_message_to_api_format("system", str(daily_data))
 
     
     
     
     context.append(recent_data_message)
+
+
+    api_response.append(recent_data_message)
 
     
 
@@ -323,13 +350,13 @@ def read_root():
     processed_response= convert_message_to_api_format(response_role, response_content)
 
 
-    context_table.insert_one(processed_response)
+    
 
-    processed_response= convert_message_to_api_format(response_role, response_content)
-
-    context.append(processed_response)
+    
 
     api_response.append(processed_response)
+
+    api_response.append(daily_data_message)
 
 
 
@@ -346,7 +373,7 @@ def read_root():
 
     formatted_output = "<br><br><br><br><br><br><br><br>".join(processed_chat)
 
-    api_response.append(processed_chat)
+    #api_response.append(processed_chat)
 
 
     
