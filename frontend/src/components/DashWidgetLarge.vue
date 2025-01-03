@@ -61,7 +61,7 @@ div {
 
   bottom: 2cm;
 
-  left: 14.5cm;
+  left: 13.2cm;
 
   
 
@@ -160,7 +160,7 @@ bottom: 1.5cm;
 
 left: 0.3cm;
 
-width: 27cm;
+width: 26cm;
 
 height: 2.9cm;
 
@@ -280,7 +280,7 @@ h1 {
 
   #buttons {
 
-    left: 14.5cm;
+    left: 13cm;
 
 
   }

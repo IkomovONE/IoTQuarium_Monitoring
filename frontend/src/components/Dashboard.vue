@@ -301,7 +301,7 @@ export default {
 
     height: 7cm;
 
-    width: 27.5cm;
+    width: 26.3cm;
 
     grid-column: span 3;
 
