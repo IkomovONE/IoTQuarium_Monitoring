@@ -54,24 +54,16 @@ div {
 
   height: fit-content;
 
-  margin-top: 3.5cm;
-
-  margin-left: 0cm;
-
   
 
-  
 
   position: relative;
 
+  bottom: 2cm;
+
   left: 14.5cm;
 
-  bottom: 5cm;
-
-
-
-
-
+  
 
 }
 
@@ -164,11 +156,13 @@ h1 {
 
 position: relative;
 
-bottom: 1cm;
+bottom: 1.5cm;
 
 left: 0.3cm;
 
-width: 25cm;
+width: 27cm;
+
+height: 2.9cm;
 
 
 
@@ -181,6 +175,8 @@ font-weight: 100;
 
 div:hover {
   transform: scale(1.01);
+
+  
 }
 
 #buttons:hover {
@@ -219,7 +215,7 @@ body[data-theme="dark"] button {
 
     
 
-    bottom: 4cm;
+    bottom: 1cm;
 
     left: 0.3cm;
 
@@ -237,7 +233,11 @@ body[data-theme="dark"] button {
 
   h1 {
 
-    width: 6cm;
+    width: 7cm;
+
+    height: 10cm;
+
+    font-size: 0.7cm;
 
 
 
@@ -256,7 +256,7 @@ body[data-theme="dark"] button {
 
     margin-top: 0cm;
 
-    bottom: 1.2cm;
+    bottom: 1.8cm;
 
     
 
