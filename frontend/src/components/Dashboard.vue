@@ -166,7 +166,7 @@ export default {
         this.widgets = [
               { id: 1, title: "Water Temperature", description: current_data["Temp"], icon: require('@/assets/therm.png') },
               { id: 2, title: "pH value of the water", description: current_data["pH"], icon: require('@/assets/therm.png') },
-              { id: 3, title: "TDS (ppm)", description: current_data["TDS"], icon: require('@/assets/therm.png') },
+              { id: 3, title: "Total Dissolved Solids (ppm)", description: current_data["TDS"], icon: require('@/assets/therm.png') },
               { id: 4, title: "Water level", description: current_data["WaterLevel"], icon: require('@/assets/water-level.png') },
               { id: 5, title: "Aquarium Lamp", description: current_data["LightNow"], icon: require('@/assets/light.png') },
               { id: 6, title: "Filter water flow", description: current_data["WaterFlow"], icon: require('@/assets/waves.png') },
