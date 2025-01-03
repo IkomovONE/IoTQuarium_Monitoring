@@ -6,23 +6,23 @@
     <DashWidget  id="big" v-for="widget in widgets.slice(0, 1)" :key="widget.id" :data="widget"  />
     <div class="grid-container-small">
 
-      <DashWidgetSmall id="small" v-for="widget in widgets.slice(4, 6)" :key="widget.id" :data="widget"  />
+      <DashWidgetSmall id="small" v-for="widget in widgets.slice(3, 5)" :key="widget.id" :data="widget"  />
 
-      <DashWidgetMid id="mid" v-for="widget in widgets.slice(7,8)" :key="widget.id" :data="widget"  />
+      <DashWidgetMid id="mid" v-for="widget in widgets.slice(6,7)" :key="widget.id" :data="widget"  />
 
       
     </div>
 
     <div class="grid-container-mid">
 
-      <DashWidgetMid id="mid" v-for="widget in widgets.slice(8,9)" :key="widget.id" :data="widget"  />
+      <DashWidgetMid id="mid" v-for="widget in widgets.slice(7,8)" :key="widget.id" :data="widget"  />
 
 
       <div class="grid-container-small">
 
 
 
-        <DashWidgetSmall id="small" v-for="widget in widgets.slice(6, 7)" :key="widget.id" :data="widget"  />
+        <DashWidgetSmall id="small" v-for="widget in widgets.slice(5, 6)" :key="widget.id" :data="widget"  />
 
         
 
@@ -46,7 +46,7 @@
     <DashWidget  id="big" v-for="widget in widgets.slice(2, 3)" :key="widget.id" :data="widget"  />
 
 
-    <DashWidgetLarge  id="large" v-for="widget in widgets.slice(9, 10)" :key="widget.id" :data="widget"  />
+    <DashWidgetLarge  id="large" v-for="widget in widgets.slice(8, 9)" :key="widget.id" :data="widget"  />
 
     
 
@@ -60,6 +60,8 @@ import DashWidget from './DashWidget.vue';
 import DashWidgetSmall from './DashWidgetSmall.vue';
 import DashWidgetMid from './DashWidgetMid.vue';
 import DashWidgetLarge from './DashWidgetLarge.vue';
+import axios from 'axios';
+
 
 export default {
   name: 'DashBoard',
@@ -70,22 +72,116 @@ export default {
     DashWidgetLarge
   },
 
+ 
+
   data() {
-    return {
-      widgets: [
-        { id: 1, title: "Water Temperature", description: "24°C", icon: require('@/assets/therm.png') },
-        { id: 2, title: "pH value of the water", description: "7.4", icon: require('@/assets/therm.png') },
-        { id: 3, title: "Water hardness (GH)", description: "6 dGH", icon: require('@/assets/therm.png') },
-        { id: 4, title: "Have questions?", description: "Ask me!", icon: require('@/assets/light.png') },
-        { id: 5, title: "Water level", description: "OK", icon: require('@/assets/water-level.png') },
-        { id: 6, title: "Aquarium Lamp", description: "ON", icon: require('@/assets/light.png') },
-        { id: 7, title: "Filter water flow", description: "Normal", icon: require('@/assets/waves.png') },
-        { id: 8, title: "Recorded at", description: "2nd January 2025,  21:07", icon: require('@/assets/clock.png') },
-        { id: 9, title: "Daily averages", description: "Temp: 24.1 | pH: 7.5 | TDS: 400", icon: require('@/assets/chart.png') },
-        { id: 10, title: "Overall evaluation", description: "Good conditions! Temperature is appropriate, liquid level is sufficient, pH is balanced, water TDS is normal. You can press 'Ask GPT' to ask me anything!", icon: require('@/assets/light.png') },
-      ],
-    };
-  },
+      return {
+        widgets: [], // Initialize widgets as an empty array
+      };
+    },
+
+    async mounted() {
+
+      function fixMongoDBString(str) {
+          return str
+            .replace(/'/g, '"')                      // Replace single quotes with double quotes
+            .replace(/ObjectId\((.*?)\)/g, '"$1"')
+            .replace(/""(.*?)""/g, '"$1"');   // Replace ObjectId(...) with just the string inside
+        }
+
+      function getMonthName(monthNumber) {
+        const months = [
+          "January", "February", "March", "April", "May", "June", 
+          "July", "August", "September", "October", "November", "December"
+        ];
+        return months[monthNumber - 1];
+      }
+
+      function getDayWithOrdinal(day) {
+        const suffixes = ["th", "st", "nd", "rd"];
+        const value = day % 100;
+        return day + (suffixes[(value - 20) % 10] || suffixes[value] || suffixes[0]);
+      }
+      try {
+        const response = await axios.get('http://192.168.3.29:3000/dashboard/');
+        const response_data = response.data;
+        console.log(response_data);
+
+        // Assuming response_data is the array you want to use for widgets
+
+        let response_current= response_data[0]
+
+        let response_gpt= response_data[1]
+
+        let response_daily= response_data[2]
+
+        let current_data= response_current["content"]
+
+        let gpt_data= response_gpt["content"]
+
+        let daily_data= response_daily["content"]
+
+
+
+        
+
+        // Fix the string before parsing it
+        current_data = fixMongoDBString(current_data);
+
+        daily_data = fixMongoDBString(daily_data);
+
+        
+        current_data= JSON.parse(current_data);
+
+
+        daily_data= JSON.parse(daily_data);
+
+
+        let daily_data_string= "Temp: " + daily_data["AverageTemp"] + " | pH: " + daily_data["AveragepH"] + " | TDS: " + daily_data["AverageTDS"]
+
+
+
+        let date= current_data["timestamp"]
+
+
+        date = new Date(date);
+
+
+
+
+
+
+        let dayWithOrdinal = getDayWithOrdinal(date.getDate());
+        let monthName = getMonthName(date.getMonth() + 1); // Months are 0-indexed
+        let year = date.getFullYear();
+        let hours = date.getHours().toString().padStart(2, "0");
+        let minutes = date.getMinutes().toString().padStart(2, "0");
+
+        // Combine the formatted date and time
+        let formattedDateTime = `${dayWithOrdinal} ${monthName} ${year}, ${hours}:${minutes}`;
+
+        
+
+
+        this.widgets = [
+              { id: 1, title: "Water Temperature", description: current_data["Temp"], icon: require('@/assets/therm.png') },
+              { id: 2, title: "pH value of the water", description: current_data["pH"], icon: require('@/assets/therm.png') },
+              { id: 3, title: "TDS (ppm)", description: current_data["TDS"], icon: require('@/assets/therm.png') },
+              { id: 4, title: "Water level", description: current_data["WaterLevel"], icon: require('@/assets/water-level.png') },
+              { id: 5, title: "Aquarium Lamp", description: current_data["LightNow"], icon: require('@/assets/light.png') },
+              { id: 6, title: "Filter water flow", description: current_data["WaterFlow"], icon: require('@/assets/waves.png') },
+              { id: 7, title: "Recorded at", description: formattedDateTime, icon: require('@/assets/clock.png') },
+              { id: 8, title: "Daily averages", description: daily_data_string, icon: require('@/assets/chart.png') },
+              { id: 9, title: "Overall evaluation", description: gpt_data },
+            ];
+
+
+
+
+      } catch (error) {
+        console.error('Error fetching sensor data:', error);
+      }
+    },
 }
 </script>
 
