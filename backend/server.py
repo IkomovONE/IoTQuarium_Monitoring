@@ -286,7 +286,7 @@ def read_root():
 
     recent_data = data_table.find().sort("timestamp", DESCENDING).limit(1)
 
-    print(recent_data)
+    
 
     recent_daily_data = daily_data_table.find().sort("timestamp", DESCENDING).limit(1)
 
@@ -310,7 +310,7 @@ def read_root():
 
 
     
-    print(data)
+    
 
     #print(daily_data)
 
@@ -360,6 +360,7 @@ def read_root():
 
     api_response.append(daily_data_message)
 
+    context.pop()
     context.pop()
 
 
