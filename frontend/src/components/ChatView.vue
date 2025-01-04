@@ -1,0 +1,474 @@
+<template>
+
+  
+  <h2>Chat with AI
+
+
+    <div id="buttons">
+
+        
+
+      <button @click="goBack">Back to home</button>
+
+
+    </div>
+
+  </h2>
+
+
+  <div class="grid-container">
+
+
+    <MessageWidget   v-for="widget in widgets" :id=widget.type :key="widget.id" :data="widget"  />  
+
+
+
+
+  </div>
+
+
+
+  <div class="message-input">
+    <textarea v-model="message" placeholder="Type a message" rows="1" @input="autoResize" class="message-textarea"></textarea>
+    <button :disabled="!message.trim()" @click="sendMessage" class="send-button">Send</button>
+  </div>
+
+  
+
+
+ 
+  
+    
+
+  
+
+
+
+
+    
+</template>
+  
+  <script>
+  import axios from 'axios';
+  import MessageWidget from './MessageWidget.vue';
+  
+  
+  export default {
+    name: 'DashBoard',
+    components: {
+      MessageWidget
+    },
+
+    methods: {
+      goBack() {
+        this.$router.back(); // Navigate back to the Dashboard
+      },
+      sendMessage() {
+        this.$emit("send-message", this.message.trim()); // Emit the message
+        this.message = ""; // Clear the input field
+      },
+      autoResize(event) {
+        const textarea = event.target;
+        textarea.style.height = "auto"; // Reset height
+        textarea.style.height = textarea.scrollHeight + "px"; // Adjust height dynamically
+      },
+      scrollToBottom() {
+        const container = this.$refs.chatContainer;
+        if (container) {
+          container.scrollTop = container.scrollHeight;
+        }
+      },
+    },
+  
+   
+  
+    data() {
+        return {
+          widgets: [
+            
+          { id: 1, type: "assistant", title: "Messages", description: "Loading..." },
+          { id: 2, type: "user", title: "user", description: "Loading..." },
+          { id: 3,type: "assistant", title: "Messages", description: "Loading..." },
+          { id: 3,type: "assistant", title: "Messages", description: "Loading..." },
+          { id: 3,type: "assistant", title: "Messages", description: "Loading..." },
+          { id: 3,type: "assistant", title: "Messages", description: "Loading..." },
+          
+        
+  
+  
+  
+  
+          ],
+          message: "",
+        };
+      },
+  
+      async mounted() {
+
+        this.scrollToBottom();
+  
+       
+        try {
+
+          
+          const response = await axios.get('http://192.168.3.29:3000/message-gpt');
+          const response_data = response.data;
+          console.log(response_data);
+  
+          // Assuming response_data is the array you want to use for widgets
+  
+         
+  
+        
+  
+  
+  
+          
+  
+          // Fix the string before parsing it
+        
+       
+  
+  
+          this.widgets = [
+                { id: 1, title: "Water Temperature", description: "fgf", icon: require('@/assets/therm.png') },
+               
+              ];
+  
+  
+  
+  
+        } catch (error) {
+          console.error('Error fetching sensor data:', error);
+  
+          this.widgets= [
+            
+          { id: 1, title: "No response from server / Server error, make sure it is online", description: "" },
+          { id: 1, title: "No response from server / Server error, make sure it is online", description: "" },
+          { id: 1, title: "No response from server / Server error, make sure it is online", description: "" },
+          { id: 1, title: "No response from server / Server error, make sure it is online", description: "" },
+  
+  
+          ] 
+        }
+      },
+
+      watch: {
+        widgets() {
+          this.$nextTick(() => {
+            this.scrollToBottom(); // Scroll to bottom when messages update
+          });
+        },
+      },
+  };
+  </script>
+  
+  <!-- Add "scoped" attribute to limit CSS to this component only -->
+  <style scoped>
+    h3 {
+      margin: 40px 0 0;
+    }
+
+
+    body {
+      display: flex;
+      flex-direction: column;
+      height: 100vh; /* Full viewport height */
+      margin: 0; /* Remove default margin */
+    }
+    
+    
+    
+  
+    h2 {
+  
+      position: relative;
+  
+      bottom: 0.5cm;
+  
+      left: 0.5cm;
+  
+      text-align: start;
+  
+      font-weight: 100;
+  
+  
+    }
+
+    #buttons {
+
+      box-shadow: none;
+
+      background: none;
+
+      width: fit-content;
+
+      height: fit-content;
+
+
+
+
+      position: relative;
+
+      left: 5cm;
+
+      bottom: 0.9cm;
+
+      
+
+
+
+      }
+
+
+    .message-input {
+
+      
+      display: flex;
+      align-items: center;
+      padding: 1px;
+      position: sticky;
+      
+      gap: 10px;
+      
+
+      background-color: #131212;
+
+      margin-top: 2cm;
+
+      box-shadow:  -1px -1px 100px #131212;
+
+      bottom: 0;
+
+      z-index: 10;
+      
+      }
+
+    .message-textarea {
+      flex: 1;
+      resize: none;
+      overflow: hidden;
+      border: none;
+      border-radius: 20px;
+      padding: 10px 15px;
+      
+      margin-bottom: 0.3cm;
+      margin-right: 10px;
+      background: #9c9ca0;
+      color: #3f4aee;
+      
+      font-size: 14px;
+      outline: none;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    }
+
+
+
+    button {
+
+      position: relative;
+
+      text-align: center;
+
+
+
+
+      font-weight: lighter;
+
+      font-size: large;
+
+      margin-right: 0.5cm;
+
+
+
+      border-width: 0cm;
+
+
+      background: linear-gradient(145deg, #14cbc894, #3f4aee);
+      color: #ffffff;
+      box-shadow: 10px 10px 10px #00000032, -1px -1px 10px #05060d3f;
+      border-radius: 20px;
+      padding: 10px;
+      transition: transform 0.2s ease-in-out;
+
+      height: 1cm;
+
+      width: 4cm;
+
+
+      }
+
+
+    body[data-theme="dark"] button {
+      background: linear-gradient(195deg, #20202caf, #262a5c);
+      
+      color:  #fdfeff;
+      box-shadow: 7px 7px 15px #080919, -7px -7px 15px #080919;
+      
+      
+      transition: transform 0.2s ease-in-out;
+
+      
+    }
+
+    button:hover {
+      transform: scale(1.03);
+    }
+
+
+
+  
+  
+  
+    .grid-container {
+      display: flex;
+       /* Flexible layout */
+      row-gap: 20px;
+      overflow-y: auto;
+      flex-direction: column;
+      min-height: 30%;
+      column-gap: 0px; /* Reduced column gap */
+      margin: 0 auto; /* Centers the container */
+      
+    }
+  
+  
+   
+  
+    #user {
+
+      align-self: flex-end;
+  
+      height: 3cm;
+  
+      width: 7.25cm;
+
+      word-wrap: break-word;
+
+      max-width: 60%;
+
+      padding: 10px;
+
+      margin-right: 2cm;
+
+  
+  
+    }
+  
+  
+    #assistant {
+  
+    height: 3cm;
+  
+    width: 7.25cm;
+
+    margin-left: 0.5cm;
+
+    }
+  
+    #system {
+  
+    height: 7cm;
+  
+    width: 7.25cm;
+  
+  
+    }
+  
+  
+    
+  
+  
+    @media (max-width: 768px) {
+  
+      
+
+      .grid-container {
+        display: flex;
+        /* Flexible layout */
+        row-gap: 2px;
+        flex-direction: column;
+        min-height: 100vh;
+        column-gap: 0px; /* Reduced column gap */
+        margin: 0 auto; /* Centers the container */
+      }
+
+
+      #user {
+
+        align-self: flex-end;
+
+        height: 3cm;
+
+        width: 7.25cm;
+
+        word-wrap: break-word;
+
+        max-width: 60%;
+
+        padding: 10px;
+
+        margin-right: 1cm;
+
+
+
+        }
+  
+  
+      
+  
+    }
+  
+    @media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+  
+     
+  
+     
+  
+      .grid-container {
+  
+        
+  
+        grid-template-columns: repeat(auto-fill, minmax(250px, 9cm));
+  
+        margin-bottom: 2cm
+  
+  
+      }
+  
+      body {
+  
+        max-width: 100%;
+  
+        overflow-x: hidden;
+  
+  
+      }
+  
+    
+  
+    }
+  
+    @media only screen and (min-width: 1024px) and (max-width: 1366px) and (orientation: landscape) {
+  
+  
+     
+  
+      .grid-container {
+
+      
+
+        grid-template-columns: repeat(auto-fill, minmax(250px, 9cm));
+
+      
+
+      }
+  
+    
+  
+        
+    }
+  
+  
+  </style>
+  

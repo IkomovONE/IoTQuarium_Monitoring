@@ -22,45 +22,20 @@
         
       </div>
 
-      <DashBoard />
+      <router-view></router-view>
     </div>
 
-    <footer class="footer" id="footer">
-      <div class="footer-content">
-        <div class="footer-links">
-          <a
-            href="https://github.com/IkomovONE/IoTQuarium_Monitoring"
-            target="_blank"
-            rel="noopener noreferrer"
-            >View on GitHub</a
-          >
-          <a href="/about">About the project</a>
-
-          <a
-            href="https://www.flaticon.com/"
-            target="_blank"
-            title="animated icons"
-            >Animated and other icons created by Freepik - Flaticon</a
-          >
-        </div>
-
-        <p>
-          This is an open-source project. Feel free to contribute, report
-          issues, or check out the code!
-        </p>
-        <p class="footer-copyright">2025 Daniil Komov</p>
-      </div>
-    </footer>
+    
   </div>
 </template>
 
 <script>
-import DashBoard from "./components/Dashboard.vue";
+
 
 export default {
   name: "App",
   components: {
-    DashBoard,
+    
   },
   data() {
     return {

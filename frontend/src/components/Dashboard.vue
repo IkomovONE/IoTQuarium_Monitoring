@@ -52,6 +52,35 @@
 
     
   </div>
+
+
+
+  <footer class="footer" id="footer">
+      <div class="footer-content">
+        <div class="footer-links">
+          <a
+            href="https://github.com/IkomovONE/IoTQuarium_Monitoring"
+            target="_blank"
+            rel="noopener noreferrer"
+            >View on GitHub</a
+          >
+          <a href="/about">About the project</a>
+
+          <a
+            href="https://www.flaticon.com/"
+            target="_blank"
+            title="animated icons"
+            >Animated and other icons created by Freepik - Flaticon</a
+          >
+        </div>
+
+        <p>
+          This is an open-source project. Feel free to contribute, report
+          issues, or check out the code!
+        </p>
+        <p class="footer-copyright">2025 Daniil Komov</p>
+      </div>
+    </footer>
   
 </template>
 
@@ -76,7 +105,22 @@ export default {
 
   data() {
       return {
-        widgets: [], // Initialize widgets as an empty array
+        widgets: [
+          
+        { id: 1, title: "Water Temperature", description: "Loading...", icon: require('@/assets/therm.png') },
+        { id: 2, title: "pH value of the water", description: "Loading...", icon: require('@/assets/therm.png') },
+        { id: 3, title: "Total Dissolved Solids (ppm)", description: "Loading...", icon: require('@/assets/therm.png') },
+        { id: 4, title: "Water level", description: "Loading...", icon: require('@/assets/water-level.png') },
+        { id: 5, title: "Aquarium Lamp", description: "Loading...", icon: require('@/assets/light.png') },
+        { id: 6, title: "Filter water flow", description: "Loading...", icon: require('@/assets/waves.png') },
+        { id: 7, title: "Recorded at", description: "Loading...", icon: require('@/assets/clock.png') },
+        { id: 8, title: "Daily averages", description: "Loading...", icon: require('@/assets/chart.png') },
+        { id: 9, title: "Overall evaluation", description: "Loading..." },
+
+
+
+
+        ], // Initialize widgets as an empty array
       };
     },
 
@@ -180,6 +224,15 @@ export default {
 
       } catch (error) {
         console.error('Error fetching sensor data:', error);
+
+        this.widgets= [
+          
+        { id: 1, title: "No response from server / Server error, make sure it is online", description: "", icon: require('@/assets/therm.png') },
+        
+
+
+
+        ]
       }
     },
 }
@@ -227,6 +280,8 @@ export default {
     column-gap: 0px; /* Reduced column gap */
     position: relative;
     margin: 0 auto; /* Centers the container */
+
+    min-height: 61.5%;
   }
 
 
@@ -309,6 +364,37 @@ export default {
   }
 
 
+  .footer {
+    background-color: #adc6fc;
+    color: rgb(0, 0, 0);
+    padding: 10px 0;
+    text-align: center;
+
+    bottom: 0;
+
+    margin-top: 2cm;
+  }
+
+  .footer-links {
+    margin-bottom: 10px;
+  }
+
+  .footer-links a {
+    color: #0022fc;
+    margin: 0 15px;
+    text-decoration: none;
+  }
+
+  .footer-links a:hover {
+    color: rgb(67, 64, 64);
+  }
+
+  .footer-copyright {
+    margin-top: 10px;
+    font-size: 14px;
+  }
+
+
   @media (max-width: 768px) {
 
     .grid-container {
@@ -333,6 +419,31 @@ export default {
 
 
     }
+
+    .footer {
+    width: 20.2cm;
+  }
+
+  /* Adjust footer layout for mobile */
+  .footer-links {
+    display: block;
+    text-align: center;
+
+    width: 10.2cm;
+  }
+
+  .footer-content {
+
+    width: 10cm;
+
+
+  }
+
+  .footer-copyright {
+    width: 10.2cm;
+
+
+}
 
   }
 

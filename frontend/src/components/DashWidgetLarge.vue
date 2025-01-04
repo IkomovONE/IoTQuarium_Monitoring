@@ -8,7 +8,7 @@
 
     <button>More info</button>
 
-    <button >Ask GPT</button>
+    <button @click="goToChat">Ask GPT</button>
 
 
   </div>
@@ -26,6 +26,11 @@ export default {
   name: 'DashWidget',
   props: {
     data: Object,
+  },
+  methods: {
+    goToChat() {
+      this.$router.push('/chat'); // Navigate to the Chat view
+    },
   },
 };
 </script>
@@ -116,10 +121,6 @@ button {
   font-size: large;
 
   margin-right: 0.5cm;
-
-  
-
-  
 
   
 
