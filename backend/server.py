@@ -215,12 +215,24 @@ def message_gpt():
     gpt_prompt= []
 
 
+    entries= context_table.find()
+
+
+    for i in entries:
+
+
+        context_history_msg= convert_message_to_api_format(i["role"], i["content"])
+
+        
+        messages.append(context_history_msg)
+
+
 
     for i in context:
 
         gpt_prompt.append(i)
 
-        messages.append(i)
+       
 
 
     
@@ -261,7 +273,7 @@ def message_gpt():
 
     processed_response= convert_message_to_api_format(response_role, response_content)
 
-    context.append(processed_response)
+    #context.append(processed_response)
 
     messages.append(processed_response)
 

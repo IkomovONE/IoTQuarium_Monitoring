@@ -23,7 +23,7 @@
   <div class="grid-container" ref="chatContainer">
 
 
-    <MessageWidget   v-for="widget in widgets" :id=widget.role :key="widget.id" :data="widget"  />  
+    <MessageWidget   v-for="message in messages" :id=message.role :key="message.id" :data="message"  />  
 
     <div></div>
     <div></div>
@@ -93,21 +93,19 @@
   
     data() {
         return {
-          widgets: [
-            
-          { id: 1, type: "assistant", title: "Messages", description: "Loading..." },
-          { id: 2, type: "user", title: "user", description: "Loading..." },
-          { id: 3,type: "assistant", title: "GPT", description: "Loading..." },
-          { id: 3,type: "assistant", title: "Messages", description: "Loading..." },
-          { id: 3,type: "assistant", title: "Messages", description: "Loading..." },
-          { id: 3,type: "assistant", title: "Messages", description: "Loading..." },
           
-        
-  
-  
-  
-  
-          ],
+          messages: [
+            
+            { id: 1, type: "assistant", title: "Messages", description: "Loading..." },
+            { id: 2, type: "user", title: "user", description: "Loading..." },
+           
+            
+          
+    
+    
+    
+    
+            ],
           message: "",
         };
       },
@@ -130,18 +128,13 @@
   
          
   
-        
-  
-  
-  
-          
   
           // Fix the string before parsing it
         
        
   
   
-          this.widgets = response_data.slice(1);
+          this.messages = response_data;
   
   
   
@@ -149,12 +142,10 @@
         } catch (error) {
           console.error('Error fetching sensor data:', error);
   
-          this.widgets= [
+          this.messages= [
             
-          { id: 1, title: "No response from server / Server error, make sure it is online", description: "" },
-          { id: 1, title: "No response from server / Server error, make sure it is online", description: "" },
-          { id: 1, title: "No response from server / Server error, make sure it is online", description: "" },
-          { id: 1, title: "No response from server / Server error, make sure it is online", description: "" },
+          { role: "system", content: "No response from server / Server error, make sure it is online" },
+          
   
   
           ] 
@@ -410,7 +401,11 @@
 
       height: fit-content;
   
+      min-width: 5cm;
+      
       width: fit-content;
+
+      
 
       max-width: 40%;
 
@@ -438,10 +433,16 @@
     #system {
   
     height: fit-content;
+
+    max-height: 2.2cm;
   
     width: fit-content;
 
     max-width: 40%;
+
+    margin-left: 10cm;
+
+    opacity: 40%;
 
 
   
