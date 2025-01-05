@@ -274,13 +274,14 @@ export default {
 
   .grid-container {
     display: grid;
+    isolation: isolate;
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); /* Flexible layout */
     grid-auto-rows: auto;
     row-gap: 20px;
     column-gap: 0px; /* Reduced column gap */
     position: relative;
     margin: 0 auto; /* Centers the container */
-
+    z-index: 0;
     min-height: 61.5%;
   }
 
@@ -294,7 +295,7 @@ export default {
     row-gap: 85px;
     column-gap: 10px;
     position: relative;
-
+    z-index: 0;
     right: 0.3cm;
     margin-left: 0.3cm; /* Center the grid */
 
@@ -310,7 +311,7 @@ export default {
 
     
     
-
+    z-index: 0;
 
     grid-auto-rows: 70px; /* Consistent row height */
     row-gap: 85px;
@@ -347,6 +348,7 @@ export default {
   height: 7cm;
 
   width: 7.25cm;
+  z-index: 9999;
 
 
   }

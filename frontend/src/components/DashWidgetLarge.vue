@@ -44,7 +44,7 @@ div {
   border-radius: 15px;
   padding: 10px;
   transition: transform 0.2s ease-in-out;
-
+  
   width: 10cm;
   height: 5cm;
 }
@@ -162,6 +162,7 @@ bottom: 1.5cm;
 left: 0.3cm;
 
 width: 26cm;
+z-index: 0;
 
 height: 2.9cm;
 

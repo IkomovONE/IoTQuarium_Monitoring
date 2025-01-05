@@ -99,8 +99,10 @@ body {
 }
 
 #app {
+  
   display: flex;
   flex-direction: column;
+  z-index: 0;
   min-height: 100vh; /* Full viewport height */
 }
 
@@ -110,6 +112,7 @@ body {
 
 h1 {
   text-align: start;
+  z-index: 0;
 }
 
 a {
