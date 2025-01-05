@@ -284,12 +284,13 @@
       border-radius: 20px;
       
 
-      background-color: #131212c4;
+      background: linear-gradient(145deg, #14cbc894, #3f4aee);
+     
 
       margin-top: 0cm;
       
 
-      box-shadow:  -1px -1px 50px #000000;
+      box-shadow:  -1px -1px 10px #737373;
 
       bottom: 0;
 
@@ -318,8 +319,8 @@
       margin-bottom: 0.3cm;
       margin-top: 0.5cm;
       margin-right: 10px;
-      background: #131212c4;
-      color: #e6e6e6;
+      background: #f5f5f534;
+      color: #f5f5f5;
 
       
       
@@ -338,6 +339,35 @@
 
 
     }
+
+
+
+    body[data-theme="dark"] .message-input {
+
+      
+    
+      background: linear-gradient(360deg, #23203694, #26264094);
+
+     
+
+
+      box-shadow:  -1px -1px 50px #000000;
+
+     
+
+    }
+
+    body[data-theme="dark"] .message-textarea {
+      
+      background: #131212c4;
+      color: #e6e6e6;
+
+
+
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    }
+
+  
 
 
 
@@ -476,31 +506,52 @@
 
     max-width: 40%;
 
-    margin-left: 10cm;
+    margin-left: 13cm;
 
-    opacity: 40%;
+    opacity: 50%;
 
 
   
   
     }
+
+    
   
   
     
   
   
     @media (max-width: 768px) {
+
+
+      #buttons {
+
+        left: 0cm;
+
+        margin-top: 1cm;
+
+      }
+
+      h2 {
+
+        font-size: 0.001cm;
+
+      }
+
+     
   
       
 
       .grid-container {
         display: flex;
+
+        overflow-x: hidden;
         /* Flexible layout */
         row-gap: 2px;
         flex-direction: column;
-        min-height: 100vh;
+        min-height: 10vh;
         column-gap: 0px; /* Reduced column gap */
-        margin: 0 auto; /* Centers the container */
+        margin-bottom: auto; /* Centers the container */
       }
 
 
@@ -514,7 +565,7 @@
 
         word-wrap: break-word;
 
-        max-width: 60%;
+        max-width: 40%;
 
         padding: 10px;
 
@@ -523,6 +574,73 @@
 
 
         }
+
+        #assistant {
+
+          align-self: unset;
+
+          right: 5cm;
+
+          margin-left: 0cm;
+
+          
+
+          
+
+          word-wrap: break-word;
+
+          max-width: 30%;
+
+          
+
+         
+
+
+
+          }
+
+
+
+        #system {
+
+          position: relative;
+
+          max-height: fit-content;
+
+          width: 7.25cm;
+
+          word-wrap: break-word;
+
+          max-width: 60%;
+
+          padding: 10px;
+
+          right: 10cm;
+
+          
+
+
+
+        }
+
+
+        .message-input {
+
+      
+          
+         
+
+          margin-left: 0cm;
+
+          max-width: 100%;
+
+          
+
+          
+
+         
+
+          }
   
   
       

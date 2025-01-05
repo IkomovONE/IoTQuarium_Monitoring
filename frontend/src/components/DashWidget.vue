@@ -98,7 +98,7 @@ export default {
   margin: 0;
   font-size: 0.45cm;
   font-weight: 100;
-  text-align: center;
+  text-align: start;
  
 }
 
@@ -199,6 +199,18 @@ button {
   
 
 
+}
+
+body[data-theme="dark"] button {
+  background: linear-gradient(195deg, #20202caf, #262a5c);
+  
+  color:  #fdfeff;
+  box-shadow: 7px 7px 15px #080919, -7px -7px 15px #080919;
+  
+  
+  transition: transform 0.2s ease-in-out;
+
+  
 }
 
 button:hover {

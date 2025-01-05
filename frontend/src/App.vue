@@ -277,6 +277,8 @@ body[data-theme="dark"] #logo_img {
 
     overflow-x: hidden;
 
+    
+
     margin: 0;
     padding: 0;
     box-sizing: border-box;
