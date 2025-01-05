@@ -6,7 +6,7 @@
 
   <div id="buttons">
 
-    <button>More info</button>
+    
 
     <button @click="goToChat">Ask GPT</button>
 
@@ -66,7 +66,7 @@ div {
 
   bottom: 2cm;
 
-  left: 13.2cm;
+  left: 20cm;
 
   
 
@@ -253,7 +253,7 @@ body[data-theme="dark"] button {
 
   #buttons {
 
-    left: 3cm;
+    left: 10cm;
 
     margin-top: 0cm;
 
@@ -281,7 +281,7 @@ h1 {
 
   #buttons {
 
-    left: 13cm;
+    left: 20cm;
 
 
   }

@@ -12,6 +12,8 @@
 
         <button @click="goBack">Back to home</button>
 
+        <button @click="goToChatHistory">View chat history</button>
+
 
       </div>
 
@@ -69,6 +71,9 @@
     methods: {
       goBack() {
         this.$router.back(); // Navigate back to the Dashboard
+      },
+      goToChatHistory() {
+        this.$router.push('/chat/history'); // Navigate to the Chat view
       },
       sendMessage() {
         const trimmedMessage = this.message.trim(); // Trim whitespace from the message
@@ -301,7 +306,7 @@
       resize: none;
       
 
-      overflow-y: scroll;
+      overflow-y: auto;
       border: none;
       border-radius: 20px;
       padding: 10px 15px;
@@ -360,12 +365,13 @@
       color: #ffffff;
       box-shadow: 10px 10px 10px #00000032, -1px -1px 10px #05060d3f;
       border-radius: 20px;
-      padding: 10px;
+      padding: 11px;
+      
       transition: transform 0.2s ease-in-out;
 
       height: 1cm;
 
-      width: 4cm;
+      width: fit-content;
 
 
       }
