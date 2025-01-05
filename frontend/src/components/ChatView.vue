@@ -71,8 +71,40 @@
         this.$router.back(); // Navigate back to the Dashboard
       },
       sendMessage() {
-        this.$emit("send-message", this.message.trim()); // Emit the message
-        this.message = ""; // Clear the input field
+        const trimmedMessage = this.message.trim(); // Trim whitespace from the message
+
+        this.messages.push({role: "user", content: trimmedMessage})
+
+        if (!trimmedMessage) return; // Do nothing if the message is empty
+
+        // Emit the message to the parent for immediate UI updates (optional)
+        this.$emit("send-message", trimmedMessage);
+
+        
+
+        //let messageSend= {role: "user", content: trimmedMessage.toString}
+
+
+
+        // Make the API request to send the message
+        axios.post("http://192.168.3.29:3000/ask-gpt", {
+            role: "user",
+            content: trimmedMessage, // The message content
+          })
+          .then((response) => {
+            console.log("Message sent successfully:", response.data);
+
+            this.messages.push({role: "assistant", content: response.data["content"]})
+
+            // Optionally, you can emit the result to the parent for further handling
+            this.$emit("message-sent", response.data);
+          })
+          .catch((error) => {
+            console.error("Error sending message:", error);
+          });
+
+        // Clear the input field
+        this.message = "";
       },
       autoResize(event) {
         const textarea = event.target;
@@ -134,7 +166,7 @@
        
   
   
-          this.messages = response_data;
+          this.messages = response_data.slice(1);
   
   
   
@@ -434,7 +466,7 @@
   
     height: fit-content;
 
-    max-height: 2.2cm;
+    max-height: 3cm;
   
     width: fit-content;
 
