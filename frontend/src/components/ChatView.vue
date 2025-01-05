@@ -36,7 +36,7 @@
 
 
   <div class="message-input">
-    <textarea v-model="message" placeholder="Type a message" rows="1" @input="autoResize" class="message-textarea"></textarea>
+    <textarea v-model="message" @keyup.enter="sendMessage" placeholder="Type a message" rows="1" @input="autoResize" class="message-textarea"></textarea>
     <button :disabled="!message.trim()" @click="sendMessage" class="send-button">Send</button>
   </div>
 
@@ -80,6 +80,8 @@
         // Emit the message to the parent for immediate UI updates (optional)
         this.$emit("send-message", trimmedMessage);
 
+        this.$nextTick(() => this.scrollToBottom());
+
         
 
         //let messageSend= {role: "user", content: trimmedMessage.toString}
@@ -95,6 +97,8 @@
             console.log("Message sent successfully:", response.data);
 
             this.messages.push({role: "assistant", content: response.data["content"]})
+
+            this.$nextTick(() => this.scrollToBottom());
 
             // Optionally, you can emit the result to the parent for further handling
             this.$emit("message-sent", response.data);
@@ -112,11 +116,11 @@
         textarea.style.height = textarea.scrollHeight + "px"; // Adjust height dynamically
       },
       scrollToBottom() {
-        const appContainer = document.documentElement || document.body;  // Entire page scroll
+        const chatContainer = this.$refs.chatContainer;  // Get the chat container using ref
 
-        // Ensure appContainer is scrollable and scrollTop is not already at the bottom
-        if (appContainer.scrollTop < appContainer.scrollHeight - window.innerHeight) {
-          appContainer.scrollTop = appContainer.scrollHeight;  // Scroll to the bottom
+        // Ensure it's scrollable and scroll to the bottom
+        if (chatContainer) {
+          chatContainer.scrollTop = chatContainer.scrollHeight;  // Scroll to the bottom
         }
       }
     },
@@ -154,19 +158,13 @@
           const response_data = response.data;
           console.log(response_data);
 
-          this.$nextTick(() => this.scrollToBottom());
-  
-          // Assuming response_data is the array you want to use for widgets
-  
-         
-  
-  
-          // Fix the string before parsing it
-        
-       
+          
   
   
           this.messages = response_data.slice(1);
+
+
+          this.$nextTick(() => this.scrollToBottom());
   
   
   
