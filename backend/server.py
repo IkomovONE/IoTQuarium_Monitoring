@@ -169,9 +169,7 @@ def daily_data_input():
 
             converted_input= convert_message_to_api_format(role, request)
 
-            context_table.insert_one(converted_input)
-
-            converted_input= convert_message_to_api_format(role, request)
+            
             
 
             context.append(converted_input)
@@ -296,6 +294,32 @@ def message_gpt():
 
 
     return messages
+
+
+@app.get("/message-history")
+def get_message_history():
+
+    message_history_list= message_history.find()
+
+    returnable_list=[]
+
+
+   
+
+
+    for i in message_history_list:
+
+
+        context_history_msg= convert_message_to_api_format(i["role"], i["content"])
+
+        returnable_list.append(context_history_msg)
+
+
+
+        
+
+
+    return returnable_list
 
 
 
