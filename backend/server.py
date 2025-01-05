@@ -207,6 +207,77 @@ for i in entries:
 @app.get("/message-gpt")
 def message_gpt():
 
+   
+
+
+    messages= []
+
+    gpt_prompt= []
+
+
+
+    for i in context:
+
+        gpt_prompt.append(i)
+
+        messages.append(i)
+
+
+    
+
+    
+
+    gpt_prompt.append({"role": "system", "content": "DASHBOARD VIEW: tell the status of the aquarium, including daily av evaluation and most recent recording. Limit: 33-35 words, Example format: Good conditions! Temperature is appropriate, liquid level is sufficient, pH is balanced, water TDS is normal. What would you like to ask?"})
+    
+
+   
+
+    
+
+
+
+    completion = client.chat.completions.create(
+    model="gpt-4o-mini",
+    messages= gpt_prompt
+)
+    
+
+
+
+
+    response= completion.choices[0].message
+
+    
+
+    response_role= response.role
+
+    response_content= response.content
+
+
+    processed_response= convert_message_to_api_format(response_role, response_content)
+
+
+    
+
+    processed_response= convert_message_to_api_format(response_role, response_content)
+
+    context.append(processed_response)
+
+    messages.append(processed_response)
+
+
+
+
+
+    
+
+    return messages
+
+
+
+@app.get("/ask-gpt")
+def ask_gpt():
+
     request= input("Enter request:")
 
     role= "system"
@@ -271,8 +342,6 @@ def message_gpt():
     
 
     return HTMLResponse(content=f"<pre>{formatted_output}</pre>")
-
-
 
 
 

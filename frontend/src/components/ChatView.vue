@@ -1,25 +1,32 @@
 <template>
 
+  <div id="title">
+
   
-  <h2>Chat with AI
+    <h2>Chat with AI
 
 
-    <div id="buttons">
+      <div id="buttons">
 
-        
+          
 
-      <button @click="goBack">Back to home</button>
-
-
-    </div>
-
-  </h2>
+        <button @click="goBack">Back to home</button>
 
 
-  <div class="grid-container">
+      </div>
+
+    </h2>
+
+  </div>
 
 
-    <MessageWidget   v-for="widget in widgets" :id=widget.type :key="widget.id" :data="widget"  />  
+  <div class="grid-container" ref="chatContainer">
+
+
+    <MessageWidget   v-for="widget in widgets" :id=widget.role :key="widget.id" :data="widget"  />  
+
+    <div></div>
+    <div></div>
 
 
 
@@ -73,11 +80,13 @@
         textarea.style.height = textarea.scrollHeight + "px"; // Adjust height dynamically
       },
       scrollToBottom() {
-        const container = this.$refs.chatContainer;
-        if (container) {
-          container.scrollTop = container.scrollHeight;
+        const appContainer = document.documentElement || document.body;  // Entire page scroll
+
+        // Ensure appContainer is scrollable and scrollTop is not already at the bottom
+        if (appContainer.scrollTop < appContainer.scrollHeight - window.innerHeight) {
+          appContainer.scrollTop = appContainer.scrollHeight;  // Scroll to the bottom
         }
-      },
+      }
     },
   
    
@@ -88,7 +97,7 @@
             
           { id: 1, type: "assistant", title: "Messages", description: "Loading..." },
           { id: 2, type: "user", title: "user", description: "Loading..." },
-          { id: 3,type: "assistant", title: "Messages", description: "Loading..." },
+          { id: 3,type: "assistant", title: "GPT", description: "Loading..." },
           { id: 3,type: "assistant", title: "Messages", description: "Loading..." },
           { id: 3,type: "assistant", title: "Messages", description: "Loading..." },
           { id: 3,type: "assistant", title: "Messages", description: "Loading..." },
@@ -114,6 +123,8 @@
           const response = await axios.get('http://192.168.3.29:3000/message-gpt');
           const response_data = response.data;
           console.log(response_data);
+
+          this.$nextTick(() => this.scrollToBottom());
   
           // Assuming response_data is the array you want to use for widgets
   
@@ -130,10 +141,7 @@
        
   
   
-          this.widgets = [
-                { id: 1, title: "Water Temperature", description: "fgf", icon: require('@/assets/therm.png') },
-               
-              ];
+          this.widgets = response_data.slice(1);
   
   
   
@@ -173,6 +181,7 @@
     body {
       display: flex;
       flex-direction: column;
+      overflow-y: auto;
       height: 100vh; /* Full viewport height */
       margin: 0; /* Remove default margin */
     }
@@ -191,8 +200,19 @@
       text-align: start;
   
       font-weight: 100;
+
+      margin-bottom: 0cm;
+
+      
   
   
+    }
+
+    #title {
+
+      height: 1.2cm;
+
+
     }
 
     #buttons {
@@ -230,15 +250,26 @@
       position: sticky;
       
       gap: 10px;
+
+      margin-left: 4cm;
+
+      margin-right: 4cm;
+
+      border-radius: 20px;
       
 
-      background-color: #131212;
+      background-color: #131212c4;
 
-      margin-top: 2cm;
+      margin-top: 0cm;
+      
 
-      box-shadow:  -1px -1px 100px #131212;
+      box-shadow:  -1px -1px 50px #000000;
 
       bottom: 0;
+
+      
+
+      
 
       z-index: 10;
       
@@ -247,19 +278,39 @@
     .message-textarea {
       flex: 1;
       resize: none;
-      overflow: hidden;
+      
+
+      overflow-y: scroll;
       border: none;
       border-radius: 20px;
       padding: 10px 15px;
+      height: 1cm;
+
+      max-height: 4cm;
+      margin-left: 1cm;
       
       margin-bottom: 0.3cm;
+      margin-top: 0.5cm;
       margin-right: 10px;
-      background: #9c9ca0;
-      color: #3f4aee;
+      background: #131212c4;
+      color: #e6e6e6;
+
+      
       
       font-size: 14px;
       outline: none;
       box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    }
+
+    .send-button {
+
+      bottom: 0.07cm;
+
+      
+
+      margin-right: 1cm
+
+
     }
 
 
@@ -327,8 +378,14 @@
       overflow-y: auto;
       flex-direction: column;
       min-height: 30%;
-      column-gap: 0px; /* Reduced column gap */
-      margin: 0 auto; /* Centers the container */
+
+      
+
+      max-height: 65vh;
+      
+      
+       /* Centers the container */
+      margin: 0 auto;
       
     }
   
@@ -351,6 +408,12 @@
 
       margin-right: 2cm;
 
+      height: fit-content;
+  
+      width: fit-content;
+
+      max-width: 40%;
+
   
   
     }
@@ -364,13 +427,23 @@
 
     margin-left: 0.5cm;
 
+    height: fit-content;
+  
+    width: fit-content;
+
+    max-width: 40%;
+
     }
   
     #system {
   
-    height: 7cm;
+    height: fit-content;
   
-    width: 7.25cm;
+    width: fit-content;
+
+    max-width: 40%;
+
+
   
   
     }

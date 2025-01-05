@@ -76,6 +76,7 @@ body {
   flex-wrap: wrap;
   flex-direction: column;
   overflow-x: hidden;
+  overflow-y: auto;
   font-family: "Roboto Flex", serif;
   font-optical-sizing: auto;
   font-weight: 100;

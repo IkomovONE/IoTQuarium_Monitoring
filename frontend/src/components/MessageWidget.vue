@@ -1,8 +1,8 @@
 <template>
     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-start ">
       
-      <h3 class="text-lg font-semibold">{{ data.title }}</h3>
-      <h1 class="text-sm text-gray-500">{{ data.description }}</h1>
+      <h3 class="text-lg font-semibold">{{ data.role }}</h3>
+      <h1 class="text-sm text-gray-500">{{ data.content }}</h1>
       
       
       
