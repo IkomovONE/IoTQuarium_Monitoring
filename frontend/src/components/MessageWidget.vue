@@ -105,6 +105,13 @@
   
   
   @media (max-width: 768px) {
+
+
+    h1 {
+
+      font-size: small;
+
+    }
     
     
   

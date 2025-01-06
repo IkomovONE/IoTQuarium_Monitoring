@@ -283,6 +283,8 @@ export default {
     margin: 0 auto; /* Centers the container */
     z-index: 0;
     min-height: 61.5%;
+
+    
   }
 
 
@@ -372,9 +374,9 @@ export default {
     padding: 10px 0;
     text-align: center;
 
-    bottom: 0;
+    margin-top: 1cm;
 
-    margin-top: 2cm;
+    
   }
 
   .footer-links {

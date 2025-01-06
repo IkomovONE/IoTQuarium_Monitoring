@@ -6,7 +6,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap" rel="stylesheet">
   </head>
   
-  <div id="app">
+  <div id="app" refs="app">
     <div id="main">
       <div class="grid-container">
         <h1 id="logo">
@@ -48,10 +48,20 @@ export default {
       this.isDarkMode = prefersDarkMode;
       document.body.setAttribute("data-theme", prefersDarkMode ? "dark" : "light");
     },
+    scrollToTop() {
+        const app = this.$refs.app;  // Get the chat container using ref
+
+        // Ensure it's scrollable and scroll to the bottom
+        if (app) {
+          app.scrollTop = app.scrollHeight;  // Scroll to the bottom
+        }
+      }
   },
   mounted() {
     // Apply dark mode based on the initial system preference
     this.setDarkModeBasedOnSystem();
+
+    this.scrollToTop();
 
     // Listen for changes in system preference and update dynamically
     window
@@ -66,17 +76,38 @@ export default {
 </script>
 
 <style>
+
+
+
+
+.no-scroll {
+  overflow-y: hidden; /* Disable scrolling */
+}
+
+.dash-no-scroll {
+  overflow-x: hidden; /* Disable scrolling */
+  
+}
+
+
+
 html,
 body {
   background: linear-gradient(360deg, #aac5ff7b 0% 10%, #ffffff);
+
+  
   margin: 0;
   padding: 0;
-  height: 100%; /* Ensure the full height is considered */
+  height: 100vh;
+  overflow: auto;
+  
+
+  min-width: 10vh;
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
-  overflow-x: hidden;
-  overflow-y: auto;
+  
+  
   font-family: "Roboto Flex", serif;
   font-optical-sizing: auto;
   font-weight: 100;
@@ -98,17 +129,20 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+
+
+
+
 #app {
   
   display: flex;
   flex-direction: column;
   z-index: 0;
-  min-height: 100vh; /* Full viewport height */
+  
+  height: 100%; /* Full viewport height */
 }
 
-#main {
-  flex: 1; /* Pushes the footer down */
-}
+
 
 h1 {
   text-align: start;
@@ -140,7 +174,9 @@ a {
   padding: 10px 0;
   text-align: center;
 
-  margin-top: 1cm;
+  
+
+  
 }
 
 .footer-links {
@@ -223,6 +259,7 @@ img {
 body[data-theme="dark"] {
   background: linear-gradient(180deg, #000000, #131212);
   color: #fdfeff;
+  background-color: black;
 }
 
 
@@ -271,17 +308,21 @@ body[data-theme="dark"] #logo_img {
 @media (max-width: 768px) {
 
 
-  body {
+  html, body {
 
     
+
+    box-sizing: border-box;
+
+    min-height: 30%;
+
+    max-height: 100%;
 
     overflow-x: hidden;
 
     
 
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+    
 
     
 

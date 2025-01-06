@@ -69,6 +69,32 @@
     },
 
     methods: {
+
+      saveScrollPosition() {
+        this.originalScrollPosition = window.scrollY;
+      },
+
+      // Restore the original scroll position when keyboard is closed
+      restoreScrollPosition() {
+        window.scrollTo(0, this.originalScrollPosition);
+      },
+
+      // Handle window resize and detect keyboard state change
+      handleResize() {
+        // If the window height is smaller than the viewport height, the keyboard is likely open
+        if (window.innerHeight < this.originalHeight) {
+          if (!this.isKeyboardOpen) {
+            this.isKeyboardOpen = true;
+            this.saveScrollPosition(); // Save scroll position when keyboard opens
+          }
+        } else {
+          if (this.isKeyboardOpen) {
+            this.isKeyboardOpen = false;
+            this.restoreScrollPosition(); // Restore scroll position when keyboard closes
+          }
+        }
+      },
+    
       goBack() {
         this.$router.back(); // Navigate back to the Dashboard
       },
@@ -127,13 +153,17 @@
         if (chatContainer) {
           chatContainer.scrollTop = chatContainer.scrollHeight;  // Scroll to the bottom
         }
-      }
+      },
+
+      
     },
   
    
   
     data() {
         return {
+          isKeyboardOpen: false,
+          originalScrollPosition: 0,
           
           messages: [
             
@@ -153,7 +183,20 @@
   
       async mounted() {
 
+
+        this.originalHeight = window.innerHeight;
+
+        // Add event listener for resize
+        window.addEventListener("resize", this.handleResize);
+
+        
+
+        document.body.classList.add('no-scroll');
+  
+
         this.scrollToBottom();
+
+        
   
        
         try {
@@ -187,6 +230,11 @@
         }
       },
 
+      beforeUnmount() {
+    // Enable scrolling when leaving chat view
+        document.body.classList.remove('no-scroll');
+      },
+
       watch: {
         widgets() {
           this.$nextTick(() => {
@@ -207,12 +255,14 @@
     body {
       display: flex;
       flex-direction: column;
-      overflow-y: auto;
       height: 100vh; /* Full viewport height */
       margin: 0; /* Remove default margin */
     }
     
-    
+   
+    .no-scroll {
+      overflow: hidden; /* Disable scrolling */
+    }
     
   
     h2 {
@@ -331,7 +381,9 @@
 
     .send-button {
 
-      bottom: 0.07cm;
+      top: 0.1cm;
+
+      width: 3cm;
 
       
 
@@ -506,7 +558,7 @@
 
     max-width: 40%;
 
-    margin-left: 13cm;
+    align-self: center;
 
     opacity: 50%;
 
@@ -515,6 +567,10 @@
   
     }
 
+
+    
+
+    
     
   
   
@@ -545,11 +601,18 @@
       .grid-container {
         display: flex;
 
+        position: relative;
+
+        margin-left: 0cm;
+
+        right: 0cm;
+
         overflow-x: hidden;
         /* Flexible layout */
         row-gap: 2px;
         flex-direction: column;
         min-height: 10vh;
+        max-width: 100vh;
         column-gap: 0px; /* Reduced column gap */
         margin-bottom: auto; /* Centers the container */
       }
@@ -561,15 +624,17 @@
 
         height: 3cm;
 
-        width: 7.25cm;
+        width: 3cm;
 
         word-wrap: break-word;
 
-        max-width: 40%;
+        max-width: 10%;
 
         padding: 10px;
 
-        margin-right: 1cm;
+        margin-right: 3cm;
+
+        margin-bottom: 2cm;
 
 
 
@@ -579,9 +644,13 @@
 
           align-self: unset;
 
-          right: 5cm;
+          right: 0.09cm;
 
           margin-left: 0cm;
+
+          align-self: start;
+
+          position: relative;
 
           
 
@@ -589,7 +658,9 @@
 
           word-wrap: break-word;
 
-          max-width: 30%;
+          max-width: 40%;
+
+          margin-bottom: 2cm;
 
           
 
@@ -615,7 +686,7 @@
 
           padding: 10px;
 
-          right: 10cm;
+          align-self:start;
 
           
 
@@ -632,13 +703,46 @@
 
           margin-left: 0cm;
 
-          max-width: 100%;
+          max-width: 110%;
+
+          margin-bottom: 0.1cm;
+
+          height: 8%;
 
           
 
           
 
          
+
+          }
+
+
+
+          .message-textarea {
+           
+            padding: 10px 15px;
+            height: 30%;
+
+            resize: none;
+
+            font-size: 16px;
+
+            max-height: 1.5cm;
+            margin-left: 0.1cm;
+            
+            margin-top: 0.3cm;
+            
+            margin-right: 10px;
+           
+ 
+          }
+
+          .send-button {
+
+            margin-top: 0cm;
+
+            margin-bottom: 0.3cm;
 
           }
   
