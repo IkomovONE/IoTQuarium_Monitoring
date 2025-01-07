@@ -85,9 +85,9 @@ export default {
 <style scoped>
 
 .context-window {
-  position: absolute;
-  top: 0cm;
-  bottom: 2cm;
+  position: relative;
+  
+  bottom: 1cm;
   
   left: 7cm;
   width: 7cm;
@@ -280,8 +280,10 @@ body[data-theme="dark"] button {
 @media (max-width: 768px) {
 
   .context-window {
-   
-    bottom: 1.4cm;
+
+    position: absolute;
+    top: 0.5cm;
+    bottom: 0cm;
     
     left: 0cm;
     width: 7cm;
@@ -321,6 +323,22 @@ body[data-theme="dark"] button {
 
 @media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
 
+  .context-window {
+
+    position: absolute;
+    top: 0.5cm;
+    bottom: 0cm;
+
+    left: 0cm;
+    width: 7cm;
+    height: fit-content;
+    padding: 10px;
+
+
+
+
+    }
+
   button {
 
     left: 5.2cm;
@@ -335,6 +353,22 @@ body[data-theme="dark"] button {
 }
 
 @media only screen and (min-width: 1024px) and (max-width: 1366px) and (orientation: landscape) {
+
+  .context-window {
+
+    position: absolute;
+    
+    bottom: 0.5cm;
+
+    left: 0cm;
+    width: 8cm;
+    height: fit-content;
+    padding: 10px;
+
+
+
+
+    }
 
 button {
 
