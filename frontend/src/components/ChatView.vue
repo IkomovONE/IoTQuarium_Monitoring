@@ -609,7 +609,7 @@
 
         overflow-x: hidden;
         /* Flexible layout */
-        row-gap: 2px;
+        row-gap: 6px;
         flex-direction: column;
         min-height: 10vh;
         max-width: 100vh;
@@ -619,26 +619,24 @@
 
 
       #user {
+  
+      align-self: center;
 
-        align-self: flex-end;
+      height: 3cm;
 
-        height: 3cm;
+      width: 4cm;
 
-        width: 3cm;
+      word-wrap: break-word;
 
-        word-wrap: break-word;
+      max-width: 60%;
 
-        max-width: 10%;
+      padding: 10px;
 
-        padding: 10px;
-
-        margin-right: 3cm;
-
-        margin-bottom: 2cm;
+      margin-right: 1cm;
 
 
 
-        }
+      }
 
         #assistant {
 
@@ -705,6 +703,8 @@
 
           max-width: 110%;
 
+          resize: none;
+
           margin-bottom: 0.1cm;
 
           height: 8%;
@@ -728,7 +728,7 @@
 
             font-size: 16px;
 
-            max-height: 1.5cm;
+            max-height: 0.5cm;
             margin-left: 0.1cm;
             
             margin-top: 0.3cm;

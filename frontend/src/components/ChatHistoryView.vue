@@ -450,38 +450,118 @@
     
     
       @media (max-width: 768px) {
-    
-        
-  
+
+
+        #buttons {
+
+          left: 0cm;
+
+          margin-top: 1cm;
+
+        }
+
+        h2 {
+
+          font-size: 0.001cm;
+
+        }
+
+
+
+
+
         .grid-container {
           display: flex;
+
+          position: relative;
+
+          margin-left: 0cm;
+
+          right: 0cm;
+
+          overflow-x: hidden;
           /* Flexible layout */
           row-gap: 2px;
           flex-direction: column;
-          min-height: 100vh;
+          min-height: 10vh;
+          max-width: 100vh;
           column-gap: 0px; /* Reduced column gap */
-          margin: 0 auto; /* Centers the container */
+          margin-bottom: auto; /* Centers the container */
         }
-  
-  
+
+
         #user {
-  
-          align-self: flex-end;
-  
-          height: 3cm;
-  
-          width: 7.25cm;
-  
-          word-wrap: break-word;
-  
-          max-width: 60%;
-  
-          padding: 10px;
-  
-          margin-right: 1cm;
-  
-  
-  
+
+        align-self: flex-end;
+
+        height: 3cm;
+
+        width: 4cm;
+
+        word-wrap: break-word;
+
+        max-width: 60%;
+
+        padding: 10px;
+
+        margin-right: 1cm;
+
+
+
+        }
+
+          #assistant {
+
+            align-self: unset;
+
+            right: 0.09cm;
+
+            margin-left: 0cm;
+
+            align-self: start;
+
+            position: relative;
+
+            
+
+            
+
+            word-wrap: break-word;
+
+            max-width: 40%;
+
+            margin-bottom: 2cm;
+
+            
+
+          
+
+
+
+            }
+
+
+
+          #system {
+
+            position: relative;
+
+            max-height: fit-content;
+
+            width: 7.25cm;
+
+            word-wrap: break-word;
+
+            max-width: 60%;
+
+            padding: 10px;
+
+            align-self:start;
+
+            
+
+
+
           }
     
     
