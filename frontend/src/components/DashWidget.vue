@@ -1,5 +1,5 @@
 <template>
-  <div @mouseleave="toggleInfoFalse" class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-start ">
+  <div  @mouseleave="toggleInfoFalse" class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-start ">
     
     <h3 class="text-lg font-semibold">{{ data.title }}</h3>
     <h1 class="text-sm text-gray-500">{{ data.description }}</h1>
@@ -45,9 +45,18 @@ export default {
       this.showInfo = !this.showInfo; // Toggle the context window
     },
 
+    handleClickOutside(event) {
+      if (this.$refs.contextWindow && !this.$refs.contextWindow.contains(event.target)) {
+        this.showInfo = false; // Close the context window if click is outside
+      }
+    },
+  
+
 
   },
   mounted() {
+
+    document.addEventListener('click', this.handleClickOutside);
 
     if (this.data.title== "Total Dissolved Solids (ppm)") {
 
@@ -76,8 +85,9 @@ export default {
 <style scoped>
 
 .context-window {
-  position: relative;
-  bottom: 1.4cm;
+  position: absolute;
+  top: 0cm;
+  bottom: 2cm;
   
   left: 7cm;
   width: 7cm;
@@ -90,7 +100,7 @@ export default {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   opacity: 100%;
   animation: fadeInScale 0.4s forwards;;  /* Animation to show the context window */
-  z-index: 9999;
+  z-index: 99999;
   
 }
 
@@ -268,6 +278,28 @@ body[data-theme="dark"] button {
 }
 
 @media (max-width: 768px) {
+
+  .context-window {
+   
+    bottom: 1.4cm;
+    
+    left: 0cm;
+    width: 7cm;
+    height: fit-content;
+    padding: 10px;
+
+    
+   
+    
+  }
+
+  .context-window p {
+    margin: 0;
+    font-size: 0.45cm;
+    font-weight: 100;
+    text-align: start;
+  
+  }
   
   button {
 

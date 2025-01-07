@@ -350,7 +350,7 @@ export default {
   height: 7cm;
 
   width: 7.25cm;
-  z-index: 9999;
+  z-index: 8000;
 
 
   }
