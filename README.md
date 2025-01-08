@@ -90,40 +90,40 @@ The hardware is an important part of the whole system, as it serves as server, c
 #### Main board
 - Raspberry Pi 5 4Gb
 
-<img src="assets/raspberry.png" alt="Dashboard view" width="20%" />
+<img src="assets/raspberry.png" width="20%" />
 
 #### Sensors
 
-- Temperature sensor
+- Temperature sensor (DS18B20), https://www.aliexpress.com/item/1005006661572551.html?spm=a2g0o.order_list.order_list_main.59.4cfa1802fwZplZ
 
-<img src="assets/temp.png" alt="Dashboard view" width="20%" />
+<img src="assets/temp.png" width="20%" />
 
-- TDS sensor
+- TDS sensor (TDS Meter V1.0), https://www.aliexpress.com/item/1005007217904107.html?spm=a2g0o.order_list.order_list_main.29.4cfa1802fwZplZ
 
-<img src="assets/tds.png" alt="Dashboard view" width="20%" />
+<img src="assets/tds.png" width="20%" />
 
-- Water flow sensor
+- Water flow sensor (YF-S201), https://www.aliexpress.com/item/1005006387653649.html?spm=a2g0o.order_list.order_list_main.47.4cfa1802fwZplZ
 
-<img src="assets/flow.png" alt="Dashboard view" width="20%" />
+<img src="assets/flow.png" width="20%" />
 
-- Water level sensor
+- Water level sensor (DC 3V-5V), https://www.aliexpress.com/item/1005006357865283.html?spm=a2g0o.order_list.order_list_main.5.4cfa1802fwZplZ
 
-<img src="assets/water_level.png" alt="Dashboard view" width="20%" />
+<img src="assets/water_level.png" width="20%" />
 
-- Light sensor
+- Light sensor (VEML7700), https://www.aliexpress.com/item/1005006994624246.html?spm=a2g0o.order_list.order_list_main.11.4cfa1802fwZplZ
 
-<img src="assets/light.png" alt="Dashboard view" width="20%" />
+<img src="assets/light.png" width="20%" />
 
-- pH sensor board and probe
+- pH sensor board and probe, https://www.aliexpress.com/item/1005005732537764.html?spm=a2g0o.order_list.order_list_main.35.4cfa1802fwZplZ (module), https://www.aliexpress.com/item/1005005716591913.html?spm=a2g0o.order_list.order_list_main.17.4cfa1802fwZplZ (probe)
 
-<div align="center">
-  <img src="assets/ph.png" alt="Dashboard Dark Mode" width="20%" />
-  <img src="assets/ph_probe.png" alt="Chat Dark Mode" width="20%" />
+<div align="start">
+  <img src="assets/ph.png" width="20%" />
+  <img src="assets/ph_probe.png" width="20%" />
 </div>
 
-- ADS board for analogue connections
+- ADS board for analogue connections (ADS1115), https://www.aliexpress.com/item/32311656694.html?spm=a2g0o.order_list.order_list_main.23.4cfa1802fwZplZ
 
-<img src="assets/ads.png" alt="Dashboard Dark Mode" width="20%" />
+<img src="assets/ads.png" width="20%" />
   
 
 
