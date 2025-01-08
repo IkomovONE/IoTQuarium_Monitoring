@@ -90,19 +90,40 @@ The hardware is an important part of the whole system, as it serves as server, c
 #### Main board
 - Raspberry Pi 5 4Gb
 
-<img src="assets/raspberry.png" alt="Dashboard view" width="48%" />
+<img src="assets/raspberry.png" alt="Dashboard view" width="20%" />
 
 #### Sensors
 
 - Temperature sensor
 
-<img src="assets/temp.png" alt="Dashboard view" width="48%" />
+<img src="assets/temp.png" alt="Dashboard view" width="20%" />
 
 - TDS sensor
 
-<img src="assets/tds.png" alt="Dashboard view" width="48%" />
+<img src="assets/tds.png" alt="Dashboard view" width="20%" />
 
+- Water flow sensor
 
+<img src="assets/flow.png" alt="Dashboard view" width="20%" />
+
+- Water level sensor
+
+<img src="assets/water_level.png" alt="Dashboard view" width="20%" />
+
+- Light sensor
+
+<img src="assets/light.png" alt="Dashboard view" width="20%" />
+
+- pH sensor board and probe
+
+<div align="center">
+  <img src="assets/ph.png" alt="Dashboard Dark Mode" width="20%" />
+  <img src="assets/ph_probe.png" alt="Chat Dark Mode" width="20%" />
+</div>
+
+- ADS board for analogue connections
+
+<img src="assets/ads.png" alt="Dashboard Dark Mode" width="20%" />
   
 
 
