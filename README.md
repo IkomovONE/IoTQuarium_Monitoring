@@ -90,7 +90,20 @@ The hardware is an important part of the whole system, as it serves as server, c
 #### Main board
 - Raspberry Pi 5 4Gb
 
+<img src="assets/raspberry.png" alt="Dashboard view" width="48%" />
+
 #### Sensors
+
+- Temperature sensor
+
+<img src="assets/temp.png" alt="Dashboard view" width="48%" />
+
+- TDS sensor
+
+<img src="assets/tds.png" alt="Dashboard view" width="48%" />
+
+
+  
 
 
 
