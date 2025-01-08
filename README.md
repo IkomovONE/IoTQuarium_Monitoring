@@ -118,7 +118,7 @@ The hardware is an important part of the whole system, as it serves as server, c
 
 <div align="start">
   <img src="assets/ph.png" width="20%" />
-  <img src="assets/ph_probe.png" width="30%" />
+  <img src="assets/ph_probe.png" width="40%" />
 </div>
 
 - [ADS board for analogue connections (ADS1115)](https://www.aliexpress.com/item/32311656694.html?spm=a2g0o.order_list.order_list_main.23.4cfa1802fwZplZ)
