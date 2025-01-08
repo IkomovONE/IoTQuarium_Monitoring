@@ -52,6 +52,46 @@ Frontend website serves as an application used to access the smart system, it fe
 To launch the frontend app, you need to install Node.js and Vue.js in your terminal (you can run "npm install"). In order to run the app you can use "npm run serve". In order for the app to show anything the server needs to be running too, otherwise the app will show server error widget.
 
 
+## Backend server application
+
+Backend server application is installed onto raspberry Pi itself as it collects the data by interacting directly with the sensors. The application features automatic sensor data collection, database management and API endpoints for the frontend app. Server application also handles OpenAI requets.
+
+### Technical specifics
+
+- The backend application is built with python and fastAPI
+
+- The app uses OpenAI API requests
+
+- The server app utilizes threads for continuous data collection
+
+### How to run
+
+To launch the backend app, you need to have python 3.10 instaled and python environment (venv) set, and have MongoDB (pymongo) installed and running. Additionally, install dependencies like fastapi 0.86.0, dotenv, cors, openai. 
+
+To run the app you need to create OpenAI developer account, get personal API key and integrate it into the app. For that you can create .env file and include OPENAI_API_KEY=<Your_api_key>.
+
+
+Use this command to run the app:
+
+python -m uvicorn server:app --host 0.0.0.0 --port 3000 --reload
+
+
+You may need to configure the address of the server application on the frontend, use .yaml configuration file inside the /frontend folder to change and set the correct IP. The IP is <Your machine's IP>:3000
+
+Additionally, you can set different IPs by changing the uvicorn command.
+
+## Hardware Used
+
+The hardware is an important part of the whole system, as it serves as server, collects sensors data, sustains the database and supports the frontend by providing the server services. It may also be used to host the frontend as well.
+
+### Technical specifics 
+
+
+#### Main board
+- Raspberry Pi 5 4Gb
+
+#### Sensors
+
 
 
 
