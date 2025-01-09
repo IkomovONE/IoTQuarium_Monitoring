@@ -66,7 +66,7 @@ Backend server application is installed onto raspberry Pi itself as it collects 
 
 ### How to run
 
-To launch the backend app, you need to have python 3.10 instaled and python environment (venv) set, and have MongoDB (pymongo) installed and running. Additionally, install dependencies like fastapi 0.86.0, dotenv, cors, openai. 
+To launch the backend app, you need to have python 3.10 instaled and python environment (venv) set, and have MongoDB (pymongo) installed and running. Additionally, install dependencies like fastapi 0.86.0, python-dotenv, cors, openai. 
 
 To run the app you need to create OpenAI developer account, get personal API key and integrate it into the app. For that you can create .env file and include OPENAI_API_KEY=<Your_api_key>.
 
