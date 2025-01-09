@@ -131,6 +131,30 @@ def input_data():
 def daily_data_input():
     while True:
 
+
+        avg_data = {
+                "timestamp": datetime.now().isoformat(),
+                "AverageTemp": 0,
+                "AveragepH": 0,
+                "AverageTDS": 0
+            }
+            
+            # Insert the average data into the Daily_Average_Data collection
+        daily_data_table.insert_one(avg_data)
+
+
+        request= str(avg_data)
+    
+        role= "system"
+
+
+        converted_input= convert_message_to_api_format(role, request)
+
+        
+        
+
+        context.append(converted_input)
+
         time.sleep(86430)  # 86400 seconds = 24 hours
         #time.sleep(20)
         # Get the last 24 entries from the data_table
