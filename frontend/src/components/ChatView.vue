@@ -120,7 +120,7 @@
 
 
         // Make the API request to send the message
-        axios.post("http://192.168.3.29:3000/ask-gpt", {
+        axios.post("http://192.168.3.38:3000/ask-gpt", {
             role: "user",
             content: trimmedMessage, // The message content
           })
@@ -202,7 +202,7 @@
         try {
 
           
-          const response = await axios.get('http://192.168.3.29:3000/message-gpt');
+          const response = await axios.get('http://192.168.3.38:3000/message-gpt');
           const response_data = response.data;
           console.log(response_data);
 
