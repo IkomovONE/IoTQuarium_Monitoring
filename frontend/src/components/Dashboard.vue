@@ -64,7 +64,7 @@
             rel="noopener noreferrer"
             >View on GitHub</a
           >
-          <a href="/about">About the project</a>
+          <a href="https://github.com/IkomovONE/IoTQuarium_Monitoring/blob/main/README.md">About the project</a>
 
           <a
             href="https://www.flaticon.com/"
@@ -147,7 +147,7 @@ export default {
         return day + (suffixes[(value - 20) % 10] || suffixes[value] || suffixes[0]);
       }
       try {
-        const response = await axios.get('http://192.168.3.38:3000/dashboard/');
+        const response = await axios.get('http://88.112.42.76:3000/dashboard/');
         const response_data = response.data;
         console.log(response_data);
 
