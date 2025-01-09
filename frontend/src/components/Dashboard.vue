@@ -208,7 +208,7 @@ export default {
 
 
         this.widgets = [
-              { id: 1, title: "Water Temperature", description: current_data["Temp"], icon: require('@/assets/therm.png') },
+              { id: 1, title: "Water Temperature", description: current_data["Temp"]+"°C", icon: require('@/assets/therm.png') },
               { id: 2, title: "pH value of the water", description: current_data["pH"], icon: require('@/assets/therm.png') },
               { id: 3, title: "Total Dissolved Solids (ppm)", description: current_data["TDS"], icon: require('@/assets/therm.png') },
               { id: 4, title: "Water level", description: current_data["WaterLevel"], icon: require('@/assets/water-level.png') },
