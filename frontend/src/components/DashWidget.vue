@@ -72,7 +72,7 @@ export default {
 
     if (this.data.title== "Water Temperature") {
 
-      this.infoText= "The optimal temperature range for most freshwater aquarium fish is typically between 22°C and 28°C. Each species has specific temperature needs, so it's essential to research the requirements of your fish. Maintaining a stable temperature is crucial because fluctuations can cause stress, weaken immune systems, and lead to illness. Tropical fish generally thrive in warmer waters, while cold-water species prefer lower temperatures. Proper temperature regulation also supports the overall health of beneficial bacteria, which are vital for biological filtration. Regular monitoring with a reliable thermometer ensures a healthy environment for your aquatic life."
+      this.infoText= "The optimal temperature range for most freshwater aquarium fish is typically between 22°C and 28°C. Each species has specific temperature needs. Maintaining a stable temperature is crucial because fluctuations can cause stress, weaken immune systems, and lead to illness. Proper temperature regulation also supports the overall health of beneficial bacteria, which are vital for biological filtration. Regular monitoring with a reliable thermometer ensures a healthy environment for your aquatic life."
 
     }
 
@@ -87,9 +87,9 @@ export default {
 .context-window {
   position: relative;
   
-  bottom: 1cm;
+  bottom: 10cm;
   
-  left: 7cm;
+  left: 0cm;
   width: 7cm;
   height: fit-content;
   padding: 10px;
