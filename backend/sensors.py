@@ -4,7 +4,7 @@ import busio
 import Adafruit_DHT
 from w1thermsensor import W1ThermSensor
 from Adafruit_ADS1x15 import ADS1115
-from veml7700 import VEML7700
+from adafruit_veml7700 import VEML7700
 import RPi.GPIO as GPIO
 
 # GPIO Pins
