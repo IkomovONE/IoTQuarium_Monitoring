@@ -129,10 +129,8 @@ def input_data():
 
 
 def daily_data_input():
-    while True:
 
-
-        avg_data = {
+    avg_data = {
                 "timestamp": datetime.now().isoformat(),
                 "AverageTemp": 0,
                 "AveragepH": 0,
@@ -140,20 +138,24 @@ def daily_data_input():
             }
             
             # Insert the average data into the Daily_Average_Data collection
-        daily_data_table.insert_one(avg_data)
+    daily_data_table.insert_one(avg_data)
 
 
-        request= str(avg_data)
+    request= str(avg_data)
+
+    role= "system"
+
+
+    converted_input= convert_message_to_api_format(role, request)
+
     
-        role= "system"
+    
+
+    context.append(converted_input)
 
 
-        converted_input= convert_message_to_api_format(role, request)
+    while True:
 
-        
-        
-
-        context.append(converted_input)
 
         time.sleep(86430)  # 86400 seconds = 24 hours
         #time.sleep(20)
