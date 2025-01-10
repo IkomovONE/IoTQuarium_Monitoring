@@ -429,6 +429,8 @@
 
       text-align: center;
 
+      
+
 
 
 
@@ -437,6 +439,8 @@
       font-size: large;
 
       margin-right: 0.5cm;
+
+      
 
 
 
@@ -451,7 +455,7 @@
       
       transition: transform 0.2s ease-in-out;
 
-      height: 1cm;
+      height: 1.1cm;
 
       width: fit-content;
 
