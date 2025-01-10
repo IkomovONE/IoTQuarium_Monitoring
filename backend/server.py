@@ -227,7 +227,7 @@ for i in entries:
     context.append(context_history_msg)
 
 
-
+###Limit the context, it may grow large here. Context is only used for chatView gpt_prompt.
 
 
 
