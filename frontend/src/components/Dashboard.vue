@@ -147,7 +147,7 @@ export default {
         return day + (suffixes[(value - 20) % 10] || suffixes[value] || suffixes[0]);
       }
       try {
-        const response = await axios.get('http://88.112.42.76:3000/dashboard/');
+        const response = await axios.get('http://iotquarium.info:3000/dashboard/');
         const response_data = response.data;
         console.log(response_data);
 
