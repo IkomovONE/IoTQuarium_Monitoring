@@ -169,7 +169,7 @@ a {
 }
 
 .footer {
-  background-color: #adc6fc;
+  background-color: #adc6fc00;
   color: rgb(0, 0, 0);
   padding: 10px 0;
   text-align: center;
@@ -266,7 +266,7 @@ body[data-theme="dark"] {
 
 
 body[data-theme="dark"] .footer {
-  background-color: #21212196; /* Dark background */
+  background-color: #21212100; /* Dark background */
   color: #bbbbbb; /* Light text color */
 }
 
