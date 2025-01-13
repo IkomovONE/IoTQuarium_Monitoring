@@ -584,6 +584,63 @@
     @media (max-width: 768px) {
 
 
+
+      #title {
+
+        
+
+        height: 1.4cm;
+
+        position: sticky;
+
+        top: 2.3cm;
+
+        background-color: f7f9fc;
+
+        
+
+        z-index: 9999;
+
+        margin-bottom: 0.2cm;
+
+
+        }
+
+      body[data-theme="dark"] #title {
+
+
+        background-color: #000000;
+
+
+
+
+
+      }
+
+
+
+      h2 {
+
+
+
+
+
+        top: 0cm;
+        z-index: 9999;
+
+        height: 1.2cm;
+
+
+
+
+
+
+
+        bottom: 0;
+
+        }
+
+
       #buttons {
 
         left: 0cm;
@@ -607,7 +664,7 @@
 
         position: relative;
 
-        margin-left: 0cm;
+        margin-left: 0.2cm;
 
         right: 0cm;
 
@@ -616,7 +673,7 @@
         row-gap: 6px;
         flex-direction: column;
         min-height: 10vh;
-        max-width: 100vh;
+        max-width:90vh;
         column-gap: 0px; /* Reduced column gap */
         margin-bottom: auto; /* Centers the container */
       }
@@ -624,19 +681,19 @@
 
       #user {
   
-      align-self: center;
+        align-self: center;
 
-      height: 3cm;
+        height: 3cm;
 
-      width: 4cm;
+        
 
-      word-wrap: break-word;
+        word-wrap: break-word;
 
-      max-width: 60%;
+        max-width: 40%;
 
-      padding: 10px;
+        padding: 10px;
 
-      margin-right: 1cm;
+        margin-right: 4cm;
 
 
 
@@ -662,13 +719,9 @@
 
           max-width: 40%;
 
-          margin-bottom: 2cm;
+          margin-bottom: 3cm;
 
           
-
-         
-
-
 
           }
 
@@ -705,13 +758,15 @@
 
           margin-left: 0cm;
 
-          max-width: 110%;
+          min-width: 50%;
+
+          max-width: 55%;
 
           resize: none;
 
           margin-bottom: 0.1cm;
 
-          height: 8%;
+          height: 9%;
 
           
 
@@ -726,7 +781,9 @@
           .message-textarea {
            
             padding: 10px 15px;
-            height: 30%;
+            height: 90%;
+
+            max-width: 100%;
 
             resize: none;
 
@@ -756,6 +813,57 @@
     }
   
     @media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+
+
+
+      #title {
+
+        
+
+        height: 1.3cm;
+
+        position: sticky;
+
+        top: 2.2cm;
+
+        background-color: #f7f9fc;
+
+        z-index: 9999;
+
+        margin-bottom: 0.2cm;
+
+
+      }
+
+      body[data-theme="dark"] #title {
+
+
+        background: linear-gradient(180deg, #00000000, #13121200);
+
+
+        }
+
+      h2 {
+
+
+
+
+
+        top: 0cm;
+        z-index: 9999;
+
+        height: 1.2cm;
+
+        
+
+
+
+        bottom: 0;
+
+      }
+
+
+      
   
      
   
@@ -775,10 +883,10 @@
       body {
   
         max-width: 100%;
-  
+
         overflow-x: hidden;
-  
-  
+
+
       }
   
     
@@ -786,7 +894,77 @@
     }
   
     @media only screen and (min-width: 1024px) and (max-width: 1366px) and (orientation: landscape) {
-  
+
+      
+
+
+      #title {
+
+        
+
+        height: 1.3cm;
+
+        position: sticky;
+
+        top: 2.3cm;
+
+        background-color: #f7f9fc;
+
+        z-index: 9999;
+
+        margin-bottom: 0.3cm;
+
+
+      }
+
+      h2 {
+
+        
+
+        
+
+        top: 0cm;
+        z-index: 9999;
+
+        height: 1.2cm;
+
+        
+
+        
+
+        
+
+        bottom: 0;
+
+      }
+
+      body[data-theme="dark"] #title {
+
+
+        background: linear-gradient(180deg, #00000000, #13121200);
+
+
+
+      }
+
+
+      .message-input {
+
+        
+
+        position: sticky;
+
+        bottom: 1.5cm;
+
+        
+
+        padding-left: 0cm;
+
+        
+
+        align-self: center;
+
+      }
   
      
   

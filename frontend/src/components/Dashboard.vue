@@ -274,6 +274,7 @@ export default {
 
   .grid-container {
     display: grid;
+    
     isolation: isolate;
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); /* Flexible layout */
     grid-auto-rows: auto;
@@ -283,6 +284,8 @@ export default {
     margin: 0 auto; /* Centers the container */
     z-index: 0;
     min-height: 61.5%;
+
+    margin-left: 0.5cm;
 
     
   }
@@ -369,12 +372,14 @@ export default {
 
 
   .footer {
-    background-color: #adc6fc;
+    background-color: #6796fb00;
     color: rgb(0, 0, 0);
     padding: 10px 0;
     text-align: center;
 
     margin-top: 1cm;
+
+    
 
     
   }
@@ -408,6 +413,7 @@ export default {
       column-gap: 1px; /* Reduced column gap */
       position: relative;
       margin: 0 auto; /* Centers the container */
+      margin-left: 0.5cm;
 
       
     }
@@ -501,7 +507,9 @@ export default {
 
       grid-template-columns: repeat(auto-fill, minmax(250px, 9cm));
 
-      margin-bottom: 2cm
+      margin-bottom: 2cm;
+
+      
 
 
     }
@@ -511,6 +519,7 @@ export default {
       max-width: 100%;
 
       overflow-x: hidden;
+      
 
 
     }
@@ -528,13 +537,29 @@ export default {
 
     }
 
+    .footer {
+
+      margin-bottom: 1.2cm;
+
+
+    }
+
+    body {
+
+      overflow-y: hidden;
+
+
+    }
+
     .grid-container-mid {
 
       
 
       grid-column: span 1;
 
-      margin-bottom: 2cm
+      margin-bottom: 2cm;
+
+      
 
 
 
@@ -546,6 +571,8 @@ export default {
       
 
         grid-template-columns: repeat(auto-fill, minmax(250px, 9cm));
+
+        
 
       
 

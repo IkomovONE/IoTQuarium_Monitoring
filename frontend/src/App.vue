@@ -8,7 +8,7 @@
   
   <div id="app" refs="app">
     <div id="main">
-      <div class="grid-container">
+      <div class="grid-container-top-bar">
         <h1 id="logo">
           <img src="./assets/icon.gif" id="logo_img"/>
         </h1>
@@ -99,7 +99,7 @@ body {
   margin: 0;
   padding: 0;
   height: 100vh;
-  overflow: auto;
+  overflow: hidden;
   
 
   min-width: 10vh;
@@ -136,11 +136,25 @@ body {
 #app {
   
   display: flex;
+
+  
   flex-direction: column;
   z-index: 0;
+
+  overflow-y: auto;
+
+  overflow-x: hidden;
+
+  overscroll-behavior: contain;
+
+  
+
+ 
   
   height: 100%; /* Full viewport height */
 }
+
+
 
 
 
@@ -157,7 +171,7 @@ a {
 #logo {
   text-align: start;
 
-  filter: drop-shadow(2px 7px 5px rgb(255, 255, 255));
+  filter: drop-shadow(2px 7px 5px 1px rgb(255, 255, 255));
 
 }
 
@@ -168,35 +182,7 @@ a {
 
 }
 
-.footer {
-  background-color: #adc6fc00;
-  color: rgb(0, 0, 0);
-  padding: 10px 0;
-  text-align: center;
 
-  
-
-  
-}
-
-.footer-links {
-  margin-bottom: 10px;
-}
-
-.footer-links a {
-  color: #0022fc;
-  margin: 0 15px;
-  text-decoration: none;
-}
-
-.footer-links a:hover {
-  color: rgb(67, 64, 64);
-}
-
-.footer-copyright {
-  margin-top: 10px;
-  font-size: 14px;
-}
 
 
 
@@ -241,7 +227,7 @@ img {
   
 }
 
-.grid-container {
+.grid-container-top-bar {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(30px, 1fr));
   gap: 30px;
@@ -287,7 +273,7 @@ body[data-theme="dark"] .footer-copyright {
 
 
 body[data-theme="dark"] #logo  {
-  filter: drop-shadow(6px 7px 5px rgb(0, 0, 0));
+  filter: drop-shadow(1px 1px 1px 1px rgb(0, 0, 0));
 
 
   
@@ -334,9 +320,41 @@ body[data-theme="dark"] #logo_img {
   }
 
 
-  .grid-container,
+  .grid-container-top-bar {
+
+    position: sticky;
+
+    top: 0cm;
+
+    
+
+    padding-left: 0.5cm;
+
+    
+
+      
+
+    z-index: 9999;
+
+    background-color: #f7f9fc;
+
+    height: 2.35cm;
+  }
+
+
+  body[data-theme="dark"] .grid-container-top-bar {
+
+
+    background-color: #000000;
+
+  }
+
+    
+
+
+  .grid-container-top-bar,
   .grid-container-small {
-    max-width: 90%; /* Prevent grids from exceeding viewport width */
+    max-width: 100%; /* Prevent grids from exceeding viewport width */
 
 }
   /* Adjust logo size for smaller screens */
@@ -401,19 +419,121 @@ body[data-theme="dark"] #logo_img {
 
 @media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
 
-body {
+  body {
 
-  overflow-x: hidden;
+    overflow-x: hidden;
 
-  overscroll-behavior-x: none ;
 
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+
+
+
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+    }
+
+.footer {
+
+
+  margin-bottom: 2cm;
+
+  
 
 }
 
+.grid-container-top-bar {
 
+  position: sticky;
+
+  top: 0cm;
+
+    
+
+  z-index: 9999;
+
+  background-color: #f7f9fc;
+
+  height: 2.35cm;
+
+
+
+}
+
+body[data-theme="dark"] .grid-container-top-bar {
+
+
+  background-color: #000000;
+
+}
+
+#logo {
+
+  margin-left: 0.5cm;
+
+  
+
+
+
+
+}
+
+#logo_title {
+
+  margin-left: 0.6cm;
+}
+
+
+
+
+}
+
+@media only screen and (min-width: 1024px) and (max-width: 1366px) and (orientation: landscape) {
+
+  
+
+
+  .grid-container-top-bar {
+
+    position: sticky;
+
+
+    top: 0;
+
+    
+
+      
+
+    z-index: 9999;
+
+    background-color: #f7f9fc;
+
+    height: 2.35cm;
+
+
+
+  }
+
+  body[data-theme="dark"] .grid-container-top-bar {
+
+
+    background-color: #000000;
+
+  }
+
+  #logo {
+
+    margin-left: 0.5cm;
+
+    
+
+
+  }
+
+  #logo_title {
+
+    margin-left: 0.6cm;
+}
 
 
 }

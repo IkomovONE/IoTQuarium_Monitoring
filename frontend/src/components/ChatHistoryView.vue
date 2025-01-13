@@ -452,6 +452,61 @@
       @media (max-width: 768px) {
 
 
+
+        #title {
+
+        
+
+          height: 1.4cm;
+
+          position: sticky;
+
+          top: 2.3cm;
+
+          background-color: f7f9fc;
+
+
+
+          z-index: 9999;
+
+          margin-bottom: 0.2cm;
+
+
+        }
+
+        body[data-theme="dark"] #title {
+
+
+          background-color: #000000;
+
+
+
+        }
+
+
+
+        h2 {
+
+
+
+
+
+          top: 0cm;
+          z-index: 9999;
+
+          height: 1.2cm;
+
+
+
+
+
+
+
+          bottom: 0;
+
+        }
+
+
         #buttons {
 
           left: 0cm;
@@ -484,7 +539,7 @@
           row-gap: 2px;
           flex-direction: column;
           min-height: 10vh;
-          max-width: 100vh;
+          max-width:90vh;
           column-gap: 0px; /* Reduced column gap */
           margin-bottom: auto; /* Centers the container */
         }
@@ -570,6 +625,54 @@
       }
     
       @media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+
+
+
+        #title {
+
+        
+
+          height: 1.3cm;
+
+          position: sticky;
+
+          top: 2.2cm;
+
+          background-color: #f7f9fc;
+
+          z-index: 9999;
+
+          margin-bottom: 0.2cm;
+
+
+          }
+
+          body[data-theme="dark"] #title {
+
+
+          background-color: #000000;
+
+
+          }
+
+          h2 {
+
+
+
+
+
+          top: 0cm;
+          z-index: 9999;
+
+          height: 1.2cm;
+
+
+
+
+
+          bottom: 0;
+
+          }
     
        
     
@@ -600,6 +703,53 @@
       }
     
       @media only screen and (min-width: 1024px) and (max-width: 1366px) and (orientation: landscape) {
+
+
+        #title {
+
+        
+
+          height: 1.3cm;
+
+          position: sticky;
+
+          top: 2.2cm;
+
+          background-color: #f7f9fc;
+
+          z-index: 9999;
+
+          margin-bottom: 0.2cm;
+
+
+          }
+
+          body[data-theme="dark"] #title {
+
+
+          background-color: #000000;
+
+
+          }
+
+          h2 {
+
+
+
+
+
+          top: 0cm;
+          z-index: 9999;
+
+          height: 1.2cm;
+
+
+
+
+
+          bottom: 0;
+
+          }
     
     
        
