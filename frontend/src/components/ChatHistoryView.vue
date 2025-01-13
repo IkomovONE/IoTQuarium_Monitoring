@@ -119,7 +119,7 @@
           try {
   
             
-            const response = await axios.get('http://iotquarium.info:3000/message-history');
+            const response = await axios.get('https://iotquarium.info/api/message-history');
             const response_data = response.data;
             console.log(response_data);
   

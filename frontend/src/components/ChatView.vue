@@ -120,7 +120,7 @@
 
 
         // Make the API request to send the message
-        axios.post("http://iotquarium.info:3000/ask-gpt", {
+        axios.post("https://iotquarium.info/api/ask-gpt", {
             role: "user",
             content: trimmedMessage, // The message content
           })
@@ -202,7 +202,7 @@
         try {
 
           
-          const response = await axios.get('http://iotquarium.info:3000/message-gpt');
+          const response = await axios.get('https://iotquarium.info/api/message-gpt');
           const response_data = response.data;
           console.log(response_data);
 
