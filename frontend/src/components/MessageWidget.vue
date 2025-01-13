@@ -23,7 +23,7 @@
   div {
     background: linear-gradient(145deg, #14cbc894, #3f4aee);
     color: #ffffff;
-    box-shadow: 5px 5px 15px #bebebe, -5px -5px 15px #ffffff;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 15px;
     padding: 10px;
     transition: transform 0.2s ease-in-out;
@@ -93,7 +93,7 @@
     background: linear-gradient(195deg, #0f0f48, #131314);
     
     color:  #fdfeff;
-    box-shadow: 7px 7px 15px #080919, -7px -7px 15px #080919;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 15px;
     padding: 10px;
     transition: transform 0.2s ease-in-out;

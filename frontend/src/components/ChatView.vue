@@ -35,6 +35,8 @@
 
   </div>
 
+  
+
 
 
   <div class="message-input">
@@ -167,8 +169,8 @@
           
           messages: [
             
-            { id: 1, type: "assistant", title: "Messages", description: "Loading..." },
-            { id: 2, type: "user", title: "user", description: "Loading..." },
+            { id: 1, role: "assistant", title: "Messages", content: "Loading..." },
+            { id: 2, role: "user", title: "user", content: "Loading..." },
            
             
           
@@ -257,6 +259,8 @@
       flex-direction: column;
       height: 100vh; /* Full viewport height */
       margin: 0; /* Remove default margin */
+
+      
     }
     
    
@@ -324,23 +328,31 @@
       align-items: center;
       padding: 1px;
       position: sticky;
+
+      
       
       gap: 10px;
 
-      margin-left: 4cm;
-
-      margin-right: 4cm;
-
-      border-radius: 20px;
       
 
-      background: linear-gradient(145deg, #14cbc894, #3f4aee);
+      
+
+      
+
+      border-radius: 2px;
+      
+
+      background: linear-gradient(145deg, #14cbc863, #3f4aee);
+
+      box-shadow: 0px -10px 30px rgba(86, 86, 86, 0.407);
+
+      
      
 
-      margin-top: 0cm;
+      margin-bottom: 0cm;
       
 
-      box-shadow:  -1px -1px 10px #737373;
+      
 
       bottom: 0;
 
@@ -351,6 +363,8 @@
       z-index: 10;
       
       }
+
+      
 
     .message-textarea {
       flex: 1;
@@ -385,7 +399,6 @@
 
       width: 3cm;
 
-      
 
       margin-right: 1cm
 
@@ -403,7 +416,7 @@
      
 
 
-      box-shadow:  -1px -1px 50px #000000;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 
      
 
@@ -447,9 +460,11 @@
       border-width: 0cm;
 
 
-      background: linear-gradient(145deg, #14cbc894, #3f4aee);
+      /*background: linear-gradient(145deg, #14cbc894, #3f4aee);*/
+
+      background: linear-gradient(145deg, #3d7f99b6, #51b3ddab);
       color: #ffffff;
-      box-shadow: 10px 10px 10px #00000032, -1px -1px 10px #05060d3f;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
       border-radius: 20px;
       padding: 11px;
       
@@ -467,7 +482,7 @@
       background: linear-gradient(195deg, #20202caf, #262a5c);
       
       color:  #fdfeff;
-      box-shadow: 7px 7px 15px #080919, -7px -7px 15px #080919;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
       
       
       transition: transform 0.2s ease-in-out;
@@ -490,7 +505,7 @@
       row-gap: 20px;
       overflow-y: auto;
       flex-direction: column;
-      min-height: 30%;
+      min-height: 100%;
 
       
 
@@ -545,6 +560,8 @@
     margin-left: 0.5cm;
 
     height: fit-content;
+
+    margin-top: 1cm;
   
     width: fit-content;
 
@@ -672,8 +689,8 @@
         /* Flexible layout */
         row-gap: 6px;
         flex-direction: column;
-        min-height: 10vh;
-        max-width:90vh;
+        min-height: 80%;
+        max-width:60%;
         column-gap: 0px; /* Reduced column gap */
         margin-bottom: auto; /* Centers the container */
       }
@@ -693,7 +710,9 @@
 
         padding: 10px;
 
-        margin-right: 4cm;
+        margin-right: 0cm;
+
+        margin-left: 2cm;
 
 
 
@@ -705,7 +724,7 @@
 
           right: 0.09cm;
 
-          margin-left: 0cm;
+          margin-left: 0.3cm;
 
           align-self: start;
 
@@ -764,7 +783,7 @@
 
           resize: none;
 
-          margin-bottom: 0.1cm;
+          margin-bottom: 0cm;
 
           height: 9%;
 
@@ -954,7 +973,7 @@
 
         position: sticky;
 
-        bottom: 1.5cm;
+        bottom: 1cm;
 
         
 
@@ -973,6 +992,8 @@
       
 
         grid-template-columns: repeat(auto-fill, minmax(250px, 9cm));
+
+        min-height: 100%;
 
       
 

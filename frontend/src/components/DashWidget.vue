@@ -136,7 +136,7 @@ body[data-theme="dark"] .context-window {
 div {
   background: linear-gradient(145deg, #14cbc894, #3f4aee);
   color: #ffffff;
-  box-shadow: 5px 5px 15px #bebebe, -5px -5px 15px #ffffff;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 15px;
   padding: 10px;
   transition: transform 0.2s ease-in-out;
@@ -190,14 +190,16 @@ button {
 
   border-width: 0cm;
 
-  box-shadow: 10px 10px 10px #26295475, -1px -1px 10px #21245178;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 
   
 
   width: 1.3cm;
   height: 1.3cm;
 
-  background: linear-gradient(145deg, #14cbc894, #3f4aee);
+  /*background: linear-gradient(145deg, #14cbc894, #3f4aee);*/
+
+  background: linear-gradient(145deg, #3d7f99b6, #51b3ddab);
   color: #ffffff;
 
   border-radius: 20px;

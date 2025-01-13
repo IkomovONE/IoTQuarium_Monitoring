@@ -321,15 +321,15 @@
         border-width: 0cm;
   
   
-        background: linear-gradient(145deg, #14cbc894, #3f4aee);
+        background: linear-gradient(145deg, #3d7f99b6, #51b3ddab);
         color: #ffffff;
-        box-shadow: 10px 10px 10px #00000032, -1px -1px 10px #05060d3f;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
         border-radius: 20px;
         padding: 11px;
         
         transition: transform 0.2s ease-in-out;
   
-        height: 1cm;
+        height: 1.1cm;
   
         width: fit-content;
   
