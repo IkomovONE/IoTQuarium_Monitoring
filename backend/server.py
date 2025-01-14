@@ -13,6 +13,7 @@ from pydantic import BaseModel
 from pymongo import MongoClient
 from pymongo import DESCENDING
 from fastapi.middleware.cors import CORSMiddleware
+import sensors
 
 
 def convert_message_to_api_format(response_role, response_content):
@@ -102,8 +103,11 @@ def input_data():
 
 
     while True:
+
+        sensor_data_list= sensors.main()
+
         sensor_data = {
-        "Temp": round(23.0 + random.uniform(0.0, 1.0), 1),  # 23.0 to 24.0
+        "Temp": sensors.main(),   #round(23.0 + random.uniform(0.0, 1.0), 1),  # 23.0 to 24.0
         "pH": round(7.0 + random.uniform(0.0, 0.6), 1),    # 7.0 to 7.6
         "TDS": round(50 + random.uniform(0.0, 450.0), 1),
         "LightNow": "ON" if random.choice([True, False]) else "OFF",  # Random ON/OFF
@@ -258,9 +262,9 @@ def message_gpt():
     daily_data_message = convert_message_to_api_format("system", str(daily_data))
 
     
-    messages.append(daily_data_message)
+    #messages.append(daily_data_message)
     
-    messages.append(recent_data_message)
+    #messages.append(recent_data_message)
 
 
 
