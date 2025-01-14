@@ -106,11 +106,18 @@ def input_data():
 
         sensor_data_list= sensors.main()
 
+        light= "OFF"
+
+        if sensor_data_list[1] > 65.0:
+
+            light= "ON"
+
+
         sensor_data = {
-        "Temp": sensors.main(),   #round(23.0 + random.uniform(0.0, 1.0), 1),  # 23.0 to 24.0
+        "Temp": round(sensor_data_list[0], 1),   #round(23.0 + random.uniform(0.0, 1.0), 1),  # 23.0 to 24.0
         "pH": round(7.0 + random.uniform(0.0, 0.6), 1),    # 7.0 to 7.6
         "TDS": round(50 + random.uniform(0.0, 450.0), 1),
-        "LightNow": "ON" if random.choice([True, False]) else "OFF",  # Random ON/OFF
+        "LightNow": light,   #"ON" if random.choice([True, False]) else "OFF",  # Random ON/OFF
         "WaterLevel": random.choice(["Sufficient", "Low", "Critical"]),
         "WaterFlow": random.choice(["Normal", "Weak", "Strong"]),
         "timestamp": datetime.now().isoformat()
@@ -123,7 +130,7 @@ def input_data():
 
 
 
-        time.sleep(3600)
+        time.sleep(300)
 
 
         continue
@@ -165,7 +172,7 @@ def daily_data_input():
         #time.sleep(20)
         # Get the last 24 entries from the data_table
 
-        recent_data = list(data_table.find().sort("timestamp", DESCENDING).limit(24))
+        recent_data = list(data_table.find().sort("timestamp", DESCENDING).limit(288))
 
 
         print(recent_data)
@@ -176,9 +183,9 @@ def daily_data_input():
         
         if len(recent_data) == 24:
             # Calculate averages
-            avg_temp = sum(d['Temp'] for d in recent_data) / 24
-            avg_ph = sum(d['pH'] for d in recent_data) / 24
-            avg_tds = sum(d['TDS'] for d in recent_data) / 24
+            avg_temp = sum(d['Temp'] for d in recent_data) / 288
+            avg_ph = sum(d['pH'] for d in recent_data) / 288
+            avg_tds = sum(d['TDS'] for d in recent_data) / 288
             
             # Prepare the averaged data document
             avg_data = {

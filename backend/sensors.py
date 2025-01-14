@@ -1,19 +1,19 @@
 import time
-#import board
-#import busio
+import board
+import busio
 #import Adafruit_DHT
 from w1thermsensor import W1ThermSensor
 #from Adafruit_ADS1x15 import ADS1115
-#from adafruit_veml7700 import VEML7700
+from adafruit_veml7700 import VEML7700
 import RPi.GPIO as GPIO
 
 # GPIO Pins
 #FLOW_SENSOR_PIN = 23  # Example GPIO pin for water flow sensor (adjust as necessary)
 
 # Initialize I2C for ADS1115 and VEML7700
-#i2c = busio.I2C(board.SCL, board.SDA)
+i2c = busio.I2C(board.SCL, board.SDA)
 #ads = ADS1115()  # Initialize ADC
-#light_sensor = VEML7700(i2c)
+light_sensor = VEML7700(i2c)
 
 # Initialize water flow sensor
 #GPIO.setmode(GPIO.BCM)
@@ -31,8 +31,8 @@ def read_temperature():
     return temp_sensor.get_temperature()
 
 def read_light():
-    #"""Read ambient light from VEML7700."""
-    #return light_sensor.lux
+    """Read ambient light from VEML7700."""
+    return light_sensor.lux
 
 #def read_ph(adc_channel):
   #  """Read pH value from pH sensor (via ADS1115)."""
@@ -69,7 +69,7 @@ def main():
         
         # Read all sensors
         temperature = read_temperature()
-        #   light = read_light()
+        light = read_light()
         #ph = read_ph(0)  # Assuming pH is connected to ADC channel 0
         #tds = read_tds(1)  # Assuming TDS is connected to ADC channel 1
         #water_level = read_water_level(2)  # Assuming water level is ADC channel 2
@@ -77,14 +77,19 @@ def main():
 
         # Print the results
         print(f"Temperature: {temperature:.2f} °C")
-        #print(f"Light Intensity: {light:.2f} lx")
+        print(f"Light Intensity: {light:.2f} lx")
         # print(f"pH Value: {ph:.2f}")
         # print(f"TDS Value: {tds:.2f} ppm")
         # print(f"Water Level: {water_level}")
         #print(f"Flow Rate: {flow_rate:.2f} L/min")
         # print("-" * 30)
 
-        return temperature
+        values = []
+
+        values.append(temperature)
+        values.append(light)
+
+        return values
 
             
 
