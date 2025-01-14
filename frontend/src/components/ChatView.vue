@@ -907,6 +907,24 @@
 
 
       }
+
+      .message-input {
+
+        
+
+        position: sticky;
+
+        bottom: 1.5cm;
+
+
+
+        padding-left: 0cm;
+
+
+
+        align-self: center;
+
+        }
   
     
   
@@ -973,7 +991,7 @@
 
         position: sticky;
 
-        bottom: 1cm;
+        bottom: 1.5cm;
 
         
 
