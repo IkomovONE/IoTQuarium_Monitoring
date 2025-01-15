@@ -3,7 +3,7 @@ import board
 import busio
 #import Adafruit_DHT
 from w1thermsensor import W1ThermSensor
-#from Adafruit_ADS1x15 import ADS1115
+from Adafruit_ADS1x15 import ADS1115
 from adafruit_veml7700 import VEML7700
 import RPi.GPIO as GPIO
 
@@ -12,7 +12,7 @@ import RPi.GPIO as GPIO
 
 # Initialize I2C for ADS1115 and VEML7700
 i2c = busio.I2C(board.SCL, board.SDA)
-#ads = ADS1115()  # Initialize ADC
+ads= ADS1115(address=0x48, busnum=1)  # Initialize ADC
 light_sensor = VEML7700(i2c)
 
 # Initialize water flow sensor
@@ -24,7 +24,7 @@ temp_sensor = W1ThermSensor()
 
 # Placeholder for pH and TDS calibration
 #PH_CALIBRATION_OFFSET = 0.0
-#TDS_FACTOR = 0.5
+TDS_FACTOR = 0.5
 
 def read_temperature():
     """Read temperature from DS18B20."""
@@ -40,13 +40,13 @@ def read_light():
   #  ph_value = 7 + (voltage - 2.5)  # Adjust based on calibration
    # return ph_value + PH_CALIBRATION_OFFSET
 
-#def read_tds(adc_channel):
+def read_tds(adc_channel):
     """Read TDS value from TDS sensor (via ADS1115)."""
     voltage = ads.read_adc(adc_channel, gain=1) * (4.096 / 32767)  # Convert to voltage
     tds_value = voltage * TDS_FACTOR  # Adjust based on calibration
     return tds_value
 
-#def read_water_level(adc_channel):
+def read_water_level(adc_channel):
     """Read water level from analog water level sensor."""
     return ads.read_adc(adc_channel, gain=1)
 
@@ -71,16 +71,18 @@ def main():
         temperature = read_temperature()
         light = read_light()
         #ph = read_ph(0)  # Assuming pH is connected to ADC channel 0
-        #tds = read_tds(1)  # Assuming TDS is connected to ADC channel 1
-        #water_level = read_water_level(2)  # Assuming water level is ADC channel 2
+        tds = read_tds(1)  # Assuming TDS is connected to ADC channel 1
+        water_level = read_water_level(2)  # Assuming water level is ADC channel 2
         #flow_rate = read_flow()
+
+        tds= tds*434.78
 
         # Print the results
         print(f"Temperature: {temperature:.2f} °C")
         print(f"Light Intensity: {light:.2f} lx")
         # print(f"pH Value: {ph:.2f}")
-        # print(f"TDS Value: {tds:.2f} ppm")
-        # print(f"Water Level: {water_level}")
+        print(f"TDS Value: {tds:.2f} ppm")
+        print(f"Water Level: {water_level}")
         #print(f"Flow Rate: {flow_rate:.2f} L/min")
         # print("-" * 30)
 
@@ -88,6 +90,11 @@ def main():
 
         values.append(temperature)
         values.append(light)
+        values.append(tds)
+        values.append(water_level)
+
+        
+        
 
         return values
 

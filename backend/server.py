@@ -108,7 +108,7 @@ def input_data():
 
         light= "OFF"
 
-        if sensor_data_list[1] > 65.0:
+        if sensor_data_list[1] > 500.0:
 
             light= "ON"
 
@@ -116,9 +116,9 @@ def input_data():
         sensor_data = {
         "Temp": round(sensor_data_list[0], 1),   #round(23.0 + random.uniform(0.0, 1.0), 1),  # 23.0 to 24.0
         "pH": round(7.0 + random.uniform(0.0, 0.6), 1),    # 7.0 to 7.6
-        "TDS": round(50 + random.uniform(0.0, 450.0), 1),
+        "TDS": int(sensor_data_list[2]), #round(50 + random.uniform(0.0, 450.0), 1),
         "LightNow": light,   #"ON" if random.choice([True, False]) else "OFF",  # Random ON/OFF
-        "WaterLevel": random.choice(["Sufficient", "Low", "Critical"]),
+        "WaterLevel": sensor_data_list[3], #random.choice(["Sufficient", "Low", "Critical"]),
         "WaterFlow": random.choice(["Normal", "Weak", "Strong"]),
         "timestamp": datetime.now().isoformat()
         
