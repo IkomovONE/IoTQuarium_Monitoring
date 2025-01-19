@@ -535,6 +535,8 @@
 
           right: 0cm;
 
+          width: 100vw;
+
           overflow-x: hidden;
           /* Flexible layout */
           row-gap: 2px;
