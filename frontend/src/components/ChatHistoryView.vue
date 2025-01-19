@@ -365,6 +365,7 @@
         overflow-y: auto;
         flex-direction: column;
         min-height: 30%;
+        width: 100vw;
   
         
   

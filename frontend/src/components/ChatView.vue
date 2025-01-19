@@ -1,5 +1,7 @@
 <template>
 
+  
+
   <div id="title">
 
   
@@ -88,6 +90,7 @@
           if (!this.isKeyboardOpen) {
             this.isKeyboardOpen = true;
             this.saveScrollPosition(); // Save scroll position when keyboard opens
+            
           }
         } else {
           if (this.isKeyboardOpen) {
@@ -649,10 +652,6 @@
 
 
 
-
-
-
-
         bottom: 0;
 
         }
@@ -690,7 +689,8 @@
         row-gap: 6px;
         flex-direction: column;
         min-height: 80%;
-        max-width:60%;
+        width: 100vw;
+        
         column-gap: 0px; /* Reduced column gap */
         margin-bottom: auto; /* Centers the container */
       }
@@ -712,7 +712,7 @@
 
         margin-right: 0cm;
 
-        margin-left: 2cm;
+        margin-left: 3cm;
 
 
 
@@ -736,7 +736,7 @@
 
           word-wrap: break-word;
 
-          max-width: 40%;
+          max-width: 50%;
 
           margin-bottom: 3cm;
 
@@ -769,32 +769,16 @@
         }
 
 
-        .message-input {
 
-      
-          
-         
+          .message-input {
 
-          margin-left: 0cm;
 
-          min-width: 50%;
 
-          max-width: 55%;
+            width: 100vw;
 
-          resize: none;
 
-          margin-bottom: 0cm;
-
-          height: 9%;
-
-          
-
-          
-
-         
 
           }
-
 
 
           .message-textarea {
