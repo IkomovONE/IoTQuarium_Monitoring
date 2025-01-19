@@ -3,6 +3,8 @@ import time
 import threading
 import random
 import uvicorn
+from slowapi import Limiter
+from slowapi.util import get_remote_address
 from datetime import datetime
 from openai import OpenAI
 from fastapi import FastAPI
@@ -39,10 +41,12 @@ Mongoclient = MongoClient("mongodb://localhost:27017/")  # Local MongoDB instanc
 
 db = Mongoclient["IoT_Quarium_Monitoring"]
 
+limiter = Limiter(key_func=get_remote_address)
+
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins="*",
+    allow_origins="https://iotquarium.info",  #https://iotquarium.info
     allow_credentials=True,
     allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allow_headers="*",
@@ -72,6 +76,9 @@ data_table = db["Aquarium_Data"]
 
 daily_data_table= db["Aquarium_data_daily_average"]
 
+input_thread = None
+daily_thread = None
+
 
 
 def save_msg(i):
@@ -87,50 +94,48 @@ def input_data():
 
     #Make database entry
 
-    #Append to the context list
-
-    #Send context to openAI
-
-
-    #So, let's say I don't open the frontend application for a long time. 
-    # Sensors record the data for a couple of days, calculate the average temperature/pH/etc every 12h, 
-    # convert the data to a gpt message {role: system, content: Temp: 23, pH: 7.5} and 
-    # save the message to the collection of messages for the context. Also data is saved separately to DB.
-    # Then, when I open the app and check the dashboard the whole context list is 
-    # fetched from the database and only 1 request is sent to show the status, 
-    # and GPT sees the data through the whole long period and the most recent one.
-
-
 
     while True:
 
-        sensor_data_list= sensors.main()
+        try:
 
-        light= "OFF"
+            sensor_data_list= sensors.main()
 
-        if sensor_data_list[1] > 500.0:
+            light= "OFF"
 
-            light= "ON"
+            water_level= "low"
 
+            if sensor_data_list[1] > 500.0:
 
-        sensor_data = {
-        "Temp": round(sensor_data_list[0], 1),   #round(23.0 + random.uniform(0.0, 1.0), 1),  # 23.0 to 24.0
-        "pH": round(7.0 + random.uniform(0.0, 0.6), 1),    # 7.0 to 7.6
-        "TDS": int(sensor_data_list[2]), #round(50 + random.uniform(0.0, 450.0), 1),
-        "LightNow": light,   #"ON" if random.choice([True, False]) else "OFF",  # Random ON/OFF
-        "WaterLevel": sensor_data_list[3], #random.choice(["Sufficient", "Low", "Critical"]),
-        "WaterFlow": random.choice(["Normal", "Weak", "Strong"]),
-        "timestamp": datetime.now().isoformat()
-        
-    }
-        
-        data_table.insert_one(sensor_data)
+                light= "ON"
+
+            #if sensor_data_list[3] > 4350:
+
+                #water_level= "sufficient"
 
 
 
+            sensor_data = {
+            "Temp": round(sensor_data_list[0], 1),   #round(23.0 + random.uniform(0.0, 1.0), 1),  # 23.0 to 24.0
+            "pH": "-", #round(7.0 + random.uniform(0.0, 0.6), 1),    # 7.0 to 7.6
+            "TDS":  "-", #round(50 + random.uniform(0.0, 450.0), 1), #int(sensor_data_list[2]),
+            "LightNow": light,   #"ON" if random.choice([True, False]) else "OFF",  # Random ON/OFF
+            "WaterLevel": "-", #random.choice(["Sufficient", "Low", "Critical"]),
+            "WaterFlow": "-",  #random.choice(["Normal", "Weak", "Strong"]),
+            "timestamp": datetime.now().isoformat()
+            
+            }
+            
+            data_table.insert_one(sensor_data)
+
+            time.sleep(300)
 
 
-        time.sleep(300)
+        except Exception as e:
+            print(f"Error in input_data thread: {e}")
+            time.sleep(15)
+            input_thread = threading.Thread(target=input_data, daemon=True)
+            input_thread.start()
 
 
         continue
@@ -175,7 +180,7 @@ def daily_data_input():
         recent_data = list(data_table.find().sort("timestamp", DESCENDING).limit(288))
 
 
-        print(recent_data)
+        #print(recent_data)
 
     
 
@@ -219,10 +224,15 @@ def daily_data_input():
 
 ######
 
+
+
 @app.on_event("startup")
 def start_data_generation():
-    threading.Thread(target=input_data, daemon=True).start()
-    threading.Thread(target=daily_data_input, daemon=True).start()
+    global input_thread, daily_thread
+    input_thread = threading.Thread(target=input_data, daemon=True)
+    daily_thread = threading.Thread(target=daily_data_input, daemon=True)
+    input_thread.start()
+    daily_thread.start()
 
 
 #####
@@ -430,7 +440,7 @@ def ask_gpt(request: Request):
 
     processed_response= convert_message_to_api_format(response_role, response_content)
 
-    print(messages)
+    #print(messages)
 
     
     
