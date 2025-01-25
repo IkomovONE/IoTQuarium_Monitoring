@@ -94,10 +94,18 @@ def input_data():
 
     #Make database entry
 
+    attempt= 0
+
 
     while True:
 
         try:
+
+            attempt+=1
+
+            if attempt==10:
+                break
+
 
             sensor_data_list= sensors.main()
 
@@ -115,14 +123,17 @@ def input_data():
             
             data_table.insert_one(sensor_data)
 
+            attempt=0
+
             time.sleep(300)
 
 
         except Exception as e:
             print(f"Error in input_data thread: {e}")
             time.sleep(15)
-            input_thread = threading.Thread(target=input_data, daemon=True)
-            input_thread.start()
+            continue
+            #input_thread = threading.Thread(target=input_data, daemon=True)
+            #input_thread.start()
 
 
         continue

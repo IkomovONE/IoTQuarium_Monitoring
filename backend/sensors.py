@@ -109,7 +109,7 @@ def read_ph(adc_channel):
 
     voltage= round(voltage, 3)
 
-    print("voltage: "+str(voltage) + "     pH: "+str(ph_value))
+    #print("voltage: "+str(voltage) + "     pH: "+str(ph_value))
 
         
 
@@ -237,13 +237,15 @@ def main():
         tds= int(tds)
 
         # Print the results
-        print(f"Temperature: {temperature} °C")
-        print(f"Light Intensity: {light}")
-        print(f"pH Value: {ph}")
-        print(f"TDS Value: {tds} ppm")
-        print(f"Water Level: {water_level}")
-        print(f"Flow Rate: {flow_rate}")
-        print("-" * 30)
+        #print(f"Temperature: {temperature} °C")
+        #print(f"Light Intensity: {light}")
+        #print(f"pH Value: {ph}")
+        #print(f"TDS Value: {tds} ppm")
+        #print(f"Water Level: {water_level}")
+        #print(f"Flow Rate: {flow_rate}")
+        #print("-" * 30)
+
+        print("Data recorded")
 
         #time.sleep(1)
 
