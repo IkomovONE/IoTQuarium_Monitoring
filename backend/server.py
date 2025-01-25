@@ -16,7 +16,7 @@ from pymongo import MongoClient
 from pymongo import DESCENDING
 from fastapi.middleware.cors import CORSMiddleware
 import sensors
-import OLED
+
 
 
 def convert_message_to_api_format(response_role, response_content):
@@ -47,7 +47,7 @@ limiter = Limiter(key_func=get_remote_address)
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins="https://iotquarium.info",  #https://iotquarium.info
+    allow_origins="*",  #https://iotquarium.info
     allow_credentials=True,
     allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allow_headers="*",
@@ -232,10 +232,8 @@ def start_data_generation():
     global input_thread, daily_thread
     input_thread = threading.Thread(target=input_data, daemon=True)
     daily_thread = threading.Thread(target=daily_data_input, daemon=True)
-    oled_thread = threading.Thread(target=OLED, daemon=True)
     input_thread.start()
     daily_thread.start()
-    oled_thread.start()
     
 
 
