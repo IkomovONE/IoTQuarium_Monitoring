@@ -175,6 +175,9 @@ try:
             display_level(w_level)
             time.sleep(5)
 
+            oled.fill(0)
+            oled.show()
+
             time.sleep(10)
 
             attempt=0
