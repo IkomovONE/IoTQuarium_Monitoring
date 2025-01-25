@@ -124,7 +124,7 @@ def read_tds(adc_channel):
 
 def read_water_level(adc_channel):
     """Read water level from analog water level sensor."""
-    return ads.read_adc(adc_channel, gain=1)
+    return ads.read_adc(adc_channel, gain=2)
 
 def read_flow(line, duration):
     """Read the flow sensor value and calculate flow rate in L/min."""
@@ -149,7 +149,7 @@ def read_flow(line, duration):
         # Linear scale from 1 L/min to 30 L/min based on pulses
         flow_rate_lpm = (pulse_count / PULSES_AT_1_LPM)  # This scales linearly from 1 L/min to 30 L/min
     
-    return flow_rate_lpm, pulse_count
+    return flow_rate_lpm
 
 def main():
     try:
@@ -168,12 +168,12 @@ def main():
             
         flow_rate= read_flow(flow_line, duration=1)
 
-        #flow_rate= round(flow_rate, 1)
+        flow_rate= round(flow_rate, 1)
 
         flow_rate= str(flow_rate) + " L/min"
     
     # Print the results
-            #print(f"Flow rate: {flow_rate:.2f} L/min (based on {pulse_count} pulses in 10 seconds)")
+        #print(f"Flow rate: {flow_rate:.2f} L/min")
             
 
         light = read_light()
@@ -188,12 +188,18 @@ def main():
 
         toggle_water_level_sensor(water_level_line, True)
 
-        time.sleep(5)
+        #time.sleep(5)
+
+        
 
         
         water_level = read_water_level(3)
 
-        water_level= int(water_level)/30000*100
+     
+
+        water_level= water_level/20500*100
+
+        water_level= int(water_level)
 
         water_level= str(water_level) + "%"
 
@@ -215,7 +221,7 @@ def main():
         ph = read_ph(1)  # Assuming pH is connected to ADC channel 0
         tds = read_tds(2)  # Assuming TDS is connected to ADC channel 1
           # Assuming water level is ADC channel 2
-        #flow_rate = read_flow()
+        
 
         tds= tds*434.78
 
