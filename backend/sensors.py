@@ -223,7 +223,7 @@ def main():
 
         ph= round(ph, 2)
 
-        tds= int(tds)
+        
 
         temperature= round(temperature, 1)
 
@@ -233,6 +233,8 @@ def main():
         
 
         tds= tds*434.78
+
+        tds= int(tds)
 
         # Print the results
         print(f"Temperature: {temperature} °C")

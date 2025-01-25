@@ -16,7 +16,7 @@ oled.fill(0)
 oled.show()
 
 # Load a font (you can use default or custom fonts)
-font = ImageFont.load_default()
+font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 18)
 
 def display_temperature(temp):
     """Display temperature on the OLED screen."""
@@ -28,7 +28,7 @@ def display_temperature(temp):
     draw.rectangle((0, 0, oled.width, oled.height), outline=0, fill=0)
 
     # Display the temperature
-    text = f"Temp: {temp:.2f}°C"
+    text = f"T: {temp}°C"
     draw.text((10, 10), text, font=font, fill=255)
 
     # Display image
@@ -82,7 +82,7 @@ def display_tds(tds):
     draw.rectangle((0, 0, oled.width, oled.height), outline=0, fill=0)
 
     # Display the temperature
-    text = f"TDS: {tds} ppm"
+    text = f"S: {tds}ppm"
     draw.text((10, 10), text, font=font, fill=255)
 
     # Display image
@@ -100,8 +100,11 @@ def display_water_flow(flow):
     draw.rectangle((0, 0, oled.width, oled.height), outline=0, fill=0)
 
     # Display the temperature
-    text = f"W_Flow: {flow} L/min"
-    draw.text((10, 10), text, font=font, fill=255)
+    text = f"F: {flow}"
+
+    fontt = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 17)
+
+    draw.text((10, 10), text, font=fontt, fill=255)
 
     # Display image
     oled.image(image)
@@ -118,7 +121,7 @@ def display_level(level):
     draw.rectangle((0, 0, oled.width, oled.height), outline=0, fill=0)
 
     # Display the temperature
-    text = f"W_Level: {level}%"
+    text = f"W: {level}"
     draw.text((10, 10), text, font=font, fill=255)
 
     # Display image
@@ -132,7 +135,7 @@ def display_level(level):
 # Example: Update temperature every second
 try:
 
-    time.sleep(20)
+    time.sleep(1)
 
     attempt= 0
 
@@ -178,7 +181,7 @@ try:
 
             continue
 
-        except RuntimeError as e:
+        except Exception as e:
             print("Failed to access sensors.")
             print(f"GPIO is busy.")
             time.sleep(10)
@@ -187,7 +190,7 @@ try:
 
 
 
-except RuntimeError as e:
+except Exception as e:
             print("Failed to access sensors.")
             print(f"GPIO is busy.")
             time.sleep(10)
