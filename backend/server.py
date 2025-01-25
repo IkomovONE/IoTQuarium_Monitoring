@@ -103,9 +103,9 @@ def input_data():
 
 
             sensor_data = {
-            "Temp": round(sensor_data_list[0], 1),   #round(23.0 + random.uniform(0.0, 1.0), 1),  # 23.0 to 24.0
-            "pH": round(sensor_data_list[2], 1),                               #round(7.0 + random.uniform(0.0, 0.6), 1),    # 7.0 to 7.6
-            "TDS":  int(sensor_data_list[3]), #round(50 + random.uniform(0.0, 450.0), 1), 
+            "Temp": sensor_data_list[0],   #round(23.0 + random.uniform(0.0, 1.0), 1),  # 23.0 to 24.0
+            "pH": sensor_data_list[2],                               #round(7.0 + random.uniform(0.0, 0.6), 1),    # 7.0 to 7.6
+            "TDS":  sensor_data_list[3], #round(50 + random.uniform(0.0, 450.0), 1), 
             "LightNow": sensor_data_list[1],                       #"ON" if random.choice([True, False]) else "OFF",  # Random ON/OFF
             "WaterLevel": sensor_data_list[4],                    #random.choice(["Sufficient", "Low", "Critical"]),
             "WaterFlow": sensor_data_list[5],                     #random.choice(["Normal", "Weak", "Strong"]),

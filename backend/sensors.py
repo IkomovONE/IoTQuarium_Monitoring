@@ -220,16 +220,25 @@ def main():
         
         ph = read_ph(1)  # Assuming pH is connected to ADC channel 0
         tds = read_tds(2)  # Assuming TDS is connected to ADC channel 1
+
+        ph= round(ph, 2)
+
+        tds= int(tds)
+
+        temperature= round(temperature, 1)
+
+
+
           # Assuming water level is ADC channel 2
         
 
         tds= tds*434.78
 
         # Print the results
-        print(f"Temperature: {temperature:.2f} °C")
+        print(f"Temperature: {temperature} °C")
         print(f"Light Intensity: {light}")
-        print(f"pH Value: {ph:.2f}")
-        print(f"TDS Value: {tds:.2f} ppm")
+        print(f"pH Value: {ph}")
+        print(f"TDS Value: {tds} ppm")
         print(f"Water Level: {water_level}")
         print(f"Flow Rate: {flow_rate}")
         print("-" * 30)
