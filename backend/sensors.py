@@ -9,8 +9,10 @@ import gpiod
 from datetime import timedelta
 
 # GPIO Pins
-CHIP_PATH = "/dev/gpiochip0"  # Adjust the chip number as per your setup
+
 FLOW_SENSOR_PIN = 17 
+
+WATER_LEVEL_POWER_PIN = 27
 
 
 # Initialize I2C for ADS1115 and VEML7700
@@ -31,9 +33,19 @@ temp_sensor = W1ThermSensor()
 PH_CALIBRATION_OFFSET = 0.0
 TDS_FACTOR = 0.5
 
+def configure_water_level_sensor(pin):
+    """
+    Configure the GPIO line for the water level sensor.
+    Sets the pin as an output to control power.
+    """
+    chip = gpiod.chip(0)
+    line = chip.get_line(pin)  # Retrieve the GPIO line for the sensor
+    config = gpiod.line_request()
+    config.request_type = gpiod.line_request.DIRECTION_OUTPUT  # Set as output
+    line.request(config)  # Apply the configuration
+    return line
 
-
-def configure_flow_sensor(chip_path, pin):
+def configure_flow_sensor(pin):
     """Configure the GPIO line for water flow sensor."""
 
     
@@ -54,6 +66,20 @@ def configure_flow_sensor(chip_path, pin):
 
     
     return line
+
+
+def toggle_water_level_sensor(line, state):
+    """
+    Toggle the water level sensor ON or OFF.
+    
+    Args:
+        line: The GPIO line configured for the sensor.
+        state: Boolean, True to turn ON (HIGH), False to turn OFF (LOW).
+    """
+    if state:
+        line.set_value(1)  # Turn ON (HIGH)
+    else:
+        line.set_value(0)  # Turn OFF (LOW)
 
 def read_temperature():
     """Read temperature from DS18B20."""
@@ -129,7 +155,10 @@ def main():
     try:
 
 
-        line = configure_flow_sensor(CHIP_PATH, FLOW_SENSOR_PIN)
+        flow_line = configure_flow_sensor(FLOW_SENSOR_PIN)
+
+
+        water_level_line = configure_water_level_sensor(WATER_LEVEL_POWER_PIN)
         
         
         
@@ -137,11 +166,42 @@ def main():
             
         
             
-        flow_rate, pulse_count = read_flow(line, duration=1)
+        flow_rate= read_flow(flow_line, duration=1)
+
+        flow_rate= str(flow_rate) + "L/min"
     
     # Print the results
             #print(f"Flow rate: {flow_rate:.2f} L/min (based on {pulse_count} pulses in 10 seconds)")
             
+
+        light = read_light()
+
+        if light > 500.0:
+
+            light= "ON"
+        else:
+
+            light= "OFF"
+
+
+        toggle_water_level_sensor(water_level_line, True)
+
+        time.sleep(5)
+
+        
+        water_level = read_water_level(3)
+
+        water_level= int(water_level)/30000*100
+
+        water_level= str(water_level) + "%"
+
+        toggle_water_level_sensor(water_level_line, False)
+
+        time.sleep(5)
+
+        water_level_line.release()
+
+
 
 
 
@@ -149,10 +209,10 @@ def main():
         
         # Read all sensors
         temperature = read_temperature()
-        light = read_light()
+        
         ph = read_ph(1)  # Assuming pH is connected to ADC channel 0
         tds = read_tds(2)  # Assuming TDS is connected to ADC channel 1
-        water_level = read_water_level(3)  # Assuming water level is ADC channel 2
+          # Assuming water level is ADC channel 2
         #flow_rate = read_flow()
 
         tds= tds*434.78
