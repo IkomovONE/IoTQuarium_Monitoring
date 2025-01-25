@@ -108,7 +108,7 @@ def input_data():
             "TDS":  int(sensor_data_list[3]), #round(50 + random.uniform(0.0, 450.0), 1), 
             "LightNow": sensor_data_list[1],                       #"ON" if random.choice([True, False]) else "OFF",  # Random ON/OFF
             "WaterLevel": sensor_data_list[4],                    #random.choice(["Sufficient", "Low", "Critical"]),
-            "WaterFlow": round(sensor_data_list[5], 1),                     #random.choice(["Normal", "Weak", "Strong"]),
+            "WaterFlow": sensor_data_list[5],                     #random.choice(["Normal", "Weak", "Strong"]),
             "timestamp": datetime.now().isoformat()
             
             }

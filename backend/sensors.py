@@ -168,7 +168,9 @@ def main():
             
         flow_rate= read_flow(flow_line, duration=1)
 
-        flow_rate= str(flow_rate) + "L/min"
+        #flow_rate= round(flow_rate, 1)
+
+        flow_rate= str(flow_rate) + " L/min"
     
     # Print the results
             #print(f"Flow rate: {flow_rate:.2f} L/min (based on {pulse_count} pulses in 10 seconds)")
@@ -219,11 +221,11 @@ def main():
 
         # Print the results
         print(f"Temperature: {temperature:.2f} °C")
-        print(f"Light Intensity: {light:.2f} lx")
+        print(f"Light Intensity: {light}")
         print(f"pH Value: {ph:.2f}")
         print(f"TDS Value: {tds:.2f} ppm")
         print(f"Water Level: {water_level}")
-        print(f"Flow Rate: {flow_rate:.2f} L/min")
+        print(f"Flow Rate: {flow_rate}")
         print("-" * 30)
 
         #time.sleep(1)
