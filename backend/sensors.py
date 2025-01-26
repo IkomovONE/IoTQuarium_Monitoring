@@ -14,6 +14,8 @@ FLOW_SENSOR_PIN = 17
 
 WATER_LEVEL_POWER_PIN = 27
 
+TDS_POWER_PIN= 26
+
 
 # Initialize I2C for ADS1115 and VEML7700
 i2c = busio.I2C(board.SCL, board.SDA)
@@ -34,10 +36,16 @@ PH_CALIBRATION_OFFSET = 0.0
 TDS_FACTOR = 0.5
 
 def configure_water_level_sensor(pin):
-    """
-    Configure the GPIO line for the water level sensor.
-    Sets the pin as an output to control power.
-    """
+    
+    chip = gpiod.chip(0)
+    line = chip.get_line(pin)  # Retrieve the GPIO line for the sensor
+    config = gpiod.line_request()
+    config.request_type = gpiod.line_request.DIRECTION_OUTPUT  # Set as output
+    line.request(config)  # Apply the configuration
+    return line
+
+def configure_tds_sensor(pin):
+    
     chip = gpiod.chip(0)
     line = chip.get_line(pin)  # Retrieve the GPIO line for the sensor
     config = gpiod.line_request()
@@ -46,36 +54,27 @@ def configure_water_level_sensor(pin):
     return line
 
 def configure_flow_sensor(pin):
-    """Configure the GPIO line for water flow sensor."""
-
-    
-    
-
+   
     chip = gpiod.chip(0)
     line = chip.get_line(pin)  # Retrieve the GPIO line for the sensor
     config = gpiod.line_request()
 
     config.request_type= gpiod.line_request.EVENT_FALLING_EDGE
-
-    
-
-    
-    
     
     line.request(config)
 
-    
     return line
 
 
 def toggle_water_level_sensor(line, state):
-    """
-    Toggle the water level sensor ON or OFF.
-    
-    Args:
-        line: The GPIO line configured for the sensor.
-        state: Boolean, True to turn ON (HIGH), False to turn OFF (LOW).
-    """
+   
+    if state:
+        line.set_value(1)  # Turn ON (HIGH)
+    else:
+        line.set_value(0)  # Turn OFF (LOW)
+
+def toggle_tds_sensor(line, state):
+   
     if state:
         line.set_value(1)  # Turn ON (HIGH)
     else:
@@ -159,6 +158,8 @@ def main():
 
 
         water_level_line = configure_water_level_sensor(WATER_LEVEL_POWER_PIN)
+
+        tds_line = configure_water_level_sensor(TDS_POWER_PIN)
         
         
         
@@ -205,9 +206,24 @@ def main():
 
         toggle_water_level_sensor(water_level_line, False)
 
-        time.sleep(5)
+        time.sleep(2)
 
         water_level_line.release()
+
+
+
+        toggle_tds_sensor(tds_line, True)
+
+        tds = read_tds(2)
+
+
+        tds= tds*434.78
+
+        tds= int(tds)
+
+        toggle_tds_sensor(tds_line, False)
+
+        time.sleep(2)
 
 
 
@@ -219,7 +235,7 @@ def main():
         temperature = read_temperature()
         
         ph = read_ph(1)  # Assuming pH is connected to ADC channel 0
-        tds = read_tds(2)  # Assuming TDS is connected to ADC channel 1
+          # Assuming TDS is connected to ADC channel 1
 
         ph= round(ph, 2)
 
@@ -232,9 +248,7 @@ def main():
           # Assuming water level is ADC channel 2
         
 
-        tds= tds*434.78
-
-        tds= int(tds)
+        
 
         # Print the results
         #print(f"Temperature: {temperature} °C")
