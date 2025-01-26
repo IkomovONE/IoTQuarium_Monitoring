@@ -189,7 +189,7 @@ def main():
 
         toggle_water_level_sensor(water_level_line, True)
 
-        #time.sleep(5)
+        time.sleep(5)
 
         
 
@@ -213,6 +213,8 @@ def main():
 
 
         toggle_tds_sensor(tds_line, True)
+
+        time.sleep(5)
 
         tds = read_tds(2)
 
@@ -254,7 +256,7 @@ def main():
         #print(f"Temperature: {temperature} °C")
         #print(f"Light Intensity: {light}")
         #print(f"pH Value: {ph}")
-        #print(f"TDS Value: {tds} ppm")
+        print(f"TDS Value: {tds} ppm")
         #print(f"Water Level: {water_level}")
         #print(f"Flow Rate: {flow_rate}")
         #print("-" * 30)
