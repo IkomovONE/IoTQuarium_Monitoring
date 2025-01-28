@@ -181,7 +181,7 @@ export default {
         daily_data= JSON.parse(daily_data);
 
 
-        let daily_data_string= "Temp: " + daily_data["AverageTemp"] + " | pH: " + daily_data["AveragepH"] + " | TDS: " + daily_data["AverageTDS"]
+        let daily_data_string= "Temp: " + daily_data["AverageTemp"] + " | pH: " + daily_data["AveragepH"] + " | TDS: " + daily_data["AverageTDS"] + " | LightON: " + daily_data["LightDuration"] + " hours"
 
 
 
@@ -215,7 +215,7 @@ export default {
               { id: 5, title: "Aquarium Lamp", description: current_data["LightNow"], icon: require('@/assets/light.png') },
               { id: 6, title: "Filter water flow", description: current_data["WaterFlow"], icon: require('@/assets/waves.png') },
               { id: 7, title: "Recorded at", description: formattedDateTime, icon: require('@/assets/clock.png') },
-              { id: 8, title: "Daily averages", description: daily_data_string, icon: require('@/assets/chart.png') },
+              { id: 8, title: "Daily data", description: daily_data_string, icon: require('@/assets/chart.png') },
               { id: 9, title: "Overall evaluation", description: gpt_data },
             ];
 
