@@ -3,7 +3,7 @@
     
     <h3 class="text-lg font-semibold">{{ data.title }}</h3>
     <h1 class="text-sm text-gray-500">{{ data.description }}</h1>
-    <img :src="data.icon" alt="Widget icon" />
+    <img :src="data.icon" alt="Widget icon" :class="{ 'daily-data-img': data.title === 'Daily data' }"/>
     
     
   </div>
@@ -48,7 +48,7 @@ img {
 
   left: 6cm;
 
-  bottom: 0.7cm;
+  bottom: 1cm;
 
   height: 1cm;
 
@@ -57,6 +57,11 @@ img {
   filter: invert(1);
 
 
+}
+
+img.daily-data-img {
+  
+  bottom: 1.8cm;
 }
 
 
@@ -79,6 +84,10 @@ bottom: 0.9cm;
 font-size: 0.5cm;
 
 font-weight: 400;
+
+line-height: 0.8cm;
+
+
 
 
 }

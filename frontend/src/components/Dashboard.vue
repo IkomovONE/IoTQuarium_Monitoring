@@ -114,7 +114,7 @@ export default {
         { id: 5, title: "Aquarium Lamp", description: "Loading...", icon: require('@/assets/light.png') },
         { id: 6, title: "Filter water flow", description: "Loading...", icon: require('@/assets/waves.png') },
         { id: 7, title: "Recorded at", description: "Loading...", icon: require('@/assets/clock.png') },
-        { id: 8, title: "Daily averages", description: "Loading...", icon: require('@/assets/chart.png') },
+        { id: 8, title: "Daily data", description: "Loading...", icon: require('@/assets/chart.png') },
         { id: 9, title: "Overall evaluation", description: "Loading..." },
 
 
@@ -181,7 +181,7 @@ export default {
         daily_data= JSON.parse(daily_data);
 
 
-        let daily_data_string= "Temp: " + daily_data["AverageTemp"] + " | pH: " + daily_data["AveragepH"] + " | TDS: " + daily_data["AverageTDS"] + " | LightON: " + daily_data["LightDuration"] + " hours"
+        let daily_data_string= "Temp: " + daily_data["AverageTemp"] + " | pH: " + daily_data["AveragepH"] + " | TDS: " + daily_data["AverageTDS"] + " | Light ON today: " + daily_data["LightDuration"] + " hrs"
 
 
 
