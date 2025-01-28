@@ -70,6 +70,9 @@ context= [{"role": "system", "content": "You are a helpful pet shop aquarium ass
 
 messages= [{"role": "system", "content": "You are a helpful pet shop aquarium assistant, You are a part of an IoT system where Raspberry Pi collects aquarium data using sensors and sends it to you. You need to analyze the data and provide the status when asked to, or just assist with general questions. Each time u will get list of messages as a history of conversation/data, and u need to assist based on the data history and saved knowledge. Additionaly, when u're told about aquarium environment statistics, such as temperature or pH, u should not answer anything, but memorize it as current status of the aquarium and then give values plus evaluation when asked about the status. The sensor values are sent from _system_, automatically, so u don't have to answer this. Also bit about the data sent to you: application collects environment data each hour, after 24 hours calculates average, and sends to you when user opens the web page. For example, AverageTemp is a daily average which was calculated and recorded at the time mentioned in the Date: and time: fields. Another data that can be sent to you is at the moment when user opens the web page: at this point of time the whole conversation context will be sent to you and the last message would be the sensor data of the most recent data recording (not average, hourly data)"}]
 
+Light_counter= 0
+
+Current_light_status= "OFF"
 
 message_history = db["Message_history"]
 
@@ -92,6 +95,10 @@ def save_msg(i):
 
 
 def input_data():
+
+    global Current_light_status
+
+    global Light_counter
 
     
 
@@ -128,6 +135,13 @@ def input_data():
 
             attempt=0
 
+            if sensor_data_list[1]== "ON":
+
+                Light_counter+=1
+
+            Current_light_status= sensor_data_list[1]
+
+
             time.sleep(300)
 
 
@@ -147,11 +161,17 @@ def input_data():
 
 def daily_data_input():
 
+    global Current_light_status
+
+    global Light_counter
+
+
     avg_data = {
                 "timestamp": datetime.now().isoformat(),
                 "AverageTemp": 0,
                 "AveragepH": 0,
-                "AverageTDS": 0
+                "AverageTDS": 0,
+                "LightDuration": 0,
             }
             
             # Insert the average data into the Daily_Average_Data collection
@@ -170,6 +190,21 @@ def daily_data_input():
 
     context.append(converted_input)
 
+    time.sleep(60)
+
+    while True:
+        if Current_light_status == "ON":
+
+            print("Light is on, waiting until the light turns off to start the daily averages timer...")
+
+            time.sleep(10)
+
+            continue
+
+        elif Current_light_status == "OFF":
+
+            break
+
 
     while True:
 
@@ -177,6 +212,13 @@ def daily_data_input():
         time.sleep(86430)  # 86400 seconds = 24 hours
         #time.sleep(20)
         # Get the last 24 entries from the data_table
+
+        Light_on_duration= Light_counter * 5
+
+        Light_on_duration= Light_on_duration/60
+
+        Light_on_duration= round(Light_on_duration, 1)
+
 
         recent_data = list(data_table.find().sort("timestamp", DESCENDING).limit(288))
 
@@ -187,7 +229,7 @@ def daily_data_input():
 
         
         
-        if len(recent_data) == 24:
+        if len(recent_data) == 288:
             # Calculate averages
             avg_temp = sum(d['Temp'] for d in recent_data) / 288
             avg_ph = sum(d['pH'] for d in recent_data) / 288
@@ -198,7 +240,8 @@ def daily_data_input():
                 "timestamp": datetime.now().isoformat(),
                 "AverageTemp": round(avg_temp, 1),
                 "AveragepH": round(avg_ph, 1),
-                "AverageTDS": round(avg_tds, 1)
+                "AverageTDS": round(avg_tds, 1),
+                "LightDuration": Light_on_duration,
             }
             
             # Insert the average data into the Daily_Average_Data collection
@@ -219,6 +262,8 @@ def daily_data_input():
 
 
             print(f"Daily averages saved: {avg_data}")
+
+            Light_counter = 0
         
         # Sleep for 1 day (24 hours) before running again
         
