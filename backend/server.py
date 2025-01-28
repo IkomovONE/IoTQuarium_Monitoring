@@ -38,7 +38,7 @@ app = FastAPI()
 
 client = OpenAI()
 
-Mongoclient = MongoClient("mongodb://localhost:27017/")  # Local MongoDB instance
+Mongoclient = MongoClient("mongodb://localhost:27017/")  
 
 db = Mongoclient["IoT_Quarium_Monitoring"]
 
@@ -47,7 +47,7 @@ limiter = Limiter(key_func=get_remote_address)
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins="*",  #https://iotquarium.info
+    allow_origins="https://iotquarium.info",
     allow_credentials=True,
     allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allow_headers="*",
@@ -55,11 +55,9 @@ app.add_middleware(
 
 class Request(BaseModel):
     role: str
-    content: str  # The actual message content
+    content: str  
    
 
-
-#{"role": "system", "content": "You are a helpful pet shop aquarium assistant, You are a part of an IoT system where Raspberry Pi collects aquarium data using sensors and sends it to you. You need to analyze the data and provide the status whe asked to, or just assist with general questions. Each time u will get list of messages as a history of conversation/data, and u need to assist based on the data history and saved knowledge. Additionaly, when u're told about aquarium environment statistics, such as temperature or pH, u should not answer anything, but memorize it as current ststus of the aquarium and then give values plus evaluation when asked about the status"}
 
 
 
@@ -102,7 +100,7 @@ def input_data():
 
     
 
-    #Make database entry
+   
 
     attempt= 0
 
@@ -121,10 +119,10 @@ def input_data():
 
 
             sensor_data = {
-            "Temp": sensor_data_list[0],   #round(23.0 + random.uniform(0.0, 1.0), 1),  # 23.0 to 24.0
+            "Temp": sensor_data_list[0],                             #round(23.0 + random.uniform(0.0, 1.0), 1),  # 23.0 to 24.0
             "pH": sensor_data_list[2],                               #round(7.0 + random.uniform(0.0, 0.6), 1),    # 7.0 to 7.6
-            "TDS":  sensor_data_list[3], #round(50 + random.uniform(0.0, 450.0), 1), 
-            "LightNow": sensor_data_list[1],                       #"ON" if random.choice([True, False]) else "OFF",  # Random ON/OFF
+            "TDS":  sensor_data_list[3],                            #round(50 + random.uniform(0.0, 450.0), 1), 
+            "LightNow": sensor_data_list[1],                       #"ON" if random.choice([True, False]) else "OFF", 
             "WaterLevel": sensor_data_list[4],                    #random.choice(["Sufficient", "Low", "Critical"]),
             "WaterFlow": sensor_data_list[5],                     #random.choice(["Normal", "Weak", "Strong"]),
             "timestamp": datetime.now().isoformat()
@@ -149,8 +147,7 @@ def input_data():
             print(f"Error in input_data thread: {e}")
             time.sleep(15)
             continue
-            #input_thread = threading.Thread(target=input_data, daemon=True)
-            #input_thread.start()
+            
 
 
         continue
@@ -174,7 +171,7 @@ def daily_data_input():
                 "LightDuration": 0,
             }
             
-            # Insert the average data into the Daily_Average_Data collection
+            
     daily_data_table.insert_one(avg_data)
 
 
@@ -197,11 +194,13 @@ def daily_data_input():
 
             print("Light is on, waiting until the light turns off to start the daily averages timer...")
 
-            time.sleep(10)
+            time.sleep(1200)
 
             continue
 
         elif Current_light_status == "OFF":
+
+            Light_counter= 0
 
             break
 
@@ -209,9 +208,8 @@ def daily_data_input():
     while True:
 
 
-        time.sleep(86430)  # 86400 seconds = 24 hours
-        #time.sleep(20)
-        # Get the last 24 entries from the data_table
+        time.sleep(86430) # 24 hours
+       
 
         Light_on_duration= Light_counter * 5
 
@@ -223,19 +221,19 @@ def daily_data_input():
         recent_data = list(data_table.find().sort("timestamp", DESCENDING).limit(288))
 
 
-        #print(recent_data)
+       
 
     
 
         
         
         if len(recent_data) == 288:
-            # Calculate averages
+           
             avg_temp = sum(d['Temp'] for d in recent_data) / 288
             avg_ph = sum(d['pH'] for d in recent_data) / 288
             avg_tds = sum(d['TDS'] for d in recent_data) / 288
             
-            # Prepare the averaged data document
+           
             avg_data = {
                 "timestamp": datetime.now().isoformat(),
                 "AverageTemp": round(avg_temp, 1),
@@ -244,7 +242,7 @@ def daily_data_input():
                 "LightDuration": Light_on_duration,
             }
             
-            # Insert the average data into the Daily_Average_Data collection
+           
             daily_data_table.insert_one(avg_data)
 
 
@@ -260,12 +258,16 @@ def daily_data_input():
 
             context.append(converted_input)
 
+            if len(context) > 25:
+
+                context = context[:1] + context[-15:]
+
 
             print(f"Daily averages saved: {avg_data}")
 
             Light_counter = 0
         
-        # Sleep for 1 day (24 hours) before running again
+       
         
 
 ######
@@ -297,7 +299,14 @@ for i in entries:
     context.append(context_history_msg)
 
 
-###Limit the context, it may grow large here. Context is only used for chatView gpt_prompt.
+if len(context) > 10:
+
+    context = context[:1] + context[-5:]
+
+    
+
+
+
 
 
 
@@ -326,10 +335,7 @@ def message_gpt():
     daily_data_message = convert_message_to_api_format("system", str(daily_data))
 
     
-    #messages.append(daily_data_message)
     
-    #messages.append(recent_data_message)
-
 
 
 
@@ -341,7 +347,7 @@ def message_gpt():
 
     for i in context:
 
-        #i = convert_message_to_api_format("system", str(i))
+       
 
         gpt_prompt.append(i)
 
@@ -376,7 +382,7 @@ def message_gpt():
 
     
 
-    #context.append(processed_response)
+   
 
     
 
@@ -435,7 +441,7 @@ def ask_gpt(request: Request):
 
     converted_input= convert_message_to_api_format(body.role, body.content)
 
-    #messages.append(converted_input)
+   
 
    
 
@@ -487,7 +493,7 @@ def ask_gpt(request: Request):
 
     processed_response= convert_message_to_api_format(response_role, response_content)
 
-    #print(messages)
+   
 
     
     

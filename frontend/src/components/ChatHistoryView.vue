@@ -157,7 +157,7 @@
     };
     </script>
     
-    <!-- Add "scoped" attribute to limit CSS to this component only -->
+    
     <style scoped>
       h3 {
         margin: 40px 0 0;
@@ -168,8 +168,8 @@
         display: flex;
         flex-direction: column;
         overflow-y: auto;
-        height: 100vh; /* Full viewport height */
-        margin: 0; /* Remove default margin */
+        height: 100vh; 
+        margin: 0; 
       }
       
       
@@ -360,7 +360,7 @@
     
       .grid-container {
         display: flex;
-         /* Flexible layout */
+         
         row-gap: 20px;
         overflow-y: auto;
         flex-direction: column;
@@ -372,7 +372,7 @@
         max-height: 65vh;
         
         
-         /* Centers the container */
+         
         margin: 0 auto;
         
       }
@@ -538,13 +538,13 @@
           width: 100vw;
 
           overflow-x: hidden;
-          /* Flexible layout */
+          
           row-gap: 2px;
           flex-direction: column;
           min-height: 10vh;
           max-width:90vh;
-          column-gap: 0px; /* Reduced column gap */
-          margin-bottom: auto; /* Centers the container */
+          column-gap: 0px; 
+          margin-bottom: auto; 
         }
 
 
