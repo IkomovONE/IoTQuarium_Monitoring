@@ -162,6 +162,8 @@ def daily_data_input():
 
     global Light_counter
 
+    global context
+
 
     avg_data = {
                 "timestamp": datetime.now().isoformat(),
@@ -207,8 +209,10 @@ def daily_data_input():
 
     while True:
 
+        print("starting daily average measurement process")
 
-        time.sleep(86430) # 24 hours
+
+        time.sleep(86400) # 24 hours
        
 
         Light_on_duration= Light_counter * 5
@@ -318,6 +322,8 @@ def message_gpt():
 
 
     global messages
+
+    global context
 
     messages= messages[:1]
 
