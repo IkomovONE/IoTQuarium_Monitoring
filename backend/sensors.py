@@ -229,7 +229,26 @@ def main():
         
 
         water_level = read_water_level(trig_line, echo_line)
-        water_level = str(water_level) + " cm"
+
+
+
+
+        max_level= 6.85
+
+        min_level= 9.5
+
+        if water_level <= max_level:
+            water_level= "100%"
+        elif water_level >= min_level:
+            water_level= "0%"
+        else:
+            percentage = ((min_level - water_level) / (min_level - max_level)) * 100
+
+            water_level= str(percentage) + "%"
+            
+            
+
+        water_level = str(water_level)
 
 
 
