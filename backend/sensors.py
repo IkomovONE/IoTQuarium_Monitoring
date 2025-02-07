@@ -12,7 +12,7 @@ from datetime import timedelta
 
 FLOW_SENSOR_PIN = 17 
 
-WATER_LEVEL_POWER_PIN = 27
+
 
 TDS_POWER_PIN= 26
 
@@ -133,30 +133,29 @@ def read_tds(adc_channel):
     return tds_value
 
 def read_water_level(trig_line, echo_line):
-    """Measure distance using HC-SR04 ultrasonic sensor."""
+    """Measure distance using HC-S203 ultrasonic sensor."""
     
     trig_line.set_value(0)
-    time.sleep(0.000002)
+    time.sleep(0.1)
     trig_line.set_value(1)
     time.sleep(0.00001)
     trig_line.set_value(0)
 
-    start_time, end_time = 0, 0
+    # Wait for the echo to start
+    start_time = time.time()
+    while echo_line.get_value() == 0:
+        start_time = time.time()  # Wait for the echo signal to start
 
-    timeout = timedelta(seconds=1)
-    start_wait = echo_line.event_wait(timeout=timeout)
-    if start_wait:
-        start_time = time.time()
-    
-    end_wait = echo_line.event_wait(timeout=timeout)
-    if end_wait:
-        end_time = time.time()
+    # Wait for the echo to end
+    while echo_line.get_value() == 1:
+        end_time = time.time()  # Wait for the echo signal to end
 
-    if start_time and end_time:
-        duration = end_time - start_time
-        distance = (duration * 34300) / 2  # Speed of sound = 343 m/s
-    else:
-        distance = -1  # Error case
+    # Calculate duration of echo
+    duration = end_time - start_time
+    distance = (duration * 17150)  # Calculate distance based on speed of sound
+
+    if distance <= 0:
+        return -1  # Return error if distance is not valid
 
     return round(distance, 2)
 
@@ -194,9 +193,9 @@ def main():
         trig_line, echo_line = configure_water_level_sensor(TRIG, ECHO)
 
 
-        water_level_line = configure_water_level_sensor(WATER_LEVEL_POWER_PIN)
+        
 
-        tds_line = configure_water_level_sensor(TDS_POWER_PIN)
+        tds_line = configure_tds_sensor(TDS_POWER_PIN)
         
         
         
@@ -222,6 +221,9 @@ def main():
         else:
 
             light= "OFF"
+
+
+        
 
 
         

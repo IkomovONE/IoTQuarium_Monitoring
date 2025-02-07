@@ -209,7 +209,7 @@ def daily_data_input():
 
     while True:
 
-        print("starting daily average measurement process")
+        print("Starting daily average measurement process")
 
 
         time.sleep(86400) # 24 hours
