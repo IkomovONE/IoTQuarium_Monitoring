@@ -16,6 +16,9 @@ WATER_LEVEL_POWER_PIN = 27
 
 TDS_POWER_PIN= 26
 
+TRIG = 27  
+ECHO = 24
+
 
 # Initialize I2C for ADS1115 and VEML7700
 i2c = busio.I2C(board.SCL, board.SDA)
@@ -35,14 +38,22 @@ temp_sensor = W1ThermSensor()
 PH_CALIBRATION_OFFSET = 0.0
 TDS_FACTOR = 0.5
 
-def configure_water_level_sensor(pin):
-    
+def configure_water_level_sensor(trig_pin, echo_pin):
+
     chip = gpiod.chip(0)
-    line = chip.get_line(pin)  # Retrieve the GPIO line for the sensor
-    config = gpiod.line_request()
-    config.request_type = gpiod.line_request.DIRECTION_OUTPUT  # Set as output
-    line.request(config)  # Apply the configuration
-    return line
+    
+    trig_line = chip.get_line(trig_pin)
+    echo_line = chip.get_line(echo_pin)
+
+    trig_config = gpiod.line_request()
+    trig_config.request_type = gpiod.line_request.DIRECTION_OUTPUT
+    trig_line.request(trig_config)
+
+    echo_config = gpiod.line_request()
+    echo_config.request_type = gpiod.line_request.DIRECTION_INPUT
+    echo_line.request(echo_config)
+
+    return trig_line, echo_line
 
 def configure_tds_sensor(pin):
     
@@ -121,9 +132,33 @@ def read_tds(adc_channel):
     tds_value = voltage * TDS_FACTOR  # Adjust based on calibration
     return tds_value
 
-def read_water_level(adc_channel):
-    """Read water level from analog water level sensor."""
-    return ads.read_adc(adc_channel, gain=2)
+def read_water_level(trig_line, echo_line):
+    """Measure distance using HC-SR04 ultrasonic sensor."""
+    
+    trig_line.set_value(0)
+    time.sleep(0.000002)
+    trig_line.set_value(1)
+    time.sleep(0.00001)
+    trig_line.set_value(0)
+
+    start_time, end_time = 0, 0
+
+    timeout = timedelta(seconds=1)
+    start_wait = echo_line.event_wait(timeout=timeout)
+    if start_wait:
+        start_time = time.time()
+    
+    end_wait = echo_line.event_wait(timeout=timeout)
+    if end_wait:
+        end_time = time.time()
+
+    if start_time and end_time:
+        duration = end_time - start_time
+        distance = (duration * 34300) / 2  # Speed of sound = 343 m/s
+    else:
+        distance = -1  # Error case
+
+    return round(distance, 2)
 
 def read_flow(line, duration):
     """Read the flow sensor value and calculate flow rate in L/min."""
@@ -156,6 +191,8 @@ def main():
 
         flow_line = configure_flow_sensor(FLOW_SENSOR_PIN)
 
+        trig_line, echo_line = configure_water_level_sensor(TRIG, ECHO)
+
 
         water_level_line = configure_water_level_sensor(WATER_LEVEL_POWER_PIN)
 
@@ -187,28 +224,10 @@ def main():
             light= "OFF"
 
 
-        toggle_water_level_sensor(water_level_line, True)
-
-        time.sleep(5)
-
         
 
-        
-        water_level = read_water_level(3)
-
-     
-
-        water_level= water_level/20500*100
-
-        water_level= int(water_level)
-
-        water_level= str(water_level) + "%"
-
-        toggle_water_level_sensor(water_level_line, False)
-
-        time.sleep(2)
-
-        water_level_line.release()
+        water_level = read_water_level(trig_line, echo_line)
+        water_level = str(water_level) + " cm"
 
 
 
@@ -257,7 +276,7 @@ def main():
         #print(f"Light Intensity: {light}")
         #print(f"pH Value: {ph}")
         print(f"TDS Value: {tds} ppm")
-        #print(f"Water Level: {water_level}")
+        print(f"Water Level: {water_level}")
         #print(f"Flow Rate: {flow_rate}")
         #print("-" * 30)
 
