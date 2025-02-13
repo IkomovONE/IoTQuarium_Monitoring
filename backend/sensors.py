@@ -225,17 +225,54 @@ def main():
 
         
 
+        #toggle_water_level_sensor(trig_line, True)
+
+        #time.sleep(2)
 
         
 
-        water_level = read_water_level(trig_line, echo_line)
+        
+        
+
+        #water_level = read_water_level(trig_line, echo_line)
+
+        #print(water_level)
+
+        #toggle_water_level_sensor(trig_line, False)
+
+        
 
 
 
 
-        max_level= 6.85
+        max_level= 11.3
 
-        min_level= 9.5
+        min_level= 13.2
+
+
+        level_list= []
+
+        for i in range(0, 101):
+
+            temp_water_level = read_water_level(trig_line, echo_line)
+
+            level_list.append(temp_water_level)
+
+            
+
+            #time.sleep(1)
+
+        water_level= round(sum(level_list)/len(level_list), 2)
+
+        print(water_level)
+
+
+
+
+
+        
+
+        
 
         if water_level <= max_level:
             water_level= "100%"
@@ -244,11 +281,15 @@ def main():
         else:
             percentage = ((min_level - water_level) / (min_level - max_level)) * 100
 
+            percentage= round(percentage, 1)
+
             water_level= str(percentage) + "%"
             
             
 
         water_level = str(water_level)
+
+        #water_level= water_level+ "cm"
 
 
 
