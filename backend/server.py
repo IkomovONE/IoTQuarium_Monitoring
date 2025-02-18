@@ -111,7 +111,7 @@ def input_data():
 
             attempt+=1
 
-            if attempt==10:
+            if attempt==20:
                 break
 
 

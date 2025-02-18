@@ -252,7 +252,7 @@ def main():
 
         level_list= []
 
-        for i in range(0, 101):
+        for i in range(0, 21):
 
             temp_water_level = read_water_level(trig_line, echo_line)
 
