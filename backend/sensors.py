@@ -185,7 +185,7 @@ def main():
             temp_water_level = read_water_level(trig_line, echo_line)       #Taking 20 water level measurements, then finding average
             level_list.append(temp_water_level)
         water_level= round(sum(level_list)/len(level_list), 2)
-        print("Water level: "+ water_level+ " cm")   
+        print("Water level: "+ str(water_level)+ " cm")   
 
 
         if water_level <= max_level:
