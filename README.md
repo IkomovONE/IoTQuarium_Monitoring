@@ -106,7 +106,7 @@ The hardware is an important part of the whole system, as it serves as server, c
 
 <img src="assets/flow.png" width="20%" />
 
-- [Water level sensor (DC 3V-5V)](https://www.aliexpress.com/item/1005006357865283.html?spm=a2g0o.order_list.order_list_main.5.4cfa1802fwZplZ)
+- [Water level sensor (3.3V-5V)]([https://www.aliexpress.com/item/1005006357865283.html?spm=a2g0o.order_list.order_list_main.5.4cfa1802fwZplZ](https://www.aliexpress.com/item/1005006851741952.html?spm=a2g0o.productlist.main.12.20fc606fp0nYrS&aem_p4p_detail=20250311012346363779302387600000028700&algo_pvid=c336bda6-6e32-42e2-8d39-640715e7f235&algo_exp_id=c336bda6-6e32-42e2-8d39-640715e7f235-11&pdp_ext_f=%7B%22order%22%3A%229%22%2C%22eval%22%3A%221%22%7D&pdp_npi=4%40dis%21EUR%212.28%212.28%21%21%2117.52%2117.52%21%40211b655217416814262422596e4c3c%2112000038516652287%21sea%21FI%214368185178%21X&curPageLogUid=tDAXYGhGk83O&utparam-url=scene%3Asearch%7Cquery_from%3A&search_p4p_id=20250311012346363779302387600000028700_4))
 
 <img src="assets/water_level.png" width="20%" />
 
