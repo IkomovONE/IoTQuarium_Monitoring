@@ -160,67 +160,119 @@ def main():
         flow_line = configure_flow_sensor(FLOW_SENSOR_PIN)
         trig_line, echo_line = configure_water_level_sensor(TRIG, ECHO)     #Initializing sensor lines
         tds_line = configure_tds_sensor(TDS_POWER_PIN)
+
+
+        flow_rate_status = "Not initialized"
+        light_sensor_status = "Not initialized"
+        water_level_sensor_status = "Not initialized"
+        tds_sensor_status = "Not initialized"
+        temp_sensor_status= "Not initialized"
+        ph_sensor_status= "Not initialized"
         
            
-        flow_rate= read_flow(flow_line, duration=1)
-        flow_rate= round(flow_rate, 1)              #Measuring and processing water flow rate
-        flow_rate= str(flow_rate) + " L/min"
+        try:
+
+            flow_rate= read_flow(flow_line, duration=1)
+            flow_rate= round(flow_rate, 1)              #Measuring and processing water flow rate
+            flow_rate= str(flow_rate) + " L/min"
+
+        except Exception as e:
+            print(f"[Error] Flow sensor: {e}")
+            flow_rate = 0
+
+            flow_rate_status = "Malfunction"
+
+        try:
 
 
-        light = read_light()
-        if light > 500.0:
-            light= "ON"                 #Measuring and processing light status
-        else:
-            light= "OFF"
+            light = read_light()
+            if light > 500.0:
+                light= "ON"                 #Measuring and processing light status
+            else:
+                light= "OFF"
+
+        except Exception as e:
+            print(f"[Error] Light sensor: {e}")
+            light = "-"
+
+            light_sensor_status = "Malfunction"
 
 
-        
+        try:
 
-        max_level= 11.3             #Mentioning min-max levels thresholds
-        min_level= 13.2
+            max_level= 11.3             #Mentioning min-max levels thresholds
+            min_level= 13.2
 
-        level_list= []          #Water level list for precise measurement
+            level_list= []          #Water level list for precise measurement
 
-        for i in range(0, 21):
-            temp_water_level = read_water_level(trig_line, echo_line)       #Taking 20 water level measurements, then finding average
-            level_list.append(temp_water_level)
-        water_level= round(sum(level_list)/len(level_list), 2)
-        print("Water level: "+ str(water_level)+ " cm")   
+            for i in range(0, 21):
+                temp_water_level = read_water_level(trig_line, echo_line)       #Taking 20 water level measurements, then finding average
+                level_list.append(temp_water_level)
+            water_level= round(sum(level_list)/len(level_list), 2)
+            print("Water level: "+ str(water_level)+ " cm")   
 
 
-        if water_level <= max_level:
-            water_level= "100%"
-        elif water_level >= min_level:
-            water_level= "0%"                                           #Calculating water level percentage
-        else:
-            percentage = ((min_level - water_level) / (min_level - max_level)) * 100
-            percentage= round(percentage, 1)
-            water_level= str(percentage) + "%"
-            
-        water_level = str(water_level)
+            if water_level <= max_level:
+                water_level= "100%"
+            elif water_level >= min_level:
+                water_level= "0%"                                           #Calculating water level percentage
+            else:
+                percentage = ((min_level - water_level) / (min_level - max_level)) * 100
+                percentage= round(percentage, 1)
+                water_level= str(percentage) + "%"
+                
+            water_level = str(water_level)
+
+        except Exception as e:
+            print(f"[Error] Water level sensor: {e}")
+            water_level = "-"
+
+            water_level_sensor_status = "Malfunction"
 
        
+        try:
+
+            toggle_tds_sensor(tds_line, True)
+            time.sleep(5)
+            tds = read_tds(2)                               #Toggling TDS sensor ON, reading value, processing the value and toggling TDS sensor OFF
+            tds= tds*434.78
+            tds= int(tds)
+            toggle_tds_sensor(tds_line, False)
+            time.sleep(2)
+
+        except Exception as e:
+            print(f"[Error] TDS sensor: {e}")
+            tds = 0
+
+            tds_sensor_status = "Malfunction"
 
 
-        toggle_tds_sensor(tds_line, True)
-        time.sleep(5)
-        tds = read_tds(2)                               #Toggling TDS sensor ON, reading value, processing the value and toggling TDS sensor OFF
-        tds= tds*434.78
-        tds= int(tds)
-        toggle_tds_sensor(tds_line, False)
-        time.sleep(2)
-
-
-        
+        try:
        
-        temperature = read_temperature()            #Reading and processing temperature
-        temperature= round(temperature, 1)
+            temperature = read_temperature()            #Reading and processing temperature
+            temperature= round(temperature, 1)
 
-        ph = read_ph(1)                 #Reading and processing pH value
-        ph= round(ph, 2)
+        except Exception as e:
+            print(f"[Error] Temperature sensor: {e}")
+            temperature = 0
+
+            temp_sensor_status= "Malfunction"
+
+
+        try:
+
+            ph = read_ph(1)                 #Reading and processing pH value
+            ph= round(ph, 2)
+
+        except Exception as e:
+            print(f"[Error] pH sensor: {e}")
+            ph = 0.0
+
+            ph_sensor_status= "Malfunction"
 
         
 
+        sensors_status= {"temperature sensor": temp_sensor_status, "light sensor": light_sensor_status, "flow rate sensor": flow_rate_status, "ph sensor": ph_sensor_status, "water level sensor": water_level_sensor_status, "TDS sensor": tds_sensor_status}
         
 
         # Print the results
@@ -243,6 +295,7 @@ def main():
         values.append(tds)                      #Returning processed values
         values.append(water_level)
         values.append(flow_rate)
+        values.append(sensors_status)
 
         return values
 

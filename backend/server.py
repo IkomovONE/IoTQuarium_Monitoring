@@ -98,6 +98,13 @@ def input_data():                       #Method for regular data gathering, uses
 
             sensor_data_list= sensors.main()          #Calling sensors.py main method to gather sensor data
 
+            sensors_condition = sensor_data_list[6]
+
+            for i in sensors_condition:
+
+                print(i)
+                print("\n")
+
             sensor_data = {             #Forming structured data json               #"Random" for testing purposes  
             "Temp": sensor_data_list[0],                                            #round(23.0 + random.uniform(0.0, 1.0), 1),  # 23.0 to 24.0
             "pH": sensor_data_list[2],                                              #round(7.0 + random.uniform(0.0, 0.6), 1),    # 7.0 to 7.6
@@ -163,6 +170,12 @@ def daily_data_input():             #Method for recording daily average
 
         elif Current_light_status == "OFF":     #Breaking the loop if the light is OFF
             Light_counter= 0
+            break
+
+        elif Current_light_status == "-":
+
+            Light_counter= 0
+
             break
 
 
