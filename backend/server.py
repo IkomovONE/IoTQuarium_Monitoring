@@ -100,10 +100,10 @@ def input_data():                       #Method for regular data gathering, uses
 
             sensors_condition = sensor_data_list[6]
 
-            for i in sensors_condition:
+            for i, value in sensors_condition.items():
 
-                print(i)
-                print("\n")
+                print(i+ ": "+ value)
+                
 
             sensor_data = {             #Forming structured data json               #"Random" for testing purposes  
             "Temp": sensor_data_list[0],                                            #round(23.0 + random.uniform(0.0, 1.0), 1),  # 23.0 to 24.0

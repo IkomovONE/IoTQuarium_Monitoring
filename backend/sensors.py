@@ -176,6 +176,8 @@ def main():
             flow_rate= round(flow_rate, 1)              #Measuring and processing water flow rate
             flow_rate= str(flow_rate) + " L/min"
 
+            flow_rate_status = "OK"
+
         except Exception as e:
             print(f"[Error] Flow sensor: {e}")
             flow_rate = 0
@@ -190,6 +192,8 @@ def main():
                 light= "ON"                 #Measuring and processing light status
             else:
                 light= "OFF"
+
+            light_sensor_status = "OK"
 
         except Exception as e:
             print(f"[Error] Light sensor: {e}")
@@ -223,6 +227,8 @@ def main():
                 
             water_level = str(water_level)
 
+            water_level_sensor_status = "OK"
+
         except Exception as e:
             print(f"[Error] Water level sensor: {e}")
             water_level = "-"
@@ -240,6 +246,8 @@ def main():
             toggle_tds_sensor(tds_line, False)
             time.sleep(2)
 
+            tds_sensor_status = "OK"
+
         except Exception as e:
             print(f"[Error] TDS sensor: {e}")
             tds = 0
@@ -252,6 +260,8 @@ def main():
             temperature = read_temperature()            #Reading and processing temperature
             temperature= round(temperature, 1)
 
+            temp_sensor_status= "OK"
+
         except Exception as e:
             print(f"[Error] Temperature sensor: {e}")
             temperature = 0
@@ -263,6 +273,8 @@ def main():
 
             ph = read_ph(1)                 #Reading and processing pH value
             ph= round(ph, 2)
+
+            ph_sensor_status= "OK"
 
         except Exception as e:
             print(f"[Error] pH sensor: {e}")
